@@ -1,0 +1,56 @@
+import("distr")
+
+exportClasses("DistrList", 
+              "UnivarDistrList")
+exportClasses("Condition", "EuclCondition") 
+exportClasses("LMParameter",   
+              "GumbelParameter")
+exportClasses("MultivariateDistribution", 
+              "DiscreteMVDistribution",
+              "UnivariateCondDistribution",
+              "DiscreteCondDistribution", 
+              "AbscontCondDistribution",
+              "Gumbel")
+
+exportMethods("initialize", 
+              "show", 
+              "plot", 
+              "coerce") 
+exportMethods("ConvexContamination", 
+              "ContaminationSize", 
+              "TotalVarDist", 
+              "KolmogorovDist", 
+              "HellingerDist") 
+exportMethods("support", 
+              "cond", 
+              "Range",
+              "loc", "loc<-", 
+              "scale", "scale<-", 
+              "name", "name<-", 
+              "E", 
+              "m1df", "m2df",
+              "liesInSupport")
+
+export("DistrList", "UnivarDistrList") 
+export("EuclCondition") 
+export("LMParameter")
+export("DiscreteDistribution", 
+       "DiscreteMVDistribution",
+       "LMCondDistribution", 
+       "Gumbel")
+export("EuclideanSpace", 
+       "Reals", 
+       "Naturals") 
+export("ConvexContamination")
+export("GLIntegrate",
+       "distrExIntegrate") 
+export("distrExOptions",
+       "GLIntegrateTruncQuantile",
+       "GLIntegrateOrder",  
+       "ElowerTruncQuantile", 
+       "EupperTruncQuantile", 
+       "ErelativeTolerance",  
+       "m1dfLowerTruncQuantile", 
+       "m1dfRelativeTolerance", 
+       "m2dfLowerTruncQuantile", 
+       "m2dfRelativeTolerance")
