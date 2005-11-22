@@ -1,8 +1,6 @@
 \name{MultivariateDistribution-class}
 \docType{class}
 \alias{MultivariateDistribution-class}
-\alias{E,MultivariateDistribution,missing,missing-method}
-\alias{E,MultivariateDistribution,function,missing-method}
 \alias{show,MultivariateDistribution-method}
 \alias{plot,MultivariateDistribution-method}
 
@@ -36,14 +34,6 @@ Class \code{"Distribution"}, directly.
 }
 \section{Methods}{
 \describe{
-  \item{E}{\code{signature(object = "MultivariateDistribution", fun = "missing", cond = "missing")}:
-    expectation of multivariate distributions. The integral is computed
-    using crude Monte-Carlo integration.}
-
-  \item{E}{\code{signature(object = "MultivariateDistribution", fun = "function", cond = "missing")}:
-    expectation of \code{fun} under multivariate distributions. The integral
-    is computed using crude Monte-Carlo integration. }  
-
   \item{show}{\code{signature(object = "MultivariateDistribution")}}
 
   \item{plot}{\code{signature(object = "MultivariateDistribution")}:

@@ -6,7 +6,23 @@ EuclCondition <- function(dimension){
 setMethod("Range", "EuclCondition", function(object) object@Range)
 
 LMParameter <- function(theta = 0, intercept = 0, scale = 1){
-    new("LMParameter", theta = theta, intercept = intercept, scale = scale)
+    if(any(!is.finite(theta)))
+        stop("inifinite or missing values in 'theta'")
+    if(length(intercept) != 1)
+        stop("'intercept' has to be of length 1")
+    if(!is.finite(intercept))
+        stop("inifinite or missing value in 'intercept'")
+    if(length(scale) != 1)
+        stop("'scale' has to be of length 1")
+    if(!is.finite(scale))
+        stop("inifinite or missing value in 'scale'")
+
+    LMP <- new("LMParameter")
+    LMP@theta <- theta
+    LMP@intercept <- intercept
+    LMP@scale <- scale
+    
+    return(LMP)
 }
 
 ## generating function
@@ -72,7 +88,14 @@ LMCondDistribution <- function(Error = Norm(), theta = 0, intercept = 0,
                         list(qfct = q(Error), lth = lth, 
                              intercept = intercept, theta = theta, 
                              scale = scale))
-                    
-    return(new("AbscontCondDistribution", r = rfun, d = dfun, p = pfun, q = qfun, 
-            param = param, cond = cond, img = Reals()))
+    CD1 <- new("AbscontCondDistribution")
+    CD1@r <- rfun 
+    CD1@d <- dfun
+    CD1@p <- pfun
+    CD1@q <- qfun
+    CD1@param <- param
+    CD1@cond <- cond
+    CD1@img <- Reals()
+    
+    return(CD1)
 }

@@ -17,18 +17,16 @@ setMethod("KolmogorovDist", signature(e1 = "AbscontDistribution",
         x <- union(x1, x2)
         
         res <- max(abs(p(e1)(x)-p(e2)(x)))
-        names(res) <- "Kolmogorov distance"
 
-        return(res)
+        return(list(e1 = e1, e2 = e2, Kolmogorov.distance = res))
     })
 setMethod("KolmogorovDist", signature(e1 = "DiscreteDistribution",
                                       e2 = "DiscreteDistribution"),
     function(e1, e2){
         supp <- union(support(e1), support(e2))
         res <- max(abs(p(e1)(supp)-p(e2)(supp)))
-        names(res) <- "Kolmogorov distance"
 
-        return(res)
+        return(list(e1 = e1, e2 = e2, Kolmogorov.distance = res))
     })
 setMethod("KolmogorovDist", signature(e1 = "DiscreteDistribution",
                                       e2 = "AbscontDistribution"),
@@ -40,9 +38,8 @@ setMethod("KolmogorovDist", signature(e1 = "DiscreteDistribution",
         x2 <- seq(from=lower, to=upper, length=1e5)
         x <- union(x1, x2)
         res <- max(abs(p(e1)(x)-p(e2)(x)))
-        names(res) <- "Kolmogorov distance"
 
-        return(res)
+        return(list(e1 = e1, e2 = e2, Kolmogorov.distance = res))
     })
 setMethod("KolmogorovDist", signature(e1 = "AbscontDistribution",
                                       e2 = "DiscreteDistribution"),

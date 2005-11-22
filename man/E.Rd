@@ -4,10 +4,12 @@
 \alias{E,UnivariateDistribution,missing,missing-method}
 \alias{E,AbscontDistribution,missing,missing-method}
 \alias{E,DiscreteDistribution,missing,missing-method}
+\alias{E,MultivariateDistribution,missing,missing-method}
 \alias{E,DiscreteMVDistribution,missing,missing-method}
 \alias{E,UnivariateDistribution,function,missing-method}
 \alias{E,AbscontDistribution,function,missing-method}
 \alias{E,DiscreteDistribution,function,missing-method}
+\alias{E,MultivariateDistribution,function,missing-method}
 \alias{E,DiscreteMVDistribution,function,missing-method}
 \alias{E,UnivariateCondDistribution,missing,numeric-method}
 \alias{E,AbscontCondDistribution,missing,numeric-method}
@@ -23,11 +25,25 @@
 \usage{
 E(object, fun, cond, ...)
 
-\S4method{E}{UnivariateCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, ...)
+\S4method{E}{UnivariateDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
 
-\S4method{E}{AbscontCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, ...)
+\S4method{E}{AbscontDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
 
-\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, ...)
+\S4method{E}{DiscreteDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+
+\S4method{E}{MultivariateDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+
+\S4method{E}{DiscreteMVDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+
+\S4method{E}{AbscontCondDistribution,missing,numeric}(object, cond, useApply = TRUE)
+
+\S4method{E}{DiscreteCondDistribution,missing,numeric}(object, cond, useApply = TRUE)
+
+\S4method{E}{UnivariateCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+
+\S4method{E}{AbscontCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+
+\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
 }
 \arguments{
   \item{object}{ object of class \code{"Distribution"}}
@@ -36,6 +52,8 @@ E(object, fun, cond, ...)
   \item{cond}{ if not missing the conditional expectation 
     given \code{cond} is computed. }
   \item{\dots}{ additional arguments to \code{fun} }
+  \item{useApply}{ logical: should \code{sapply}, respectively \code{apply} 
+    be used to evaluate \code{fund}. }
   \item{withCond}{ logical: is \code{cond} in the argument list of \code{fun}. }
 }
 \details{The precision of the computations can be controlled via 
@@ -56,6 +74,9 @@ E(object, fun, cond, ...)
     expectation of discrete univariate distributions using \code{support}
     and \code{sum}.}
 
+  \item{object = "MultivariateDistribution", fun = "missing", cond = "missing":}{
+    expectation of multivariate distributions using crude Monte-Carlo integration. }
+
   \item{object = "DiscreteMVDistribution", fun = "missing", cond = "missing":}{
     expectation of discrete multivariate distributions. The computation is based
     on \code{support} and \code{sum}.}
@@ -71,6 +92,9 @@ E(object, fun, cond, ...)
   \item{object = "DiscreteDistribution", fun = "function", cond = "missing":}{  
     expectation of \code{fun} under discrete univariate 
     distributions using \code{support} and \code{sum}. }
+
+  \item{object = "MultivariateDistribution", fun = "function", cond = "missing":}{
+    expectation of multivariate distributions using crude Monte-Carlo integration. }
 
   \item{object = "DiscreteMVDistribution", fun = "function", cond = "missing":}{
     expectation of \code{fun} under discrete multivariate 
@@ -115,6 +139,7 @@ E(Exp())
 
 # second moment of N(1,4)
 E(Norm(mean=1, sd=2), fun = function(x){x^2})
+E(Norm(mean=1, sd=2), fun = function(x){x^2}, useApply = FALSE)
 
 # conditional distribution of a linear model
 D1 <- LMCondDistribution(theta = 1) 
@@ -122,7 +147,7 @@ E(D1, cond = 1)
 E(Norm(mean=1))
 E(D1, function(x){x^2}, cond = 1)
 E(Norm(mean=1), fun = function(x){x^2})
-E(D1, function(x, cond){cond*x^2}, cond = 2, withCond = TRUE)
+E(D1, function(x, cond){cond*x^2}, cond = 2, withCond = TRUE, useApply = FALSE)
 E(Norm(mean=2), function(x){2*x^2})
 }
 \concept{expectation}

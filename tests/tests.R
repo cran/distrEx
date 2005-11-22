@@ -9,6 +9,7 @@ D0 <- DiscreteDistribution(c(1:10, 2, 3, 4))
 support(D0)
 E(D0)
 E(D0, function(x){x^3})
+E(D0, function(x){x^3}, useApply = FALSE)
 
 
 ## Gumbel distribution
@@ -22,6 +23,7 @@ scale(G1) <- 1
 plot(G1)
 E(G1) # Euler's constant
 E(G2, function(x){x^2})
+E(G2, function(x){x^2}, useApply = FALSE)
 
 
 ## MultivariateDistribution, DiscreteMVDistribution
@@ -39,6 +41,8 @@ img(D2)
 
 (e11 <- E(D2)) # expectation
 (e12 <- E(as(D2, "MultivariateDistribution"))) # crude Monte-Carlo
+(e13 <- E(D2, function(x){x}, useApply = FALSE)) # expectation
+(e14 <- E(as(D2, "MultivariateDistribution"), function(x){x}, useApply = FALSE)) # crude Monte-Carlo
 E(D2, function(x, e1){ (x-e1)%*%t(x-e1) }, e1 = e11) # covariance
 E(as(D2, "MultivariateDistribution"), function(x, e1){ (x-e1)%*%t(x-e1) }, e1 = e12) # crude Monte-Carlo
 
@@ -70,13 +74,17 @@ d(Norm(mean=1))(x)
 
 N <- Norm(mean = 2)
 E(D4, cond = 1)
+E(D4, cond = 1, useApply = FALSE)
 E(as(D4, "UnivariateCondDistribution"), cond = 1)
+E(as(D4, "UnivariateCondDistribution"), cond = 1, useApply = FALSE)
 E(D4, function(x){x^2}, cond = 2)
+E(D4, function(x){x^2}, cond = 2, useApply = FALSE)
 E(N, function(x){x^2})
-E(as(N, "UnivariateDistribution"), function(x){x^2}) # crude Monte-Carlo
+E(as(N, "UnivariateDistribution"), function(x){x^2}, useApply = FALSE) # crude Monte-Carlo
 E(D4, function(x, cond){cond*x^2}, cond = 2, withCond = TRUE)
+E(D4, function(x, cond){cond*x^2}, cond = 2, withCond = TRUE, useApply = FALSE)
 E(N, function(x){2*x^2})
-E(as(N, "UnivariateDistribution"), function(x){2*x^2}) # crude Monte-Carlo
+E(as(N, "UnivariateDistribution"), function(x){2*x^2}, useApply = FALSE) # crude Monte-Carlo
 
 (D5 <- new("DiscreteCondDistribution"))
 r(D5)

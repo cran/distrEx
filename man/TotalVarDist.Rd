@@ -23,8 +23,10 @@ TotalVarDist(e1, e2)
 }
 %\details{}
 \value{
-  The total variation distance of two probability distributions
-  is computed.
+  A list containing the following components:
+  \item{e1}{ object of class \code{"Distribution"}; distribution 1  }
+  \item{e2}{ object of class \code{"Distribution"}; distribution 2}
+  \item{total.variation.distance}{ total variation distance of \code{e1} and \code{e2} }
 }
 \section{Methods}{
 \describe{

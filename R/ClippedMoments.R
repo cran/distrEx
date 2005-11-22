@@ -13,27 +13,31 @@ setMethod("m2df", "UnivariateDistribution",
     })
 setMethod("m1df", "AbscontDistribution",
     function(object, upper){
-        integrandm1 <- function(x){ x * d(object)(x) }
+        integrandm1 <- function(x, dfun){ x * dfun(x) }
         return(distrExIntegrate(integrandm1, lower = q(object)(m1dfLowerTruncQuantile), 
-                    rel.tol = m1dfRelativeTolerance, upper = upper, distr = object))
+                    rel.tol = m1dfRelativeTolerance, upper = upper, dfun = d(object), 
+                    distr = object))
     })
 setMethod("m2df", "AbscontDistribution",
     function(object, upper){
-        integrandm2 <- function(x){ x^2 * d(object)(x) }
+        integrandm2 <- function(x, dfun){ x^2 * dfun(x) }
         return(distrExIntegrate(integrandm2, lower = q(object)(m2dfLowerTruncQuantile), 
-                    rel.tol = m2dfRelativeTolerance, upper = upper, distr = object))
+                    rel.tol = m2dfRelativeTolerance, upper = upper, dfun = d(object), 
+                    distr = object))
     })
 setMethod("m1df", "DiscreteDistribution",
     function(object, upper){
         supp <- support(object)
         supp <- supp[supp <= upper]
-        return(sum(supp * d(object)(supp)))
+        dfun <- d(object)
+        return(sum(supp * dfun(supp)))
     })
 setMethod("m2df", "DiscreteDistribution",
     function(object, upper){
         supp <- support(object)
         supp <- supp[supp <= upper]
-        return(sum(supp^2 * d(object)(supp)))
+        dfun <- d(object)
+        return(sum(supp^2 * dfun(supp)))
     })
 setMethod("m1df", "Binom",
     function(object, upper){

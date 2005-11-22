@@ -77,9 +77,16 @@ DiscreteMVDistribution <- function(supp, prob){
         sum(prob[ind])
     }
         
-    return(new("DiscreteMVDistribution", r = rfun, d = dfun, p = pfun, q = NULL, 
-        param = NULL, img = new("EuclideanSpace", dimension = floor(ncol(supp))), 
-        support = supp))
+    MVD <- new("DiscreteMVDistribution")
+    MVD@r <- rfun
+    MVD@d <- dfun
+    MVD@p <- pfun
+    MVD@q <- NULL
+    MVD@param <- NULL
+    MVD@img <- EuclideanSpace(dimension = floor(ncol(supp)))
+    MVD@support <- supp
+    
+    return(MVD)
 }
 
 setMethod("support", "DiscreteMVDistribution", function(object) object@support)

@@ -10,21 +10,17 @@ setMethod("ContaminationSize", signature(e1 = "AbscontDistribution",
         lower <- min(q(e1)(1e-10), q(e2)(1e-10))
         upper <- max(q(e1)(1-1e-10), q(e2)(1-1e-10))
         x <- seq(from = lower, to = upper, length = 1e5)
-        fct <- function(rad, x, e1, e2){
-            return(min(d(e2)(x) - (1-rad)*d(e1)(x)))
+        fct <- function(rad, x, dfun1, dfun2){
+            return(min(dfun2(x) - (1-rad)*dfun1(x)))
         }
         res <- try(uniroot(f = fct, interval = c(-1e-3,1+1e-3), 
                     tol = .Machine$double.eps^0.25, x = x, 
-                    e1 = e1, e2 = e2)$root, silent=TRUE)
+                    dfun1 = d(e1), dfun2 = d(e2))$root, silent=TRUE)
         if(!is.numeric(res)){ 
-            res <- 1
-            names(res) <- "size of contamination"
-
-            return(res)
+            return(list(e1 = e1, e2 = e2, size.of.contamination = 1))
         }
         
-        names(res) <- "size of contamination"
-        return(res)
+        return(list(e1 = e1, e2 = e2, size.of.contamination = res))
 #        fct <- function(x, e1, e2){
 #            p1 <- p(e1)(x)
 #            return((p1 != 0)*(log(p(e2)(x)) - log(p1)) + (p1 == 0))
@@ -53,7 +49,6 @@ setMethod("ContaminationSize", signature(e1 = "DiscreteDistribution",
         p2 <- p(e2)(supp)[p1 != 0]
         p1 <- p1[p1 != 0]
         res <- round(1 - exp(min(log(p2) - log(p1))), 2)
-        names(res) <- "size of contamination"
 
-        return(res)
+        return(list(e1 = e1, e2 = e2, size.of.contamination = res))
     })

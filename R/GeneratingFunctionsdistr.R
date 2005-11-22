@@ -56,6 +56,5 @@ DiscreteDistribution <- function(supp, prob){
 
     qfun <- function(x){ supp[sum(cumprob<x)+1] }
 
-    return(new("DiscreteDistribution", r = rfun, d = dfun, p = pfun, 
-        q = qfun, support = supp))
+    new("DiscreteDistribution", r = rfun, d = dfun, q = qfun, support = supp)
 }

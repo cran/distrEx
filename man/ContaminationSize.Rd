@@ -23,7 +23,10 @@ ContaminationSize(e1, e2)
 \details{Computes the distance from \code{e1} to \code{e2} respectively
   \eqn{P} to \eqn{Q}. This is not really a distance as it is not symmetric!}
 \value{
-  The size of contamination is computed.
+  A list containing the following components:
+  \item{e1}{ object of class \code{"Distribution"}; ideal distribution  }
+  \item{e2}{ object of class \code{"Distribution"}; 'contaminated' distribution }
+  \item{size.of.contamination}{ size of contamination }
 }
 \section{Methods}{
 \describe{
