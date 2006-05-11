@@ -61,7 +61,7 @@ HellingerDist(e1, e2)
 HellingerDist(Norm(), Gumbel())
 HellingerDist(Norm(), Td(10))
 HellingerDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100)) # mutually singular
-HellingerDist(Pois(10), Binom(size = 20))
+HellingerDist(Pois(10), Binom(size = 20)) 
 }
 \concept{distance}
 \keyword{distribution}

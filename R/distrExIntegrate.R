@@ -1,6 +1,8 @@
 # Gauﬂ-Legendre abscissas and weights
 # cf. Numerical Recipies in C (1992), p. 152
-.GLaw <- function(n){
+
+#implementation in S:
+.GLawOld <- function(n){
     if(n %% 2 == 1) stop("n has to be an even number")
 
     m <- (n + 1)/2
@@ -28,6 +30,22 @@
     }
     cbind(A, W)
 }
+
+## new: interface to C P.R. 01-04-06
+
+.GLaw <- function(n){
+    if(n %% 2 == 1) stop("n has to be an even number")
+
+    A <- numeric(n)
+    W <- numeric(n)
+
+#    mm<-dyn.load("G:/rtest/GLaw.dll")
+    erg<-.C("gauleg",n=as.integer(n),eps=as.double(.Machine$double.eps),
+             A=as.double(A),W=as.double(W))
+#    dyn.unload("G:/rtest/GLaw.dll")
+    cbind(A=erg$A, W=erg$W)         
+}
+
 
 GLIntegrate <- function(f, lower, upper, order = 500, ...){
     if(order %in% c(100, 500, 1000))

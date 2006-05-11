@@ -230,3 +230,139 @@ setMethod("E", signature(object = "DiscreteCondDistribution",
         }
         return(sum(fct(x = supp, dfun = d(object), fun = fun, cond = cond, ...)))
     })
+
+### added 29-03-06 P.R. 
+# some exact expectations:
+setMethod("E", signature(object = "Norm", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(mean(object))
+    })
+
+setMethod("E", signature(object = "Beta", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        if(!identical(all.equal(ncp(object),0), TRUE))
+          return(E(as(object,"AbscontDistribution"),...))
+        else
+          return(shape1(object)/(shape1(object)+shape2(object)))
+    })
+
+setMethod("E", signature(object = "Binom", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(size(object)*prob(object))
+    })
+
+setMethod("E", signature(object = "Cauchy", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(NA)
+    })
+
+setMethod("E", signature(object = "Chisq", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(df(object)+ncp(object))
+    })
+
+setMethod("E", signature(object = "Dirac", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(location(object))
+    })
+
+
+setMethod("E", signature(object = "Exp", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(1/rate(object))
+    })
+
+
+setMethod("E", signature(object = "Fd", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){ 
+        df1 <- df1(object)
+        df2 <- df2(object)
+        d <- ncp(object)
+        return(ifelse(df2>2,df2/(df2-2)*(df1+d)/df1,Inf))
+    })
+
+setMethod("E", signature(object = "Gammad", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(shape(object)*scale(object))
+    })
+
+setMethod("E", signature(object = "Geom", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(prob(object)/(1-prob(object)))
+    })
+
+setMethod("E", signature(object = "Hyper", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(k(object)*n(object)/(m(object)+n(object)))
+    })
+
+setMethod("E", signature(object = "Logis", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(location(object))
+    })
+
+setMethod("E", signature(object = "Lnorm", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(exp(meanlog(object)+sdlog(object)^2/2))
+    })
+
+setMethod("E", signature(object = "Nbinom", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(size(object)*prob(object)/(1-prob(object)))
+    })
+
+setMethod("E", signature(object = "Pois", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(lambda(object))
+    })
+
+setMethod("E", signature(object = "Td", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(ncp(object)*sqrt(df(object)/2)*exp(lgamma((df(object)-1)/2)-lgamma(df(object)/2)))
+    })
+
+setMethod("E", signature(object = "Unif", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return((Max(object)+Min(object))/2)
+    })
+
+setMethod("E", signature(object = "Weibull", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(scale(object)*gamma(1+1/shape(object)))
+    })

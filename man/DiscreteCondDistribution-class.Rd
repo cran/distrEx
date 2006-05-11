@@ -22,6 +22,8 @@
       optional conditional cumulative distribution function. }
     \item{\code{q}:}{Object of class \code{"OptionalFunction"}:
       optional conditional quantile function. }
+    \item{\code{.withArith}:}{logical: used internally to issue warnings as to interpretation of arithmetics}
+    \item{\code{.withSim}:}{logical: used internally to issue warnings as to accuracy}
   }
 }
 \section{Extends}{

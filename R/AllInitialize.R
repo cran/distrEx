@@ -3,7 +3,7 @@ setMethod("initialize", "Gumbel",
     function(.Object, loc = 0, scale = 1) {
         .Object@img <- Reals()
         .Object@param <- new("GumbelParameter", loc = loc, scale = scale, 
-                             name = "parameter of a Gumbel distribution")
+                             name = gettext("parameter of a Gumbel distribution"))
         .Object@r <- function(n){ rgumbel(n, loc = loc1, scale = scale1) }
         body(.Object@r) <- substitute({ rgumbel(n, loc = loc1, scale = scale1) },
                                      list(loc1 = loc, scale1 = scale))
@@ -22,5 +22,7 @@ setMethod("initialize", "Gumbel",
                                         if(x == 1) return(Inf)
                                         qgumbel(x, loc = loc1, scale = scale1, ...) },
                                      list(loc1 = loc, scale1 = scale))
+        .Object@.withSim   <- FALSE
+        .Object@.withArith <- FALSE
         .Object
     })

@@ -9,6 +9,7 @@ setMethod("ConvexContamination", signature(e1 = "AbscontDistribution",
                                            e2 = "AbscontDistribution",
                                            size = "numeric"),
     function(e1, e2, size){
+        TruncQuantile <- getdistrOption("TruncQuantile")
         if(length(size) != 1)
             stop("length of 'size' has to be 1")
         if((size < 0)|(size > 1))
@@ -39,8 +40,8 @@ setMethod("ConvexContamination", signature(e1 = "AbscontDistribution",
                                    (1-size)*p1(x) + size*p2(x)},
                             list(size = size, p1fun = p(e1), p2fun = p(e2)))
 
-        m1 <- min(q(e1)(distr::TruncQuantile), q(e2)(distr::TruncQuantile))
-        m2 <- max(q(e1)(1-distr::TruncQuantile), q(e2)(1-distr::TruncQuantile))
+        m1 <- min(q(e1)(TruncQuantile), q(e2)(TruncQuantile))
+        m2 <- max(q(e1)(1-TruncQuantile), q(e2)(1-TruncQuantile))
         qfun <- function(x){
             pfunx <- seq(from = m1, to = m2, length = 1e5)
             p <- pfun; pfuny <- pfun(pfunx)
@@ -55,7 +56,7 @@ setMethod("ConvexContamination", signature(e1 = "AbscontDistribution",
                                    return(y)},
                             list(m1 = m1, m2 = m2, pfun = pfun)) 
     
-        return(new("AbscontDistribution", r = rfun, d = dfun, p = pfun, q = qfun))
+        return(new("AbscontDistribution", r = rfun, d = dfun, p = pfun, q = qfun, .withSim=FALSE, .withArith=FALSE))
     })
 setMethod("ConvexContamination", signature(e1 = "DiscreteDistribution",
                                            e2 = "DiscreteDistribution",
@@ -105,7 +106,7 @@ setMethod("ConvexContamination", signature(e1 = "DiscreteDistribution",
         qfun <- function(x){ supp[sum(cumprob<x)+1] }        
     
         return(new("DiscreteDistribution", r = rfun, d = dfun, p = pfun, q = qfun, 
-                                           support = supp))
+                                           support = supp, .withSim=FALSE, .withArith=FALSE))
     })
 
 setMethod("ConvexContamination", signature(e1 = "UnivariateDistribution",
@@ -133,9 +134,9 @@ setMethod("ConvexContamination", signature(e1 = "UnivariateDistribution",
         body(pfun) <- substitute({ p1 <- p1fun; p2 <- p2fun
                                    (1-size)*p1(x) + size*p2(x)},
                             list(size = size, p1fun = p(e1), p2fun = p(e2)))
-
-        m1 <- min(q(e1)(distr::TruncQuantile), q(e2)(distr::TruncQuantile))
-        m2 <- max(q(e1)(1-distr::TruncQuantile), q(e2)(1-distr::TruncQuantile))
+        TruncQuantile <- getdistrOption("TruncQuantile")
+        m1 <- min(q(e1)(TruncQuantile), q(e2)(TruncQuantile))
+        m2 <- max(q(e1)(1-TruncQuantile), q(e2)(1-TruncQuantile))
         qfun <- function(x){
             pfunx <- seq(from = m1, to = m2, length = 1e5)
             p <- pfun; pfuny <- pfun(pfunx)
@@ -150,5 +151,5 @@ setMethod("ConvexContamination", signature(e1 = "UnivariateDistribution",
                                    return(y)},
                             list(m1 = m1, m2 = m2, pfun = pfun)) 
     
-        return(new("UnivariateDistribution", img = img(e1), r = rfun, d = NULL, p = pfun, q = qfun))
+        return(new("UnivariateDistribution", img = img(e1), r = rfun, d = NULL, p = pfun, q = qfun, .withSim=FALSE, .withArith=FALSE))
     })

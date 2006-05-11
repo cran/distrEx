@@ -1,6 +1,6 @@
 setMethod("show", "DistrList", 
     function(object){
-        cat(paste("An object of class", dQuote(class(object)), "\n"))
+        cat(gettextf("An object of class \"%s\"\n", class(object)))
         for(i in 1:length(object)){
             cat("[[", i, "]]\n", sep = "")
             print(object[[i]])
@@ -8,7 +8,7 @@ setMethod("show", "DistrList",
     })
 setMethod("show", "MultivariateDistribution",
     function(object){
-        cat("Distribution object of class: ", class(object)[1], "\n")
+        cat(gettextf("Distribution object of class: %s\n", class(object)[1]))
         parameter <- param(object)
         Names <- slotNames(parameter)
         if(length(Names) > 1){
@@ -18,26 +18,25 @@ setMethod("show", "MultivariateDistribution",
     })
 setMethod("show", "EuclCondition",
     function(object){
-        cat("name:\t", object@name, "\n")
-        cat("Range:\t", object@Range@name, "with dimension ")
-        cat(object@Range@dimension, "\n")
+        cat(gettextf("name:\t%s\n", object@name))
+        cat(gettextf("Range:\t%s with dimension %s\n", object@Range@name, object@Range@dimension))
     })
 setMethod("show", "LMParameter",
     function(object){
-        cat("name:\t", object@name, "\n")
-        cat("theta:\t", object@theta, "\n")
-        cat("intercept:\t", object@intercept, "\n")
-        cat("scale:\t", object@scale, "\n")
+        cat(gettextf("name:\t%s\n", object@name))
+        cat(gettextf("theta:\t%s\n", object@theta))
+        cat(gettextf("intercept:\t%s\n", object@intercept))
+        cat(gettextf("scale:\t%s\n", object@scale))
     })
 setMethod("show", "UnivariateCondDistribution",
     function(object){
-        cat("Distribution object of class: ", class(object)[1], "\n")
+        cat(gettextf("Distribution object of class: %s", class(object)[1]))
         parameter <- param(object)
         Names <- slotNames(parameter)
         if(length(Names) > 1){
           for(i in Names[Names != "name"])
             cat(i, ": ", slot(parameter, i), "\n")
         }
-        cat("## cond:\n")
+        cat(gettext("## cond:\n"))
         show(object@cond)
     })

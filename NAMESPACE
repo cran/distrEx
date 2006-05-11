@@ -1,4 +1,7 @@
+useDynLib("distrEx")
+
 import("distr")
+import("startupmsg")
 
 exportClasses("DistrList", 
               "UnivarDistrList")
@@ -10,7 +13,7 @@ exportClasses("MultivariateDistribution",
               "UnivariateCondDistribution",
               "DiscreteCondDistribution", 
               "AbscontCondDistribution",
-              "Gumbel")
+              "Gumbel", "PrognCondition")
 
 exportMethods("initialize", 
               "show", 
@@ -27,9 +30,11 @@ exportMethods("support",
               "loc", "loc<-", 
               "scale", "scale<-", 
               "name", "name<-", 
-              "E", 
+              "E", "var", "IQR", 
+              "sd", "median", "mad",
               "m1df", "m2df",
               "liesInSupport")
+exportMethods("illustrateCLT")
 
 export("DistrList", "UnivarDistrList") 
 export("EuclCondition") 
@@ -44,7 +49,7 @@ export("EuclideanSpace",
 export("ConvexContamination")
 export("GLIntegrate",
        "distrExIntegrate") 
-export("distrExOptions",
+export("distrExOptions", 
        "GLIntegrateTruncQuantile",
        "GLIntegrateOrder",  
        "ElowerTruncQuantile", 
@@ -54,3 +59,4 @@ export("distrExOptions",
        "m1dfRelativeTolerance", 
        "m2dfLowerTruncQuantile", 
        "m2dfRelativeTolerance")
+export("make01","PrognCondDistribution","PrognCondition")

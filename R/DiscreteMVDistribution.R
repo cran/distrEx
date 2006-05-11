@@ -6,10 +6,11 @@
     if(ncol(x) != ncol(y))
         stop("'x' and 'y' have different numbers of columns")
     res <- numeric(0)
+    DistrResolution <- getdistrOption("DistrResolution")
     for(i in 1:nrow(x))
         for(j in 1:nrow(y))
-            if(identical(all.equal(x[i,], y[j,], 
-                         tolerance = distr::DistrResolution), TRUE)) res <- c(res, j)
+            if(identical(all.equal(x[i,], y[j,], tolerance = DistrResolution), TRUE)) 
+               res <- c(res, j)
     return(res)
 }
 
@@ -85,6 +86,8 @@ DiscreteMVDistribution <- function(supp, prob){
     MVD@param <- NULL
     MVD@img <- EuclideanSpace(dimension = floor(ncol(supp)))
     MVD@support <- supp
+    MVD@.withSim <- FALSE 
+    MVD@.withArith <- FALSE
     
     return(MVD)
 }

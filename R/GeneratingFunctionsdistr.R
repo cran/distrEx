@@ -21,7 +21,7 @@ DiscreteDistribution <- function(supp, prob){
         if(any(!is.finite(prob)))
             stop("inifinite or missing values in prob")
         if(!identical(all.equal(sum(prob), 1, 
-                            tolerance = 2*distr::TruncQuantile), TRUE))
+                            tolerance = 2*getdistrOption("TruncQuantile")), TRUE))
             stop("sum of 'prob' has to be (approximately) 1")
         if(!all(prob >= 0))
             stop("'prob' contains values < 0")
@@ -38,13 +38,13 @@ DiscreteDistribution <- function(supp, prob){
     }
     
     if(len > 1){
-      if(min(supp[2:len] - supp[1:(len - 1)]) < distr::DistrResolution)
+      if(min(supp[2:len] - supp[1:(len - 1)]) < getdistrOption("DistrResolution"))
         stop("grid too narrow --> change DistrResolution")
     }
     rfun <- function(n){ 
         sample(x = supp, size = n, replace = TRUE, prob = prob) 
     }
-    intervall <- distr::DistrResolution / 2  
+    intervall <- getdistrOption("DistrResolution") / 2  
   
     supp.grid <- as.numeric(matrix(
                       rbind(supp - intervall, supp + intervall), nrow = 1))

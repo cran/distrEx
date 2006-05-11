@@ -1,0 +1,4 @@
+distrExUse         This example illustrates how useful the functionals are in distrEx: code can be written once for all distributions...
+illustCLT         This example illustrates how the CLT forces consecutive sums of iid r.v.'s to converge to a normal distribution; it uses
+                  the E()- and sd()-methods from distrEx.   
+Prognose          This example shows how the conditional distributions from distrEx can be used to achieve a general deconvolution method.

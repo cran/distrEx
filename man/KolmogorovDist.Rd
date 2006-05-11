@@ -69,7 +69,7 @@ KolmogorovDist(e1, e2)
 KolmogorovDist(Norm(), Gumbel())
 KolmogorovDist(Norm(), Td(10))
 KolmogorovDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100))
-KolmogorovDist(Pois(10), Binom(size = 20))
+KolmogorovDist(Pois(10), Binom(size = 20)) 
 }
 \concept{distance}
 \keyword{distribution}

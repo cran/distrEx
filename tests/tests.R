@@ -92,12 +92,12 @@ img(D5) # bug in methods package in R Version R 2.0.1 patched (2004-12-09)?
 
 ## DistrList, UnivarDistrList
 (L1 <- new("DistrList", list(D1, D2, Norm())))
-plot(L1)
+#plot(L1) not yet implemented
 (L2 <- DistrList(D1, D2, D2))
-plot(L2)
+#plot(L2) not yet implemented
 
 (L3 <- new("UnivarDistrList", list(Binom(size=10), Td(df=10), Fd(df1 = 10, df2=10))))
-plot(L3)
+plot(L3) 
 try(L4 <- UnivarDistrList(D4, Exp(rate = 0.5), Pois(lambda = 10)))
 D4
 

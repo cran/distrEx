@@ -53,9 +53,9 @@ liesInSupport(Exp(1), rnorm(10))
 x <- rpois(10, lam = 10)
 liesInSupport(Pois(1), x)
 # better
-distroptions("TruncQuantile", 1e-15)
+distroptions("TruncQuantile"=1e-15)
 liesInSupport(Pois(1), x)
-distroptions("TruncQuantile", 1e-05) # default
+distroptions("TruncQuantile"=1e-05) # default
 
 M <- matrix(rpois(30, lam = 10), ncol = 3)
 D1 <- DiscreteMVDistribution(M)

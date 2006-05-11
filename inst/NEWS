@@ -1,0 +1,38 @@
+######################################################################
+#  News: to package distrEx
+######################################################################
+
+##############
+v 0.4-3 
+##############
+
+*  Implementation of functionals:
+   o evaluation of exact expressions of E (expectation functional) for most specific distributions from stats package
+   o var, sd methods for UnivariateDistributions; these include calls like
+
+     N <- Norm()
+
+     var(N,function(t)abs(t)^(1/2))   # calculates Var[|N|^(1/2)] 
+
+     also (factorized) conditional variance is available
+   o evaluation of exact expressions of var for most specific distributions from stats package
+   o median, IQR, mad methods for UnivariateDistributions
+   o for var, sd, median, IQR, mad: all functionality/arguments of stats methods is/are preserved and
+            only if first argument / argument x is of class UnivariateDistribution (or descendant) a 
+            different method is applied
+* Internationalization: use of gettext, gettextf in output
+* C-interface .GLaw() to replace respective R-Code in distrExintegrate.R
+* PrognCondDistribution, PrognCondition are included as classes and generating functions (incl. show-method); 
+* Inclusion of demos (see above)
+  + PrognCondDistribution, PrognCondition are included as classes and generating functions (incl. show-method); 
+  + illustrateCLT is included and rd-file is done
+
+
+##############
+v 0.4-2 
+##############
+
+* ContaminationSize, HellingerDist, KolmogorovDist, TotalVarDist now return a list which consists of the corresponding distributions and their distance
+* minor changes in m1df and m2df to increase speed of computation
+* minor changes in DiscreteMVDistribution to increase speed of computation
+* introduction of a new parameter useApply in methods for function E with default value TRUE

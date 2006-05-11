@@ -96,6 +96,7 @@ LMCondDistribution <- function(Error = Norm(), theta = 0, intercept = 0,
     CD1@param <- param
     CD1@cond <- cond
     CD1@img <- Reals()
-    
+    CD1@.withSim <- FALSE
+    CD1@.withArith <- FALSE
     return(CD1)
 }

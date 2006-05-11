@@ -43,3 +43,10 @@ distrExOptions <- function(arg = "missing", value = -1){
     else
         eval.parent(parse(text = paste("assignInNamespace(\"", arg, "\",", value, ", \"distrEx\")", sep = "")))
 }
+
+###
+#* Diesen Kommentar nach Bearbeitung löschen....
+###
+##@Matthias: Willst Du das wie in distr machen (vgl. 01.R, 99.R)
+## m.E.: globale Optionen besser in einer globalen Liste ablegen (Überschreibschutz/Namenskollision)
+## und dann mit unlockBinding 'verschleiern'...

@@ -60,7 +60,7 @@ TotalVarDist(e1, e2)
 TotalVarDist(Norm(), Gumbel())
 TotalVarDist(Norm(), Td(10))
 TotalVarDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100)) # mutually singular
-TotalVarDist(Pois(10), Binom(size = 20))
+TotalVarDist(Pois(10), Binom(size = 20)) 
 }
 \concept{distance}
 \keyword{distribution}
