@@ -93,3 +93,4 @@ DiscreteMVDistribution <- function(supp, prob){
 }
 
 setMethod("support", "DiscreteMVDistribution", function(object) object@support)
+setMethod("dim", "DiscreteMVDistribution", function(x)ncol(x@support))

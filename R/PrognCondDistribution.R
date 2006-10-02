@@ -16,7 +16,7 @@ PrognCondition <- function(range = EuclideanSpace()){
 setMethod("show", "PrognCondition",
     function(object){
         cat(gettextf("name:\t%s\n", object@name))
-        cat("range:\t\%s with dimension %s\n", object@range@name, object@range@dimension)
+        cat("range:\t%s with dimension %s\n", object@range@name, object@range@dimension)
     })
 
 ## generating function

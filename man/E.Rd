@@ -22,6 +22,7 @@
 \alias{E,Cauchy,missing,missing-method}
 \alias{E,Chisq,missing,missing-method}
 \alias{E,Dirac,missing,missing-method}
+\alias{E,DExp,missing,missing-method}
 \alias{E,Exp,missing,missing-method}
 \alias{E,Fd,missing,missing-method}
 \alias{E,Gammad,missing,missing-method}
@@ -70,6 +71,7 @@ E(object, fun, cond, ...)
 \S4method{E}{Cauchy,missing,missing}(object, fun, cond)
 \S4method{E}{Chisq,missing,missing}(object, fun, cond)
 \S4method{E}{Dirac,missing,missing}(object, fun, cond)
+\S4method{E}{DExp,missing,missing}(object, fun, cond)
 \S4method{E}{Exp,missing,missing}(object, fun, cond)
 \S4method{E}{Fd,missing,missing}(object, fun, cond)
 \S4method{E}{Gammad,missing,missing}(object, fun, cond)
@@ -177,6 +179,8 @@ E(object, fun, cond, ...)
   \item{object = "Chisq", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
   \item{object = "Dirac", fun = "missing", cond = "missing":}{ 
+    exact evaluation using explicit expressions.}
+  \item{object = "DExp", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
   \item{object = "Exp", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}

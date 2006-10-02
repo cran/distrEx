@@ -8,6 +8,7 @@
 \alias{var,Cauchy-method}
 \alias{var,Chisq-method}
 \alias{var,Dirac-method}
+\alias{var,DExp-method}
 \alias{var,Exp-method}
 \alias{var,Fd-method}
 \alias{var,Gammad-method}
@@ -66,6 +67,7 @@ var(x, ...)
 \S4method{var}{Cauchy}(x)
 \S4method{var}{Chisq}(x)
 \S4method{var}{Dirac}(x)
+\S4method{var}{DExp}(x)
 \S4method{var}{Exp}(x)
 \S4method{var}{Fd}(x)
 \S4method{var}{Gammad}(x)
@@ -128,6 +130,8 @@ var(x, ...)
   \item{\code{var}, \code{signature(x = "Chisq")}:}{ 
     exact evaluation using explicit expressions.}
   \item{\code{var}, \code{signature(x = "Dirac")}:}{ 
+    exact evaluation using explicit expressions.}
+  \item{\code{var}, \code{signature(x = "DExp")}:}{ 
     exact evaluation using explicit expressions.}
   \item{\code{var}, \code{signature(x = "Exp")}:}{ 
     exact evaluation using explicit expressions.}

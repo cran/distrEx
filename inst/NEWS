@@ -3,6 +3,14 @@
 ######################################################################
 
 ##############
+v 0.4-4 
+##############
+
+* dim() method for DiscreteMVDistribution 
+* var() + E() overloaded for DExp-Class 
+* sd()-method  overwritten for Norm-Class to allow function / condition argument
+
+##############
 v 0.4-3 
 ##############
 

@@ -24,15 +24,13 @@ distrEx -- Extensions of package distr
 \details{
 \tabular{ll}{
 Package: \tab distrEx\cr
-Version: \tab 0.4-3\cr
-Date: \tab 2006-05-11\cr
-Depends: \tab R(>= 2.2.0), methods, distr(>= 1.7) , evd\cr
+Version: \tab 0.4-4\cr
+Date: \tab 2006-10-03\cr
+Depends: \tab R(>= 2.2.0), methods, distr(>= 1.8) , evd\cr
 SaveImage: \tab no\cr
 LazyLoad: \tab yes\cr
 License: \tab GPL (version 2 or later)\cr
 URL: \tab http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/\cr
-Packaged: \tab Thu May 11 10:16:03 2006; Peter\cr
-Built: \tab R 2.4.0dev; i386-pc-mingw32; 2006-05-11 10:20:11; windows\cr
 }
 }
 \section{Classes}{
@@ -178,8 +176,16 @@ Peter Ruckdeschel \email{Peter.Ruckdeschel@uni-bayreuth.de},\cr
 \emph{Maintainer:}  Matthias Kohl \email{Matthias.Kohl@stamats.de}
 }
 \references{
-a more detailed manual for \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} may be downloaded from  
-\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf}
+P. Ruckdeschel, M. Kohl, T. Stabla, F. Camphausen (2006):
+S4 Classes for Distributions, {\em R News}, {\em 6}(2), 2-6. 
+\url{http://CRAN.R-project.org/doc/Rnews/Rnews_2006-2.pdf}
+
+%a more detailed manual for \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} may be downloaded from  
+%\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf}\cr
+
+a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} 
+is included into the mere documentation package \pkg{distrDoc} and may be called by 
+\code{require("distrDoc");vignette("distr")}
 
 a homepage to this package is available under\cr
 \url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distrEx.html}

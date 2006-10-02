@@ -279,6 +279,13 @@ setMethod("E", signature(object = "Dirac",
     })
 
 
+setMethod("E", signature(object = "DExp", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object){
+        return(0)
+    })
+
 setMethod("E", signature(object = "Exp", 
                          fun = "missing", 
                          cond = "missing"),

@@ -1,5 +1,7 @@
 \name{distrExOptions}
 \alias{distrExOptions}
+%\alias{distrExoptions}
+%\alias{getdistrExOption}
 \alias{MCIterations}
 \alias{GLIntegrateTruncQuantile}
 \alias{GLIntegrateOrder}

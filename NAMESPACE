@@ -18,7 +18,8 @@ exportClasses("MultivariateDistribution",
 exportMethods("initialize", 
               "show", 
               "plot", 
-              "coerce") 
+              "coerce", 
+              "dim") 
 exportMethods("ConvexContamination", 
               "ContaminationSize", 
               "TotalVarDist", 

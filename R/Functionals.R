@@ -38,6 +38,22 @@ setMethod("sd", signature(x = "UnivariateDistribution"),
            return(sqrt(var(x, fun = fun, cond = cond, withCond = FALSE, useApply = TRUE,...)))}           
     })
 
+### overload "sd" method for "Norm" ...
+setMethod("sd", signature(x = "Norm"), 
+    function(x, fun, cond, withCond = FALSE, useApply = TRUE, ...){
+      if(missing(fun))
+        {if(missing(cond))
+           return(sd(param(x)))
+        else
+           return(sqrt(var(x, cond = cond, withCond = FALSE, useApply = TRUE, ...)))}
+      else
+        {if(missing(cond))
+           return(sqrt(var(x, fun = fun, useApply = TRUE, ...)))
+        else
+           return(sqrt(var(x, fun = fun, cond = cond, withCond = FALSE, useApply = TRUE,...)))}           
+    }) 
+    
+
 
 ###################################################################################
 #median, mad, IQR
@@ -105,6 +121,14 @@ setMethod("var", signature(x = "Chisq"),
 setMethod("var", signature(x = "Dirac"),
     function(x){return(0)})
 
+
+setMethod("var", signature(x = "DExp"),
+    function(x, ...){    
+    if((hasArg(fun))||(hasArg(cond))) 
+         return(var(as(x,"AbscontDistribution"),...))
+    else
+        return(2/rate(x)^2)
+    })
 
 setMethod("var", signature(x = "Exp"),
     function(x, ...){    
