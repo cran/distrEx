@@ -30,7 +30,7 @@ setMethod("show", "LMParameter",
     })
 setMethod("show", "UnivariateCondDistribution",
     function(object){
-        cat(gettextf("Distribution object of class: %s", class(object)[1]))
+        cat(gettextf("Distribution object of class: %s\n", class(object)[1]))
         parameter <- param(object)
         Names <- slotNames(parameter)
         if(length(Names) > 1){

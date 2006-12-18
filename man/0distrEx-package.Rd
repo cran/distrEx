@@ -24,8 +24,8 @@ distrEx -- Extensions of package distr
 \details{
 \tabular{ll}{
 Package: \tab distrEx\cr
-Version: \tab 0.4-4\cr
-Date: \tab 2006-10-03\cr
+Version: \tab 1.8\cr
+Date: \tab 2006-12-18\cr
 Depends: \tab R(>= 2.2.0), methods, distr(>= 1.8) , evd\cr
 SaveImage: \tab no\cr
 LazyLoad: \tab yes\cr

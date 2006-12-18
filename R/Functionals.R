@@ -200,7 +200,7 @@ setMethod("var", signature(x = "Nbinom"),
     if((hasArg(fun))||(hasArg(cond))) 
          return(var(as(x,"DiscreteDistribution"),...))
     else
-        return(size(x)*prob(x)/(1-prob(x))^2)
+        return(size(x)*(1-prob(x))/prob(x)^2)
     })
 
 setMethod("var", signature(x = "Pois"),

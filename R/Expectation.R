@@ -343,7 +343,7 @@ setMethod("E", signature(object = "Nbinom",
                          fun = "missing", 
                          cond = "missing"),
     function(object){
-        return(size(object)*prob(object)/(1-prob(object)))
+        return(size(object)*(1-prob(object))/prob(object))
     })
 
 setMethod("E", signature(object = "Pois", 
