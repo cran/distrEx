@@ -76,5 +76,7 @@ m2df(D1, Inf)
 E(D1, function(x){x^2})
 }
 \concept{moment}
+\concept{functional}
+\concept{truncated moment}
 \keyword{methods}
 \keyword{distribution}

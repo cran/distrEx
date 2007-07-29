@@ -35,4 +35,6 @@ Class \code{"Distribution"}, by class \code{"UnivariateCondDistribution"}.
 \seealso{\code{\link{UnivariateCondDistribution-class}}, \code{\link[distr]{Distribution-class}}}
 \examples{new("AbscontCondDistribution")}
 \keyword{distribution}
-\keyword{classes}
+\concept{absolutely continous distribution}
+\concept{conditional distribution}
+\concept{S4 distribution class}

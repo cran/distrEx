@@ -2,62 +2,29 @@
     require("methods", character = TRUE, quietly = TRUE)
 }
 
-###
-#* Diesen Kommentar nach Bearbeitung löschen....
-###
-##@Matthias: Willst Du das wie in distr machen (vgl. 01.R, 99.R)
-## m.E.: globale Optionen besser in einer globalen Liste ablegen (Überschreibschutz/Namenskollision)
 
 .onAttach <- function(library, pkg)
 {
-#  unlockBinding(".distrExoptions", asNamespace("distr"))
-# next lines are taken from Valentin Todorov's package "rrcov"
-#    ver <- read.dcf(file.path(library, pkg, "DESCRIPTION"), "Version")
-#    ver <- as.character(ver)
-#    title <- read.dcf(file.path(library, pkg, "DESCRIPTION"), "Title")
-#    title <- as.character(title)
-#    if((!getOption("StartupBanner")=="off")||is.null(getOption("StartupBanner"))) 
-#       message(paste(title, " (version ", ver, ")\n", sep = ""))
-#    msga <- gettext("For more information see ?\"distrTEst\", NEWS(\"distrTEst\"), and \n")
-#    msgb <- gettext("    http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf .\n")
-#    if((getOption("StartupBanner")=="complete")||is.null(getOption("StartupBanner"))) 
-#       message(msga,msgb,sep=""); 
-buildStartupMessage(pkg="distrEx", library=library, packageHelp=TRUE, 
+unlockBinding(".distrExOptions", asNamespace("distrEx"))
+msga <- gettext("Note: Packages \"e1071\", \"moments\", \"fBasics\" should be attached\n")
+msgb <- gettext("/before/ package \"distrEx\". See distrExMASK().")
+buildStartupMessage(pkg = "distrEx", msga, msgb, library = library, packageHelp = TRUE, 
 #                    MANUAL="http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf",
-                    VIGNETTE=gettext("Package \"distrDoc\" provides a vignette to this package as well as\nto several related packages; try vignette(\"distr\")."))
-
-###
+VIGNETTE = gettext("Package \"distrDoc\" provides a vignette to this package as well as\nto several related packages; try vignette(\"distr\")."))
   invisible()
 }
+
+distrExMASK <- function(library = NULL) 
+{
+    infoShow(pkg = "distrEx", filename = "MASKING", library = library)
+}
+
 
 .onUnload <- function(libpath)
 {
     library.dynam.unload("distrEx", libpath)
 }
 
-# list of distributions
-setClass(Class = "DistrList", 
-            prototype = prototype(list(new("Norm"))), 
-            contains = "list",
-            validity = function(object){
-                nrvalues <- length(object)
-                for(i in 1:nrvalues)
-                    if(!is(object[[i]], "Distribution")) 
-                        stop("element ", i, " is no 'Distribution'")
-                return(TRUE) 
-            })
-
-# list of univariate distributions
-setClass("UnivarDistrList", 
-            prototype = prototype(list(new("Norm"))), 
-            contains = "DistrList", 
-            validity = function(object){
-                nrvalues <- length(object)
-                for(i in 1:nrvalues)
-                    if(!is(object[[i]], "UnivariateDistribution"))
-                        stop("element ", i, " is no 'UniveriateDistribution'")
-                return(TRUE) 
-            })
 
 # multivariate distribution
 setClass("MultivariateDistribution", 

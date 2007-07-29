@@ -36,5 +36,9 @@ Class \code{"Condition"}, directly.
 %\note{}
 \seealso{\code{\link{PrognCondDistribution-class}},\code{\link{Condition-class}}}
 \examples{PrognCondition()}
+\concept{condition}
 \concept{conditioning}
-\keyword{classes}
+\concept{S4 condition class}
+\concept{prediction distribution}
+\concept{conditional distribution}
+\keyword{distribution}

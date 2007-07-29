@@ -14,11 +14,14 @@
   \deqn{Q = (1-\varepsilon)P + \varepsilon R}{Q = (1 - epsilon)P + epsilon R}
 }
 \usage{
-ContaminationSize(e1, e2)
+ContaminationSize(e1, e2, ...)
+\S4method{ContaminationSize}{AbscontDistribution,AbscontDistribution}(e1,e2)
+\S4method{ContaminationSize}{DiscreteDistribution,DiscreteDistribution}(e1,e2)
 }
 \arguments{
   \item{e1}{ object of class \code{"Distribution"} }
   \item{e2}{ object of class \code{"Distribution"} }
+  \item{\dots}{ further arguments to be used in particular methods (not in package \pkg{distrEx})}
 }
 \details{Computes the distance from \code{e1} to \code{e2} respectively
   \eqn{P} to \eqn{Q}. This is not really a distance as it is not symmetric!}
@@ -39,7 +42,7 @@ ContaminationSize(e1, e2)
     univariate distributions.
   }
   }
-}}
+}
 \references{Huber, P.J. (1981) \emph{Robust Statistics}. New York: Wiley.}
 \author{Matthias Kohl \email{Matthias.Kohl@stamats.de}}
 %\note{ ~~further notes~~ }
@@ -52,3 +55,4 @@ ContaminationSize(Pois(), Pois(1.5))
 \concept{convex contamination}
 \concept{gross error}
 \keyword{distribution}
+\concept{distance}

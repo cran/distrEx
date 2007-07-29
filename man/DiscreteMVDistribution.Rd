@@ -40,3 +40,5 @@ r(D2)(10)
 \concept{multivariate distribution}
 \concept{discrete distribution}
 \keyword{distribution}
+\concept{S4 distribution class}
+\concept{generating function}

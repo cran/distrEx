@@ -46,5 +46,12 @@ Class \code{"OptionalParameter"}, by class \code{"Parameter"}.
 \examples{
 new("GumbelParameter")
 }
-\concept{Gumbel}
-\keyword{classes}
+\concept{Gumbel distribution}
+\keyword{distribution}
+\concept{parameter}
+\concept{S4 parameter class}
+\keyword{models}
+\concept{generating function}
+\concept{scale}
+\concept{location}
+\concept{location scale model}

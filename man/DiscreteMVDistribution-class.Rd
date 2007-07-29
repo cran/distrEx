@@ -61,5 +61,5 @@ e1 <- E(D2) # expectation
 }
 \concept{multivariate distribution}
 \concept{discrete distribution}
-\keyword{classes}
 \keyword{distribution}
+\concept{S4 distribution class}

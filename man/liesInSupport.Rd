@@ -1,10 +1,4 @@
 \name{liesInSupport}
-\alias{liesInSupport}
-\alias{liesInSupport-methods}
-\alias{liesInSupport,DiscreteDistribution,numeric-method}
-\alias{liesInSupport,DiscreteDistribution,matrix-method}
-\alias{liesInSupport,AbscontDistribution,numeric-method}
-\alias{liesInSupport,AbscontDistribution,matrix-method}
 \alias{liesInSupport,DiscreteMVDistribution,numeric-method}
 \alias{liesInSupport,DiscreteMVDistribution,matrix-method}
 
@@ -14,7 +8,8 @@
   distribution \code{object}.
 }
 \usage{
-liesInSupport(object, x)
+\S4method{liesInSupport}{DiscreteMVDistribution,numeric}(object, x)
+\S4method{liesInSupport}{DiscreteMVDistribution,matrix}(object, x)
 }
 \arguments{
   \item{object}{ object of class \code{"Distribution"} }
@@ -24,18 +19,6 @@ liesInSupport(object, x)
 \value{logical vector}
 \section{Methods}{
 \describe{
-  \item{object = "DiscreteDistribution", x = "numeric":}{ 
-    does \code{x} lie in the support of \code{object}. }
-
-  \item{object = "DiscreteDistribution", x = "matrix":}{
-    does \code{x} lie in the support of \code{object}. }
-
-  \item{object = "AbscontDistribution", x = "numeric":}{
-    does \code{x} lie in the support of \code{object}. }
-
-  \item{object = "AbscontDistribution", x = "matrix":}{ 
-    does \code{x} lie in the support of \code{object}. }
-
   \item{object = "DiscreteMVDistribution", x = "numeric":}{ 
     does \code{x} lie in the support of \code{object}. }
 
@@ -47,19 +30,12 @@ liesInSupport(object, x)
 %\note{}
 \seealso{\code{\link[distr]{Distribution-class}}}
 \examples{
-liesInSupport(Exp(1), rnorm(10))
-
-# note
-x <- rpois(10, lam = 10)
-liesInSupport(Pois(1), x)
-# better
-distroptions("TruncQuantile"=1e-15)
-liesInSupport(Pois(1), x)
-distroptions("TruncQuantile"=1e-05) # default
-
-M <- matrix(rpois(30, lam = 10), ncol = 3)
+M <- matrix(rpois(30, lambda = 10), ncol = 3)
 D1 <- DiscreteMVDistribution(M)
 M1 <- rbind(r(D1)(10), matrix(rpois(30, lam = 10), ncol = 3))
 liesInSupport(D1, M1)
 }
 \keyword{distribution}
+\keyword{utilities}
+\keyword{methods}
+\concept{support}

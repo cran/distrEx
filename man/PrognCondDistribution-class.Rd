@@ -51,5 +51,6 @@ Class \code{"Distribution"}, by classes \code{"UnivariateCondDistribution"} and 
 \seealso{\code{\link{PrognCondition-class}}, \code{\link{UnivariateCondDistribution-class}}
 \code{\link{AbscontCondDistribution-class}}, \code{\link[distr]{Distribution-class}}}
 \examples{PrognCondDistribution()}
+\concept{S4 distribution class}
+\concept{conditional distribution}
 \keyword{distribution}
-\keyword{classes}

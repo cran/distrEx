@@ -45,13 +45,14 @@ setMethod("ContaminationSize", signature(e1 = "DiscreteDistribution",
 #
 #        return(res)
 
-    suppressWarnings({
+        owarn <- getOption("warn"); options(warn = -1)
         supp <- union(support(e1), support(e2))
         p1 <- p(e1)(supp)
         p2 <- p(e2)(supp)[p1 != 0]
         p1 <- p1[p1 != 0]
         res <- round(1 - exp(min(log(p2) - log(p1))), 2)
-                     })
+        options(warn = owarn)
+
 
         return(list(e1 = e1, e2 = e2, size.of.contamination = res))
     })

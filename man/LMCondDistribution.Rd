@@ -44,3 +44,5 @@ E(Norm(mean=2), function(x){x^2})
 \concept{conditional distribution}
 \keyword{distribution}
 \keyword{models}
+\concept{S4 distribution class}
+\concept{generating function}

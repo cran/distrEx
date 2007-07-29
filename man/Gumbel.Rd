@@ -38,3 +38,6 @@ function(loc = 0, scale = 1){
 }
 \concept{Gumbel}
 \keyword{distribution}
+\concept{absolutely continuous distribution}
+\concept{Gumbel distribution}
+\concept{generating function}

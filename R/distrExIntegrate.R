@@ -1,8 +1,8 @@
 # Gauﬂ-Legendre abscissas and weights
-# cf. Numerical Recipies in C (1992), p. 152
+# cf. for example Numerical Recipies in C (1992), p. 152
 
 #implementation in S:
-.GLawOld <- function(n){
+.GLawOld <- function(n){                                                          
     if(n %% 2 == 1) stop("n has to be an even number")
 
     m <- (n + 1)/2
@@ -40,8 +40,9 @@
     W <- numeric(n)
 
 #    mm<-dyn.load("G:/rtest/GLaw.dll")
-    erg<-.C("gauleg",n=as.integer(n),eps=as.double(.Machine$double.eps),
-             A=as.double(A),W=as.double(W))
+    erg<-.C("gauleg",n = as.integer(n),eps = as.double(.Machine$double.eps),
+             A = as.double(A),W = as.double(W), PACKAGE = "distrEx") 
+              ### PACKAGE ARGUMENT added P.R. 270507
 #    dyn.unload("G:/rtest/GLaw.dll")
     cbind(A=erg$A, W=erg$W)         
 }
@@ -49,7 +50,8 @@
 
 GLIntegrate <- function(f, lower, upper, order = 500, ...){
     if(order %in% c(100, 500, 1000))
-        AW <- getFromNamespace(paste(".AW", as.character(order), sep = "."), ns = "distrEx")
+        AW <- getFromNamespace(paste(".AW", as.character(order), 
+                                     sep = "."), ns = "distrEx")
     else
         AW <- .GLaw(order)
 
@@ -62,10 +64,14 @@ GLIntegrate <- function(f, lower, upper, order = 500, ...){
     sum(res)
 }
 
-distrExIntegrate <- function(f, lower, upper, subdivisions = 100, rel.tol = .Machine$double.eps^0.25, 
-                           abs.tol = rel.tol, stop.on.error = TRUE, distr, order = GLIntegrateOrder, ...){
+distrExIntegrate <- function(f, lower, upper, subdivisions = 100, 
+                             rel.tol = .Machine$double.eps^0.25, 
+                             abs.tol = rel.tol, stop.on.error = TRUE, 
+                             distr, order = .distrExOptions$GLIntegrateOrder, 
+                             ...){
     res <- try(integrate(f, lower = lower, upper = upper, rel.tol = rel.tol, 
-                  abs.tol = abs.tol, stop.on.error = stop.on.error, ...)$value, silent = TRUE)
+                  abs.tol = abs.tol, stop.on.error = stop.on.error, ...)$value, 
+                  silent = TRUE)
 
     # if integrate fails => Gauﬂ-Legendre integration
     if(!is.numeric(res)){
@@ -81,20 +87,32 @@ distrExIntegrate <- function(f, lower, upper, subdivisions = 100, rel.tol = .Mac
         else{
             value <- c(...)
             if(is(distr, "UnivariateCondDistribution"))
-                lower <- q(distr)(GLIntegrateTruncQuantile, cond = value$cond)
+                lower <- q(distr)(.distrExOptions$GLIntegrateTruncQuantile, 
+                                   cond = value$cond)
             else
-                lower <- q(distr)(GLIntegrateTruncQuantile)
+                lower <- q(distr)(.distrExOptions$GLIntegrateTruncQuantile)
         }
         if(!is.finite(upper))
             if(missing(distr)) stop(res)
         else{
             value <- c(...)
-            if(is(distr, "UnivariateCondDistribution"))
-                upper <- q(distr)(1 - GLIntegrateTruncQuantile, cond = value$cond)
-            else
-                upper <- q(distr)(1 - GLIntegrateTruncQuantile)
+            if(is(distr, "UnivariateCondDistribution")){
+                if("lower.tail" %in% names(formals(distr@q)))
+                  upper <- q(distr)(.distrExOptions$GLIntegrateTruncQuantile, 
+                                      cond = value$cond, lower.tail = FALSE)  
+                else    
+                  upper <- q(distr)(1 - .distrExOptions$GLIntegrateTruncQuantile, 
+                                      cond = value$cond)                                      
+            }else{
+                if("lower.tail" %in% names(formals(distr@q)))
+                  upper <- q(distr)(.distrExOptions$GLIntegrateTruncQuantile, 
+                                     lower.tail = FALSE)  
+                else    
+                  upper <- q(distr)(1 - .distrExOptions$GLIntegrateTruncQuantile)
+            }
         }
-        res <- Zi*GLIntegrate(f = f, lower = lower, upper = upper, order = order, ...)
+        res <- Zi*GLIntegrate(f = f, lower = lower, upper = upper, 
+                              order = order, ...)
     }
     
     return(res)

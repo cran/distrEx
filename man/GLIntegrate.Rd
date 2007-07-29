@@ -14,7 +14,7 @@ GLIntegrate(f, lower, upper, order = 500, ...)
             element will generate an error. }
   \item{lower}{ finite lower limit of integration. }
   \item{upper}{ finite upper limit of integration. }
-  \item{order}{ order of Gauﬂ-Legendre quadrature. }
+  \item{order}{ order of Gauss-Legendre quadrature. }
   \item{\dots}{ additional arguments to be passed to \code{f}. Remember 
     to use argument names not matching those of \code{GLIntegrate}! }
 }
@@ -31,7 +31,6 @@ GLIntegrate(f, lower, upper, order = 500, ...)
   Second Edition. Cambridge University Press.
 }
 \author{Matthias Kohl \email{Matthias.Kohl@stamats.de}}
-%\note{ ~~further notes~~ }
 \seealso{\code{\link[stats]{integrate}}, \code{\link{distrExIntegrate}}}
 \examples{
 integrate(dnorm, -1.96, 1.96)

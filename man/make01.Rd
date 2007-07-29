@@ -27,7 +27,7 @@ print(X01)
 plot(X01)
 sd(X01); E(X01)
 }
-\concept{functionals}
+\concept{functional}
 \concept{centering}
 \concept{standardization}
 \keyword{distribution}

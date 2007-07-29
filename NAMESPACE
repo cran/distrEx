@@ -3,8 +3,6 @@ useDynLib("distrEx")
 import("distr")
 import("startupmsg")
 
-exportClasses("DistrList", 
-              "UnivarDistrList")
 exportClasses("Condition", "EuclCondition") 
 exportClasses("LMParameter",   
               "GumbelParameter")
@@ -14,7 +12,6 @@ exportClasses("MultivariateDistribution",
               "DiscreteCondDistribution", 
               "AbscontCondDistribution",
               "Gumbel", "PrognCondition")
-
 exportMethods("initialize", 
               "show", 
               "plot", 
@@ -31,33 +28,22 @@ exportMethods("support",
               "loc", "loc<-", 
               "scale", "scale<-", 
               "name", "name<-", 
-              "E", "var", "IQR", 
-              "sd", "median", "mad",
+              "E", "var", "IQR", "skewness", "kurtosis", 
+              "sd", "median", "mad", 
               "m1df", "m2df",
               "liesInSupport")
-exportMethods("illustrateCLT")
-
-export("DistrList", "UnivarDistrList") 
+export("illustrateLLN")
+export("illustrateCLT")
+export("illustrateCLT.tcl")
 export("EuclCondition") 
 export("LMParameter")
-export("DiscreteDistribution", 
-       "DiscreteMVDistribution",
+export("DiscreteMVDistribution",
        "LMCondDistribution", 
        "Gumbel")
-export("EuclideanSpace", 
-       "Reals", 
-       "Naturals") 
 export("ConvexContamination")
 export("GLIntegrate",
        "distrExIntegrate") 
-export("distrExOptions", 
-       "GLIntegrateTruncQuantile",
-       "GLIntegrateOrder",  
-       "ElowerTruncQuantile", 
-       "EupperTruncQuantile", 
-       "ErelativeTolerance",  
-       "m1dfLowerTruncQuantile", 
-       "m1dfRelativeTolerance", 
-       "m2dfLowerTruncQuantile", 
-       "m2dfRelativeTolerance")
-export("make01","PrognCondDistribution","PrognCondition")
+export("distrExOptions", "getdistrExOption",
+       "distrExMASK")
+export("make01","PrognCondDistribution",
+       "PrognCondition")

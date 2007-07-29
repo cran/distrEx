@@ -46,5 +46,4 @@ Class \code{"Distribution"}, by class \code{"UnivariateDistribution"}.
 \seealso{\code{\link[distr]{Distribution-class}}}
 \examples{new("UnivariateCondDistribution")}
 \concept{conditional distribution}
-\keyword{classes}
 \keyword{distribution}

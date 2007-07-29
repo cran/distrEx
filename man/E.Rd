@@ -4,6 +4,10 @@
 \alias{E,UnivariateDistribution,missing,missing-method}
 \alias{E,AbscontDistribution,missing,missing-method}
 \alias{E,DiscreteDistribution,missing,missing-method}
+\alias{E,AffLinDistribution,missing,missing-method}
+\alias{E,AffLinAbscontDistribution,missing,missing-method}
+\alias{E,AffLinDiscreteDistribution,missing,missing-method}
+\alias{E,AffLinLatticeDistribution,missing,missing-method}
 \alias{E,MultivariateDistribution,missing,missing-method}
 \alias{E,DiscreteMVDistribution,missing,missing-method}
 \alias{E,UnivariateDistribution,function,missing-method}
@@ -50,6 +54,8 @@ E(object, fun, cond, ...)
 
 \S4method{E}{DiscreteDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
 
+\S4method{E}{AffLinDistribution,missing,missing}(object)
+
 \S4method{E}{MultivariateDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
 
 \S4method{E}{DiscreteMVDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
@@ -95,7 +101,7 @@ E(object, fun, cond, ...)
     given \code{cond} is computed. }
   \item{\dots}{ additional arguments to \code{fun} }
   \item{useApply}{ logical: should \code{sapply}, respectively \code{apply} 
-    be used to evaluate \code{fund}. }
+    be used to evaluate \code{fun}. }
   \item{withCond}{ logical: is \code{cond} in the argument list of \code{fun}. }
 }
 \details{The precision of the computations can be controlled via 
@@ -250,3 +256,5 @@ E(Norm(mean=2), function(x){2*x^2})
 \concept{integration}
 \keyword{methods}
 \keyword{distribution}
+\concept{functional}
+\concept{moment}

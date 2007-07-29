@@ -1,3 +1,5 @@
+require(distrEx)
+
 ### Why distrEx is useful ---  a convincing demonstration
 
 N <- Norm(mean = 2, sd = 1.3)

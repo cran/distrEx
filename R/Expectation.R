@@ -3,16 +3,18 @@ setMethod("E", signature(object = "UnivariateDistribution",
                          fun = "missing", 
                          cond = "missing"),
     function(object, fun){
-        return(mean(r(object)(MCIterations)))
+        return(mean(r(object)(.distrExOptions$MCIterations)))
     })
 setMethod("E", signature(object = "AbscontDistribution", 
                          fun = "missing", 
                          cond = "missing"),
     function(object, fun){
         integrand <- function(x, dfun){ x * dfun(x) }
-        return(distrExIntegrate(f = integrand, lower = q(object)(ElowerTruncQuantile),
-                    upper = q(object)(1-EupperTruncQuantile), 
-                    rel.tol = ErelativeTolerance, distr = object, dfun = d(object)))
+        return(distrExIntegrate(f = integrand, 
+                    lower = q(object)(.distrExOptions$ElowerTruncQuantile),
+                    upper = q(object)(1-.distrExOptions$EupperTruncQuantile), 
+                    rel.tol = .distrExOptions$ErelativeTolerance, 
+                    distr = object, dfun = d(object)))
     })
 setMethod("E", signature(object = "DiscreteDistribution", 
                          fun = "missing", 
@@ -22,11 +24,41 @@ setMethod("E", signature(object = "DiscreteDistribution",
         dfun <- d(object)
         return(sum(supp * dfun(supp)))
     })
+
+setMethod("E", signature(object = "AffLinDistribution", 
+                         fun = "missing", 
+                         cond = "missing"),
+    function(object, fun){
+             object@a * E(object@X0) + object@b
+    })
+
+setMethod("E", signature(object = "AffLinAbscontDistribution", 
+                         fun = "missing", 
+                         cond = "missing"),
+           getMethod("E", signature(object = "AffLinDistribution", 
+                         fun = "missing", 
+                         cond = "missing")))    
+setMethod("E", signature(object = "AffLinDiscreteDistribution", 
+                         fun = "missing", 
+                         cond = "missing"),
+           getMethod("E", signature(object = "AffLinDistribution", 
+                         fun = "missing", 
+                         cond = "missing")))    
+setMethod("E", signature(object = "AffLinLatticeDistribution", 
+                         fun = "missing", 
+                         cond = "missing"),
+           getMethod("E", signature(object = "AffLinDistribution", 
+                         fun = "missing", 
+                         cond = "missing")))    
+
+
+
+
 setMethod("E", signature(object = "MultivariateDistribution", 
                          fun = "missing", 
                          cond = "missing"),
     function(object, fun){
-        return(colMeans(r(object)(MCIterations)))
+        return(colMeans(r(object)(.distrExOptions$MCIterations)))
     })
 setMethod("E", signature(object = "DiscreteMVDistribution", 
                          fun = "missing", 
@@ -45,9 +77,9 @@ setMethod("E", signature(object = "UnivariateDistribution",
                          cond = "missing"),
     function(object, fun, useApply = TRUE, ...){
         if(useApply)        
-            return(mean(sapply(r(object)(MCIterations), fun, ...)))
+            return(mean(sapply(r(object)(.distrExOptions$MCIterations), fun, ...)))
         else
-            return(mean(fun(r(object)(MCIterations), ...)))
+            return(mean(fun(r(object)(.distrExOptions$MCIterations), ...)))
     })
 setMethod("E", signature(object = "AbscontDistribution", 
                          fun = "function", 
@@ -63,10 +95,10 @@ setMethod("E", signature(object = "AbscontDistribution",
             }
         }
         return(distrExIntegrate(f = integrand, 
-                    lower = q(object)(ElowerTruncQuantile), 
-                    upper = q(object)(1-EupperTruncQuantile), 
-                    rel.tol = ErelativeTolerance, distr = object, 
-                    fun = fun, dfun = d(object), ...))
+                    lower = q(object)(.distrExOptions$ElowerTruncQuantile), 
+                    upper = q(object)(1-.distrExOptions$EupperTruncQuantile), 
+                    rel.tol = .distrExOptions$ErelativeTolerance, 
+                    distr = object, fun = fun, dfun = d(object), ...))
     })
 setMethod("E", signature(object = "DiscreteDistribution", 
                          fun = "function", 
@@ -88,7 +120,7 @@ setMethod("E", signature(object = "MultivariateDistribution",
                          fun = "function", 
                          cond = "missing"),
     function(object, fun, useApply = TRUE, ...){
-        x <- r(object)(MCIterations)
+        x <- r(object)(.distrExOptions$MCIterations)
         if(useApply)
             erg <- apply(x, 1, fun, ...)
         else
@@ -125,7 +157,7 @@ setMethod("E", signature(object = "UnivariateCondDistribution",
                          fun = "missing", 
                          cond = "numeric"),
     function(object, cond){
-        return(mean(r(object)(MCIterations, cond)))
+        return(mean(r(object)(.distrExOptions$MCIterations, cond)))
     })
 setMethod("E", signature(object = "AbscontCondDistribution", 
                          fun = "missing", 
@@ -139,9 +171,11 @@ setMethod("E", signature(object = "AbscontCondDistribution",
         }else{
             integrand <- fct
         }
-        return(distrExIntegrate(integrand, lower = q(object)(ElowerTruncQuantile, cond), 
-                upper = q(object)(1-EupperTruncQuantile, cond), 
-                rel.tol = ErelativeTolerance, distr = object, dfun = d(object), cond = cond))
+        return(distrExIntegrate(integrand, 
+               lower = q(object)(.distrExOptions$ElowerTruncQuantile, cond), 
+                upper = q(object)(1-.distrExOptions$EupperTruncQuantile, cond), 
+                rel.tol = .distrExOptions$ErelativeTolerance, distr = object, 
+                dfun = d(object), cond = cond))
     })
 setMethod("E", signature(object = "DiscreteCondDistribution", 
                          fun = "missing",
@@ -160,14 +194,18 @@ setMethod("E", signature(object = "UnivariateCondDistribution",
     function(object, fun, cond, withCond = FALSE, useApply = TRUE, ...){
         if(withCond){
             if(useApply)
-                res <- mean(sapply(r(object)(MCIterations, cond), fun, cond, ...))
+                res <- mean(sapply(r(object)(.distrExOptions$MCIterations, 
+                                              cond), fun, cond, ...))
             else
-                res <- mean(fun(r(object)(MCIterations, cond), ...))
+                res <- mean(fun(r(object)(.distrExOptions$MCIterations, 
+                                           cond), ...))
         }else{
             if(useApply)
-                res <- mean(sapply(r(object)(MCIterations, cond), fun, ...))
+                res <- mean(sapply(r(object)(.distrExOptions$MCIterations, 
+                                              cond), fun, ...))
             else
-                res <- mean(fun(r(object)(MCIterations, cond), cond, ...))                
+                res <- mean(fun(r(object)(.distrExOptions$MCIterations, 
+                                           cond), cond, ...))                
         }
 
         return(res)
@@ -197,9 +235,10 @@ setMethod("E", signature(object = "AbscontCondDistribution",
                 }
             }
         
-        return(distrExIntegrate(integrand, lower = q(object)(ElowerTruncQuantile, cond), 
-                upper = q(object)(1-EupperTruncQuantile, cond), 
-                rel.tol = ErelativeTolerance, distr = object, 
+        return(distrExIntegrate(integrand, 
+                lower = q(object)(.distrExOptions$ElowerTruncQuantile, cond), 
+                upper = q(object)(1-.distrExOptions$EupperTruncQuantile, cond), 
+                rel.tol = .distrExOptions$ErelativeTolerance, distr = object, 
                 dfun = d(object), fun = fun, cond = cond, ...))
     })
 setMethod("E", signature(object = "DiscreteCondDistribution", 
@@ -228,7 +267,8 @@ setMethod("E", signature(object = "DiscreteCondDistribution",
                 }
             }
         }
-        return(sum(fct(x = supp, dfun = d(object), fun = fun, cond = cond, ...)))
+        return(sum(fct(x = supp, dfun = d(object), fun = fun, 
+                       cond = cond, ...)))
     })
 
 ### added 29-03-06 P.R. 
@@ -244,7 +284,7 @@ setMethod("E", signature(object = "Beta",
                          fun = "missing", 
                          cond = "missing"),
     function(object){
-        if(!identical(all.equal(ncp(object),0), TRUE))
+        if(!isTRUE(all.equal(ncp(object),0)))
           return(E(as(object,"AbscontDistribution"),...))
         else
           return(shape1(object)/(shape1(object)+shape2(object)))
@@ -315,7 +355,7 @@ setMethod("E", signature(object = "Geom",
                          fun = "missing", 
                          cond = "missing"),
     function(object){
-        return(prob(object)/(1-prob(object)))
+        return(1/ prob(object) -1)
     })
 
 setMethod("E", signature(object = "Hyper", 
@@ -357,7 +397,11 @@ setMethod("E", signature(object = "Td",
                          fun = "missing", 
                          cond = "missing"),
     function(object){
-        return(ncp(object)*sqrt(df(object)/2)*exp(lgamma((df(object)-1)/2)-lgamma(df(object)/2)))
+        ## correction thanks to G.Jay Kerns
+        return(ifelse( df(object)>1, 
+                       ncp(object)*sqrt(df(object)/2)*
+                         exp(lgamma((df(object)-1)/2)-lgamma(df(object)/2)), 
+                       NA))
     })
 
 setMethod("E", signature(object = "Unif", 

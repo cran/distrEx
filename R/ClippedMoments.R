@@ -3,26 +3,26 @@
 ###############################################################################
 setMethod("m1df", "UnivariateDistribution",
     function(object, upper){
-        x <- r(object)(MCIterations)
+        x <- r(object)(.distrExOptions$MCIterations)
         return(mean(x*(x<=upper)))
     })
 setMethod("m2df", "UnivariateDistribution",
     function(object, upper){
-        x <- r(object)(MCIterations)
+        x <- r(object)(.distrExOptions$MCIterations)
         return(mean(x^2*(x<=upper)))
     })
 setMethod("m1df", "AbscontDistribution",
     function(object, upper){
         integrandm1 <- function(x, dfun){ x * dfun(x) }
-        return(distrExIntegrate(integrandm1, lower = q(object)(m1dfLowerTruncQuantile), 
-                    rel.tol = m1dfRelativeTolerance, upper = upper, dfun = d(object), 
+        return(distrExIntegrate(integrandm1, lower = q(object)(.distrExOptions$m1dfLowerTruncQuantile), 
+                    rel.tol = .distrExOptions$m1dfRelativeTolerance, upper = upper, dfun = d(object), 
                     distr = object))
     })
 setMethod("m2df", "AbscontDistribution",
     function(object, upper){
         integrandm2 <- function(x, dfun){ x^2 * dfun(x) }
-        return(distrExIntegrate(integrandm2, lower = q(object)(m2dfLowerTruncQuantile), 
-                    rel.tol = m2dfRelativeTolerance, upper = upper, dfun = d(object), 
+        return(distrExIntegrate(integrandm2, lower = q(object)(.distrExOptions$m2dfLowerTruncQuantile), 
+                    rel.tol = .distrExOptions$m2dfRelativeTolerance, upper = upper, dfun = d(object), 
                     distr = object))
     })
 setMethod("m1df", "DiscreteDistribution",

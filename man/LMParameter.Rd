@@ -27,4 +27,6 @@ function(theta = 0, intercept = 0, scale = 1){
 }
 }
 \concept{parameter}
+\concept{S4 parameter class}
 \keyword{models}
+\concept{generating function}

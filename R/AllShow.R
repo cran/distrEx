@@ -1,11 +1,3 @@
-setMethod("show", "DistrList", 
-    function(object){
-        cat(gettextf("An object of class \"%s\"\n", class(object)))
-        for(i in 1:length(object)){
-            cat("[[", i, "]]\n", sep = "")
-            print(object[[i]])
-        }
-    })
 setMethod("show", "MultivariateDistribution",
     function(object){
         cat(gettextf("Distribution object of class: %s\n", class(object)[1]))

@@ -37,4 +37,7 @@ Class \code{"Condition"}, directly.
   new("EuclCondition")
 }
 \concept{conditioning}
-\keyword{}
+\concept{condition}
+\concept{S4 condition class}
+\concept{conditional distribution}
+\keyword{distribution}

@@ -13,7 +13,8 @@
   size \eqn{\varepsilon\in [0,1]} the convex contaminated distribution
   \deqn{Q = (1-\varepsilon)P + \varepsilon R}{Q = (1-epsilon)P + epsilon R}
   is generated.}
-\usage{ConvexContamination(e1, e2, size)}
+\usage{ConvexContamination(e1, e2, size)
+}
 \arguments{
   \item{e1}{ object of class \code{"Distribution"}: ideal distribution}
   \item{e2}{ object of class \code{"Distribution"}: contaminating distribution}
@@ -44,3 +45,8 @@ plot(C1)
 \concept{convex contamination}
 \concept{gross error}
 \keyword{distribution}
+\concept{univariate distribution}
+\concept{absolutely continuous distribution}
+\concept{discrete distribution}
+\keyword{methods}
+\concept{S4 distribution class}

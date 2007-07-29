@@ -75,5 +75,8 @@ m1df(D1, 2)
 m1df(D1, Inf)
 E(D1)
 }
+\concept{functional}
+\concept{truncated moment}
 \concept{moment}
 \keyword{distribution}
+\keyword{methods}

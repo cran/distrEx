@@ -49,5 +49,5 @@ Class \code{"Distribution"}, directly.
 new("MultivariateDistribution")
 }
 \concept{multivariate distribution}
-\keyword{classes}
 \keyword{distribution}
+\concept{S4 distribution class}

@@ -70,3 +70,6 @@ plot(G1)
 }
 \concept{Gumbel}
 \keyword{distribution}
+\concept{extreme value distribution}
+\concept{absolutely continuous distribution}
+\concept{S4 distribution class}

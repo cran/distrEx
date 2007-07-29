@@ -1,7 +1,6 @@
 \name{distrExOptions}
 \alias{distrExOptions}
-%\alias{distrExoptions}
-%\alias{getdistrExOption}
+\alias{getdistrExOption}
 \alias{MCIterations}
 \alias{GLIntegrateTruncQuantile}
 \alias{GLIntegrateOrder}
@@ -16,16 +15,20 @@
 \title{Function to change the global variables of the package `distrEx' }
 \description{With \code{distrExOptions} you can inspect and change 
   the global variables of the package \pkg{distrEx}. }
-\usage{distrExOptions(arg = "missing", value = -1)}
+\usage{
+distrExOptions(...)
+getdistrExOption(x)
+}
 \arguments{
-  \item{arg}{ the global variable to be shown or changed }
-  \item{value}{ the new value of the global variable }
+  \item{\dots}{ any options can be defined, using name = value or by passing a list of such tagged values. }
+  \item{x}{ a character string holding an option name.}
 }
 %\details{}
 \value{
   \code{distrExOptions()} returns a list of the global variables.\newline
-  \code{distrExOptions(arg=x)} returns the global variable \var{x}.\newline
-  \code{distrExOptions(arg=x,value=y)} sets the value of the global variable \var{x} to \var{y}.
+  \code{distrExOptions(x)} returns the global variable \var{x}.\newline
+  \code{getdistrExOption(x)} returns the global variable \var{x}.\newline
+  \code{distrExOptions(x=y)} sets the value of the global variable \var{x} to \var{y}.
 }
 \section{Global Options}{
 \describe{
@@ -57,13 +60,16 @@
 %\references{}
 \author{Matthias Kohl \email{Matthias.Kohl@stamats.de}}
 %\note{}
-%\seealso{}
+\seealso{\code{\link[base]{options}}, \code{\link[base]{getOption}}}
 \examples{
 distrExOptions()
 distrExOptions("ElowerTruncQuantile")
-distrExOptions("ElowerTruncQuantile", 1e-6)
+distrExOptions("ElowerTruncQuantile" = 1e-6)
 # or
-distrExOptions(ElowerTruncQuantile)
-distrExOptions(ElowerTruncQuantile, 1e-6)
+distrExOptions(ElowerTruncQuantile = 1e-6)
+getdistrExOption("ElowerTruncQuantile")
 }
 \keyword{misc}
+\keyword{distribution}
+\concept{global options}
+\concept{options}

@@ -16,11 +16,16 @@
   of the densities.
 }
 \usage{
-HellingerDist(e1, e2)
+HellingerDist(e1, e2, ...)
+\S4method{HellingerDist}{AbscontDistribution,AbscontDistribution}(e1,e2)
+\S4method{HellingerDist}{AbscontDistribution,DiscreteDistribution}(e1,e2)
+\S4method{HellingerDist}{DiscreteDistribution,AbscontDistribution}(e1,e2)
+\S4method{HellingerDist}{DiscreteDistribution,DiscreteDistribution}(e1,e2)
 }
 \arguments{
   \item{e1}{ object of class \code{"Distribution"} }
   \item{e2}{ object of class \code{"Distribution"} }
+  \item{\dots}{ further arguments to be used in particular methods (not in package \pkg{distrEx})}
 }
 %\details{}
 \value{

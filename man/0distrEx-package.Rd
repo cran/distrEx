@@ -9,10 +9,12 @@ distrEx -- Extensions of package distr
 \pkg{distrEx} proides some extensions of package \pkg{distr}:
 \itemize{\item  extreme value distribution classes,
          \item expectations in the form 
-         \itemize{\item \code{E(X)} for the expectation of a distribution object \code{X} 
-                  \item \code{E(X,f)} for the expectation of \code{f(X)} where \code{X} is
-                         some distribution object and \code{f} some function in \code{X} }
-\item further functionals: var, sd, IQR, mad, median
+         \itemize{\item \code{E(X)} for the expectation of a 
+                        distribution object \code{X} 
+                  \item \code{E(X,f)} for the expectation of \code{f(X)} 
+                         where \code{X} is some distribution object and 
+                         \code{f} some function in \code{X} }
+\item further functionals: var, sd, IQR, mad, median, skewness, kurtosis
 \item truncated moments,
 \item distances between distributions
      (Hellinger, Kolmogorov, total variation, "convex contamination")
@@ -24,9 +26,10 @@ distrEx -- Extensions of package distr
 \details{
 \tabular{ll}{
 Package: \tab distrEx\cr
-Version: \tab 1.8\cr
-Date: \tab 2006-12-18\cr
-Depends: \tab R(>= 2.2.0), methods, distr(>= 1.8) , evd\cr
+Version: \tab 1.9 \cr
+Date: \tab 2007-07-29 \cr
+Depends: \tab R(>= 2.2.0), methods, distr(>= 1.8), evd, startupmsg\cr
+Suggests: \tab tcltk\cr
 SaveImage: \tab no\cr
 LazyLoad: \tab yes\cr
 License: \tab GPL (version 2 or later)\cr
@@ -49,9 +52,6 @@ Distribution Classes
 |>|>|>"PrognCondDistribution"
 |>|>"DiscreteCondDistribution"
 
-"DistrList" 
-|>"UnivarDistrList"
-
 
 Condition Classes
 
@@ -72,15 +72,15 @@ Parameter Classes
 \preformatted{
 
 Integration:
-GLIntegrate             Gauss-Legendre Quadrature
-distrExIntegrate        Integration of One-Dimensional Functions
+GLIntegrate             Gauss-Legendre quadrature
+distrExIntegrate        Integration of one-dimensional functions
 
 Options:
 distrExOptions          Function to change the global variables of the
                         package 'distrEx'
 Standardization:
-make01                  Centering and Standardization of Univariate
-                        Distributions
+make01                  Centering and standardization of univariate
+                        distributions
 
 }}
 
@@ -88,17 +88,14 @@ make01                  Centering and Standardization of Univariate
 \preformatted{
 
 Distribution Classes
-ConvexContamination     Generic Function for Generating Convex
-                        Contaminations
-DiscreteDistribution    Generating function for
-                        DiscreteDistribution-class
+ConvexContamination     Generic function for generating convex
+                        contaminations
 DiscreteMVDistribution
                         Generating function for
                         DiscreteMVDistribution-class
 Gumbel                  Generating function for Gumbel-class
 LMCondDistribution      Generating function for the conditional
                         distribution of a linear regression model.
-UnivarDistrList         Generating function for UnivarDistrList-class
 
 Condition Classes
 EuclCondition           Generating function for EuclCondition-class
@@ -106,17 +103,13 @@ EuclCondition           Generating function for EuclCondition-class
 Parameter Classes
 LMParameter             Generating function for LMParameter-class
 
-Space Classes
-EuclideanSpace          Generating function for EuclideanSpace-class
-Naturals                Generating function for Naturals-class
-Reals                   Generating function for Reals-class
 }}
 \section{Methods}{
 \preformatted{
 Distances:
-ContaminationSize       Generic Function for the Computation of the
-                        Convex Contamination (Pseudo-)Distance of Two
-                        Distributions
+ContaminationSize       Generic function for the computation of the
+                        convex contamination (Pseudo-)distance of two
+                        distributions
 HellingerDist           Generic function for the computation of the
                         Hellinger distance of two distributions
 KolmogorovDist          Generic function for the computation of the
@@ -124,29 +117,39 @@ KolmogorovDist          Generic function for the computation of the
 TotalVarDist            Generic function for the computation of the
                         total variation distance of two distributions
 
-liesInSupport           Generic Function for Testing the Support of a
-                        Distribution
+liesInSupport           Generic function for testing the support of a
+                        distribution
 
 
 Functionals:
-E                       Generic Function for the Computation of
-                        (Conditional) Expectations
-var                     Generic Functions for the Computation of
-                        Functionals
-IQR                     Generic Functions for the Computation of
-                        Functionals
-sd                      Generic Functions for the Computation of
-                        Functionals
-mad                     Generic Functions for the Computation of
-                        Functionals
-median                  Generic Functions for the Computation of
+E                       Generic function for the computation of
+                        (conditional) expectations
+var                     Generic functions for the computation of
+                        functionals
+IQR                     Generic functions for the computation of
+                        functionals
+sd                      Generic functions for the computation of
+                        functionals
+mad                     Generic functions for the computation of
+                        functionals
+median                  Generic functions for the computation of
+                        functionals
+skewness                Generic functions for the computation of
+                        functionals
+kurtosis                Generic functions for the computation of
                         Functionals
 
+
 truncated Moments:
-m1df                    Generic Function for the Computation of Clipped
-                        First Moments
+m1df                    Generic function for the computation of clipped
+                        first moments
 m2df                    Generic function for the computation of clipped
                         second moments
+
+illustration:
+illustrateLLT           function for the generation of LLN - visualizations
+illustrateCLT           function for the generation of CLT - visualizations
+plotCLT                 Generic function for the plotting of CLT-approximations
 
 }
 }
@@ -154,20 +157,45 @@ m2df                    Generic function for the computation of clipped
 \section{Demos}{
 Demos are available --- see \code{demo(package="distrEx")}.}
 
+\section{Acknowledgement}{
+G. Jay Kerns, \email{gkerns@ysu.edu}, has provided a major contribution,
+in particular the functionals \code{skewness} and \code{kurtosis} are due to him.
+}
+
+\note{
+Some functions of package \pkg{stats} have intentionally been masked, but 
+completely retain their functionality --- see \code{distrExMASK()}.
+
+If any of the packages \pkg{e1071}, \pkg{moments}, \pkg{fBasics} is to be used 
+together with \pkg{distrEx} the latter must be attached \emph{after} any of the 
+first mentioned. Otherwise \code{kurtosis()} and \code{skewness()}
+defined as \emph{methods} in \pkg{distrEx} may get masked.\cr  To re-mask, you 
+may use  \code{kurtosis <- distrEx::kurtosis; skewness <- distrEx::skewness}. 
+See also \code{distrExMASK()}
+}
+
 \section{Start-up-Banner}{
-You may suppress the start-up banner/message completely by setting \code{options("StartupBanner"="off")}
-somewhere before loading this package by \code{library} or \code{require} in your R-code / R-session.
+You may suppress the start-up banner/message completely by setting 
+\code{options("StartupBanner"="off")} somewhere before loading this package by 
+\code{library} or \code{require} in your R-code / R-session.
 
 If option \code{"StartupBanner"} is not defined (default) or setting    
-\code{options("StartupBanner"=NULL)} or  \code{options("StartupBanner"="complete")} 
-the complete start-up banner is displayed.
+\code{options("StartupBanner"=NULL)} or 
+\code{options("StartupBanner"="complete")} the complete start-up banner is 
+displayed.
 
-For any other value of option \code{"StartupBanner"} (i.e., not in \code{c(NULL,"off","complete")})
-only the version information is displayed.
+For any other value of option \code{"StartupBanner"} (i.e., not in 
+\code{c(NULL,"off","complete")}) only the version information is displayed.
 
-The same can be achieved by wrapping the \code{library} or \code{require}  call into
-either \code{suppressStartupMessages()} or \code{onlytypeStartupMessages(.,atypes="version")}
-}
+The same can be achieved by wrapping the \code{library} or \code{require}  call 
+into either \code{suppressStartupMessages()} or 
+\code{onlytypeStartupMessages(.,atypes="version")}.  
+ 
+As for general \code{packageStartupMessage}'s, you may also suppress all
+ the start-up banner by wrapping the \code{library} or \code{require} 
+ call into \code{suppressPackageStartupMessages()} from 
+ \pkg{startupmsg}-version 0.5 on.
+ }
 
 \author{
 Matthias Kohl \email{Matthias.Kohl@stamats.de} and \cr
@@ -183,17 +211,34 @@ S4 Classes for Distributions, {\em R News}, {\em 6}(2), 2-6.
 %a more detailed manual for \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} may be downloaded from  
 %\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf}\cr
 
-a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} 
-is included into the mere documentation package \pkg{distrDoc} and may be called by 
-\code{require("distrDoc");vignette("distr")}
+a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, 
+and \pkg{distrEx} is included into the mere documentation package \pkg{distrDoc} 
+and may be called by \code{require("distrDoc");vignette("distr")}
 
 a homepage to this package is available under\cr
 \url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distrEx.html}
 
-M. Kohl (2005): \emph{Numerical Contributions to the Asymptotic Theory of Robustness.}
-PhD Thesis. Bayreuth. Available as \url{http://www.stamats.de/ThesisMKohl.pdf}
+M. Kohl (2005): \emph{Numerical Contributions to the Asymptotic 
+Theory of Robustness.} PhD Thesis. Bayreuth. Available as 
+\url{http://www.stamats.de/ThesisMKohl.pdf}
 }
 \keyword{package}
+\concept{LLN}
+\concept{CLT}
+\concept{Teaching demos}
+\concept{S4 condition class}
+\concept{S4 distribution class}
+\concept{functional}
+\concept{kurtosis}
+\concept{median}
+\concept{skewness}
+\concept{mad}
+\concept{IQR}
+\concept{var}
+\concept{E}
+\concept{distribution distance}
+\concept{multivariate distribution}
+\concept{conditional distribution}
 \seealso{
 \code{\link[distr]{distr}} 
 }

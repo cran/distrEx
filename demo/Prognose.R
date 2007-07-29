@@ -1,3 +1,5 @@
+require(distrEx) 
+
 ## by M. Kohl
 ## slightly modified by P.R. [for more recent versions of our packages]
 
@@ -16,7 +18,7 @@ D4 <- PrognCondDistribution(Error = ConvexContamination(Norm(), Norm(0,9), size=
 D5 <- PrognCondDistribution(Error = ConvexContamination(Norm(), Norm(0,9), size=0.2))
 
 y <- seq(from = 0, to = 8, length = 100)
-## bedingter Erwartungswert
+## posterior mean
 f <- function(y, e1){ E(e1, function(x){x[1]}, y) }
 
 ## dauert etwas ...
@@ -28,13 +30,14 @@ system.time(erg5 <- sapply(y, f, D5)) # ca. 80 sec.
 
 ## posterior modus
 post.mod <- function(cond, e1) {
-    optimize(f = d(e1), interval = c(q(e1)(1e-3, cond), q(e1)(1-1e-3, cond)), 
+    optimize(f = d(e1), interval = c(q(e1)(1e-3, cond), 
+                        q(e1)(1e-3, cond, lower.tail = FALSE)), 
         tol = .Machine$double.eps^0.25, maximum = TRUE, cond = cond)$maximum
 }
 
 D0 <- PrognCondDistribution()
 
-## dauert etwas ...
+## takes some time
 system.time(perg0 <- sapply(y, post.mod, D0)) # ca. 0.5 sec.
 system.time(perg1 <- sapply(y, post.mod, D1)) # ca. 0.8 sec.
 system.time(perg2 <- sapply(y, post.mod, D2)) # ca. 0.6 sec.
@@ -49,7 +52,7 @@ lines(y, erg2, col = "blue")
 lines(y, erg3, col = "orange")
 lines(y, erg4, col = "darkgreen")
 lines(y, erg5, col = "darkred")
-title("Bedingter Erwartungswert")
+title("Posterior Mean")
 
 windows()
 plot(y, perg0, type = "l", ylim = c(-0.5, 4))

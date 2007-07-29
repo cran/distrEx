@@ -42,4 +42,6 @@ Class \code{"OptionalParameter"}, by class \code{"Parameter"}.
   new("LMParameter")
 }
 \concept{parameter}
-\keyword{classes}
+\keyword{distribution}
+\concept{S4 parameter class}
+\concept{S4 linear model class}

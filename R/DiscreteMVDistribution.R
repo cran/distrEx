@@ -9,7 +9,7 @@
     DistrResolution <- getdistrOption("DistrResolution")
     for(i in 1:nrow(x))
         for(j in 1:nrow(y))
-            if(identical(all.equal(x[i,], y[j,], tolerance = DistrResolution), TRUE)) 
+            if(isTRUE(all.equal(x[i,], y[j,], tolerance = DistrResolution))) 
                res <- c(res, j)
     return(res)
 }

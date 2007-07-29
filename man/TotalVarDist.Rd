@@ -15,11 +15,16 @@
   \deqn{d_v(P,Q)=\sup_{B\in{\cal A}}|P(B)-Q(B)|}{d_v(P,Q)=\sup\{|P(B)-Q(B)| | B in A\}}
 }
 \usage{
-TotalVarDist(e1, e2)
+TotalVarDist(e1, e2, ...)
+\S4method{TotalVarDist}{AbscontDistribution,AbscontDistribution}(e1,e2)
+\S4method{TotalVarDist}{AbscontDistribution,DiscreteDistribution}(e1,e2)
+\S4method{TotalVarDist}{DiscreteDistribution,AbscontDistribution}(e1,e2)
+\S4method{TotalVarDist}{DiscreteDistribution,DiscreteDistribution}(e1,e2)
 }
 \arguments{
   \item{e1}{ object of class \code{"Distribution"} }
   \item{e2}{ object of class \code{"Distribution"} }
+  \item{\dots}{ further arguments to be used in particular methods (not in package \pkg{distrEx})}
 }
 %\details{}
 \value{

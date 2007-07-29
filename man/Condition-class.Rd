@@ -28,4 +28,7 @@
 \seealso{\code{\link{UnivariateCondDistribution-class}}}
 \examples{new("Condition")}
 \concept{conditioning}
-\keyword{classes}
+\concept{condition}
+\concept{S4 condition class}
+\concept{conditional distribution}
+\keyword{distribution}

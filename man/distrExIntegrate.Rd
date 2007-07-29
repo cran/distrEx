@@ -26,7 +26,7 @@ distrExIntegrate(f, lower, upper, subdivisions = 100,
     stops the function. If false some errors will give a result with a 
     warning in the \code{message} component. }
   \item{distr}{ object of class \code{UnivariateDistribution}. }
-  \item{order}{ order of Gauﬂ-Legendre quadrature. }
+  \item{order}{ order of Gauss-Legendre quadrature. }
   \item{\dots}{ additional arguments to be passed to \code{f}. Remember 
     to use argument names not matching those of \code{integrate}
     and \code{GLIntegrate}! }
@@ -53,8 +53,8 @@ distrExIntegrate(f, lower, upper, subdivisions = 100,
   Second Edition. Cambridge University Press.
 }
 \author{Matthias Kohl \email{Matthias.Kohl@stamats.de}}
-%\note{ ~~further notes~~ }
-\seealso{\code{\link[stats]{integrate}}, \code{\link{GLIntegrate}}, \code{\link{distrExOptions}}}
+\seealso{\code{\link[stats]{integrate}}, \code{\link{GLIntegrate}}, 
+\code{\link{distrExOptions}}}
 \examples{
 fkt <- function(x){x*dchisq(x+1, df = 1)}
 integrate(fkt, lower = -1, upper = 3)

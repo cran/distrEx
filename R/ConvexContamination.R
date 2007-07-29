@@ -14,50 +14,66 @@ setMethod("ConvexContamination", signature(e1 = "AbscontDistribution",
             stop("length of 'size' has to be 1")
         if((size < 0)|(size > 1))
             stop("'size' has to be in [0,1]")
-        rfun <- function(n){ 
-            r1 <- r1fun; r2 <- r2fun
-            ind <- rbinom(n, prob=size, size=1)
-            (1-ind)*r1(n) + ind*r2(n)
-        }
+        rfun <- function(n){}
         body(rfun) <- substitute({ r1 <- r1fun; r2 <- r2fun
                                    ind <- rbinom(n, prob=size, size=1)
                                    (1-ind)*r1(n) + ind*r2(n)},
                             list(size = size, r1fun = r(e1), r2fun = r(e2)))
 
-        dfun <- function(x){ 
-            d1 <- d1fun; d2 <- d2fun
-            (1-size)*d1(x) + size*d2(x)
-        }
+        dfun <- function(x, log = FALSE){} 
         body(dfun) <- substitute({ d1 <- d1fun; d2 <- d2fun
-                                   (1-size)*d1(x) + size*d2(x)},
+                                   d0 <- (1-size)*d1(x) + size*d2(x)
+                                   if (log) d0 <- log(d0)
+                                   return(d0)
+                                   },
                             list(size = size, d1fun = d(e1), d2fun = d(e2)))
 
-        pfun <- function(x){ 
-            p1 <- p1fun; p2 <- p2fun
-            (1-size)*p1(x) + size*p2(x)
-        }
-        body(pfun) <- substitute({ p1 <- p1fun; p2 <- p2fun
-                                   (1-size)*p1(x) + size*p2(x)},
-                            list(size = size, p1fun = p(e1), p2fun = p(e2)))
+        pfun <- function(q, lower.tail = TRUE, log.p = FALSE){} 
+        body(pfun) <- substitute({ 
+                         p1 <- function(x){
+                            if ("lower.tail" %in% names(formals(p1fun)))
+                                 p1fun(x, lower.tail)
+                            else {p0 <- p1fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }     
+                         p2 <- function(x){
+                            if ("lower.tail" %in% names(formals(p2fun)))
+                                 p2fun(x, lower.tail)
+                            else {p0 <- p2fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }
+                         p0 <- (1-size)*p1(q) + size*p2(q)
+                         if (log.p) p0 <- log(p0)
+                         return(p0)
+                                 },
+                         list(size = size, p1fun = p(e1), p2fun = p(e2)))
 
         m1 <- min(q(e1)(TruncQuantile), q(e2)(TruncQuantile))
-        m2 <- max(q(e1)(1-TruncQuantile), q(e2)(1-TruncQuantile))
-        qfun <- function(x){
-            pfunx <- seq(from = m1, to = m2, length = 1e5)
-            p <- pfun; pfuny <- pfun(pfunx)
-            qfun1 <- approxfun(x = pfuny, y = pfunx, rule = 2)
-            y <- ifelse(x > 1, NA, ifelse(x < 0, NA, qfun1(x)))
-            return(y)
-        }
-        body(qfun) <- substitute({ pfunx <- seq(from = m1, to = m2, length = 1e5)
-                                   p <- pfun; pfuny <- p(pfunx)
-                                   qfun1 <- approxfun(x = pfuny, y = pfunx, rule = 2)
-                                   y <- ifelse(x > 1, NA, ifelse(x < 0, NA, qfun1(x)))
+        m21 <- ifelse("lower.tail" %in% names(formals(e1@q)),
+                      q(e1)(TruncQuantile, lower.tail = FALSE),
+                      q(e1)(1-TruncQuantile))
+        m22 <- ifelse("lower.tail" %in% names(formals(e2@q)),
+                      q(e2)(TruncQuantile, lower.tail = FALSE),
+                      q(e2)(1-TruncQuantile))
+        m2 <- max(m21,m22); rm(m21,m22)
+
+        qfun <- function(p, lower.tail = TRUE, log.p = FALSE){}
+        body(qfun) <- substitute({ if (log.p) p <- exp(p)
+                                   pfunx <- seq(from = m1, to = m2, length = 1e5)
+                                   p0 <- pfun 
+                                   pfuny <- p0(pfunx, lower.tail = lower.tail)
+                                   qfun1 <- approxfun(x = pfuny, y = pfunx, 
+                                                      rule = 2)
+                                   y <- ifelse(p > 1, 
+                                               NaN, 
+                                               ifelse(p < 0, NaN, qfun1(p)))
                                    return(y)},
                             list(m1 = m1, m2 = m2, pfun = pfun)) 
     
-        return(new("AbscontDistribution", r = rfun, d = dfun, p = pfun, q = qfun, .withSim=FALSE, .withArith=FALSE))
+        return(new("AbscontDistribution", r = rfun, d = dfun, p = pfun, 
+                    q = qfun, .withSim=FALSE, .withArith=FALSE))
     })
+
 setMethod("ConvexContamination", signature(e1 = "DiscreteDistribution",
                                            e2 = "DiscreteDistribution",
                                            size = "numeric"),
@@ -76,37 +92,59 @@ setMethod("ConvexContamination", signature(e1 = "DiscreteDistribution",
             supp <- supp[o]
         }
 
-        rfun <- function(n){ 
-            r1 <- r1fun; r2 <- r2fun
-            ind <- rbinom(n, prob=size, size=1)
-            (1-ind)*r1(n) + ind*r2(n)
-        }
+        rfun <- function(n){}
         body(rfun) <- substitute({ r1 <- r1fun; r2 <- r2fun
                                    ind <- rbinom(n, prob=size, size=1)
                                    (1-ind)*r1(n) + ind*r2(n)},
                             list(size = size, r1fun = r(e1), r2fun = r(e2)))
 
-        dfun <- function(x){ 
-            d1 <- d1fun; d2 <- d2fun
-            (1-size)*d1(x) + size*d2(x)
-        }
+        dfun <- function(x, log = FALSE){}
         body(dfun) <- substitute({ d1 <- d1fun; d2 <- d2fun
-                                   (1-size)*d1(x) + size*d2(x)},
+                                   d0 <- (1-size)*d1(x) + size*d2(x)
+                                  if(log) d0 <- log(d0)
+                                  return(d0) },
                             list(size = size, d1fun = d(e1), d2fun = d(e2)))
 
-        pfun <- function(x){ 
-            p1 <- p1fun; p2 <- p2fun
-            (1-size)*p1(x) + size*p2(x)
-        }
-        body(pfun) <- substitute({ p1 <- p1fun; p2 <- p2fun
-                                   (1-size)*p1(x) + size*p2(x)},
-                            list(size = size, p1fun = p(e1), p2fun = p(e2)))
+        pfun <- function(q, lower.tail = TRUE, log.p = FALSE){}
+        body(pfun) <- substitute({ 
+                         p1 <- function(x){
+                            if ("lower.tail" %in% names(formals(p1fun)))
+                                 p1fun(x, lower.tail)
+                            else {p0 <- p1fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }     
+                         p2 <- function(x){
+                            if ("lower.tail" %in% names(formals(p2fun)))
+                                 p2fun(x, lower.tail)
+                            else {p0 <- p2fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }
+                         p0 <- (1-size)*p1(q) + size*p2(q)
+                         if (log.p) p0 <- log(p0)
+                         return(p0)
+                                 },
+                         list(size = size, p1fun = p(e1), p2fun = p(e2)))
 
-        cumprob <- pfun(supp)
-        qfun <- function(x){ supp[sum(cumprob<x)+1] }        
+        cumprob.l <- pfun(supp)
+        cumprob.u <- pfun(supp, lower.tail = FALSE)
+
+        qfun <- function(p, lower.tail = TRUE, log.p = FALSE)
+                         {if(log.p) p <- exp(p)
+                          i01 <- (0<=p)&(p<=1)
+                          p01 <- p[i01]
+                          q0 <- p
+                          q0[!i01] <- NaN
+                          if (lower.tail)
+                              q0[i01] <- sapply(p01, function(x){
+                                       supp[ sum( cumprob.l < x ) + 1] })
+                          else    
+                              q0[i01] <- sapply(p01, function(x){ 
+                                      (rev(supp))[sum( cumprob.u < x ) + 1] })
+                          return(q0)
+                          }        
     
         return(new("DiscreteDistribution", r = rfun, d = dfun, p = pfun, q = qfun, 
-                                           support = supp, .withSim=FALSE, .withArith=FALSE))
+                    support = supp, .withSim=FALSE, .withArith=FALSE))
     })
 
 setMethod("ConvexContamination", signature(e1 = "UnivariateDistribution",
@@ -117,39 +155,58 @@ setMethod("ConvexContamination", signature(e1 = "UnivariateDistribution",
             stop("length of 'size' has to be 1")
         if((size < 0)|(size > 1))
             stop("'size' has to be in [0,1]")
-        rfun <- function(n){ 
-            r1 <- r1fun; r2 <- r2fun
-            ind <- rbinom(n, prob=size, size=1)
-            (1-ind)*r1(n) + ind*r2(n)
-        }
+        rfun <- function(n){}
         body(rfun) <- substitute({ r1 <- r1fun; r2 <- r2fun
                                    ind <- rbinom(n, prob=size, size=1)
                                    (1-ind)*r1(n) + ind*r2(n)},
                             list(size = size, r1fun = r(e1), r2fun = r(e2)))
 
-        pfun <- function(x){ 
-            p1 <- p1fun; p2 <- p2fun
-            (1-size)*p1(x) + size*p2(x)
-        }
-        body(pfun) <- substitute({ p1 <- p1fun; p2 <- p2fun
-                                   (1-size)*p1(x) + size*p2(x)},
-                            list(size = size, p1fun = p(e1), p2fun = p(e2)))
+        pfun <- function(q, lower.tail = TRUE, log.p = FALSE){}
+        body(pfun) <- substitute({ 
+                         p1 <- function(x){
+                            if ("lower.tail" %in% names(formals(p1fun)))
+                                 p1fun(x, lower.tail)
+                            else {p0 <- p1fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }     
+                         p2 <- function(x){
+                            if ("lower.tail" %in% names(formals(p2fun)))
+                                 p2fun(x, lower.tail)
+                            else {p0 <- p2fun(x)
+                                  if(!lower.tail) p0 <- 1-p0
+                                  return(p0)} }
+                         p0 <- (1-size)*p1(q) + size*p2(q)
+                         if (log.p) p0 <- log(p0)
+                         return(p0)
+                                 },
+                         list(size = size, p1fun = p(e1), p2fun = p(e2)))
+
         TruncQuantile <- getdistrOption("TruncQuantile")
         m1 <- min(q(e1)(TruncQuantile), q(e2)(TruncQuantile))
-        m2 <- max(q(e1)(1-TruncQuantile), q(e2)(1-TruncQuantile))
-        qfun <- function(x){
-            pfunx <- seq(from = m1, to = m2, length = 1e5)
-            p <- pfun; pfuny <- pfun(pfunx)
-            qfun1 <- approxfun(x = pfuny, y = pfunx, rule = 2)
-            y <- ifelse(x > 1, NA, ifelse(x < 0, NA, qfun1(x)))
-            return(y)
-        }
-        body(qfun) <- substitute({ pfunx <- seq(from = m1, to = m2, length = 1e5)
-                                   p <- pfun; pfuny <- p(pfunx)
-                                   qfun1 <- approxfun(x = pfuny, y = pfunx, rule = 2)
-                                   y <- ifelse(x > 1, NA, ifelse(x < 0, NA, qfun1(x)))
+        m21 <- ifelse("lower.tail" %in% names(formals(e1@q)),
+                      q(e1)(TruncQuantile, lower.tail = FALSE),
+                      q(e1)(1-TruncQuantile))
+        m22 <- ifelse("lower.tail" %in% names(formals(e2@q)),
+                      q(e2)(TruncQuantile, lower.tail = FALSE),
+                      q(e2)(1-TruncQuantile))
+        m2 <- max(m21,m22); rm(m21,m22)
+
+        cumprob.l <- pfun(supp)
+        cumprob.u <- pfun(supp, lower.tail = FALSE)
+
+        qfun <- function(p, lower.tail = TRUE, log.p = FALSE){}
+        body(qfun) <- substitute({ if (log.p) p <- exp(p)
+                                   pfunx <- seq(from = m1, to = m2, length = 1e5)
+                                   p0 <- pfun 
+                                   pfuny <- p0(pfunx, lower.tail = lower.tail)
+                                   qfun1 <- approxfun(x = pfuny, y = pfunx, 
+                                                      rule = 2)
+                                   y <- ifelse(p > 1, 
+                                               NaN, 
+                                               ifelse(p < 0, NaN, qfun1(p)))
                                    return(y)},
                             list(m1 = m1, m2 = m2, pfun = pfun)) 
     
-        return(new("UnivariateDistribution", img = img(e1), r = rfun, d = NULL, p = pfun, q = qfun, .withSim=FALSE, .withArith=FALSE))
+        return(new("UnivariateDistribution", img = img(e1), r = rfun, d = NULL, 
+                    p = pfun, q = qfun, .withSim = FALSE, .withArith = FALSE))
     })

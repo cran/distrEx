@@ -37,5 +37,5 @@ Class \code{"Distribution"}, by class \code{"UnivariateCondDistribution"}.
 \examples{new("DiscreteCondDistribution")}
 \concept{conditional distribution}
 \concept{discrete distribution}
-\keyword{classes}
 \keyword{distribution}
+\concept{S4 distribution class}

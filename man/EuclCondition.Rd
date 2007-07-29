@@ -22,5 +22,9 @@ function(dimension){
     new("EuclCondition", Range = EuclideanSpace(dimension = dimension))
 }
 }
+\concept{generating function}
 \concept{conditioning}
-\keyword{}
+\concept{condition}
+\concept{S4 condition class}
+\concept{conditional distribution}
+\keyword{distribution}

@@ -11,4 +11,7 @@
 }}
 \seealso{\code{\link[distr]{dim-methods}},\cr
  \code{\link[base]{dim}}}
-\keyword{}
+\keyword{methods}
+\concept{dimension}
+\concept{space}
+\concept{accessor function}

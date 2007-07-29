@@ -1,4 +1,4 @@
-## initialize method
+## initialize method 
 setMethod("initialize", "Gumbel",
     function(.Object, loc = 0, scale = 1) {
         .Object@img <- Reals()
