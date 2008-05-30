@@ -92,7 +92,7 @@ if(!isGeneric("cond")){
 }
 
 if(!isGeneric("Range")){ 
-   setGeneric("Range", function(object) standardGeneric("Range"))
+   setGeneric("Range", function(object, ...) standardGeneric("Range"))
 }
 
 if(!isGeneric("loc")){
@@ -127,6 +127,11 @@ if(!isGeneric("HellingerDist")){
    setGeneric("HellingerDist", 
                function(e1, e2, ...) standardGeneric("HellingerDist"))
 }
+if(!isGeneric("CvMDist")){
+   setGeneric("CvMDist", 
+               function(e1, e2, ...) standardGeneric("CvMDist"))
+}
+
 if(!isGeneric("ConvexContamination")){ 
    setGeneric("ConvexContamination", 
                function(e1, e2, size) standardGeneric("ConvexContamination"))

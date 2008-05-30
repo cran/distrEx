@@ -1,9 +1,3 @@
 distrExUse        This example illustrates how useful the functionals are in distrEx: code can be written once for all
                   distributions...
-illustLLN         This example illustrates how the LLN forces consecutive arithmetic means of iid r.v.'s to 
-                  converge to their expectation --- using E()- and sd()-methods from distrEx.   
-illustCLT         This example illustrates how the CLT forces consecutive sums of iid r.v.'s to converge to a normal 
-                  distribution; it uses the E()- and sd()-methods from distrEx.   
-illustCLT_tcl     This example is a version of the preceding one; it has Tcl/Tk-based widget to control the input
-                  arguments of illustCLT and requires Tcl/Tk   
 Prognose          This example shows how the conditional distributions from distrEx can be used to achieve a general deconvolution method.

@@ -26,11 +26,10 @@ distrEx -- Extensions of package distr
 \details{
 \tabular{ll}{
 Package: \tab distrEx\cr
-Version: \tab 1.9 \cr
-Date: \tab 2007-07-29 \cr
-Depends: \tab R(>= 2.2.0), methods, distr(>= 1.8), evd, startupmsg\cr
+Version: \tab 2.0 \cr
+Date: \tab 2008-05-08 \cr
+Depends: \tab R(>= 2.6.0), methods, distr(>= 2.0), evd, startupmsg\cr
 Suggests: \tab tcltk\cr
-SaveImage: \tab no\cr
 LazyLoad: \tab yes\cr
 License: \tab GPL (version 2 or later)\cr
 URL: \tab http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/\cr
@@ -116,6 +115,8 @@ KolmogorovDist          Generic function for the computation of the
                         Kolmogorov distance of two distributions
 TotalVarDist            Generic function for the computation of the
                         total variation distance of two distributions
+vonMisesDist            Generic function for the computation of the
+                        von Mises distance of two distributions
 
 liesInSupport           Generic function for testing the support of a
                         distribution
@@ -145,11 +146,6 @@ m1df                    Generic function for the computation of clipped
                         first moments
 m2df                    Generic function for the computation of clipped
                         second moments
-
-illustration:
-illustrateLLT           function for the generation of LLN - visualizations
-illustrateCLT           function for the generation of CLT - visualizations
-plotCLT                 Generic function for the plotting of CLT-approximations
 
 }
 }
@@ -199,7 +195,7 @@ As for general \code{packageStartupMessage}'s, you may also suppress all
 
 \author{
 Matthias Kohl \email{Matthias.Kohl@stamats.de} and \cr
-Peter Ruckdeschel \email{Peter.Ruckdeschel@uni-bayreuth.de},\cr 
+Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de},\cr 
 
 \emph{Maintainer:}  Matthias Kohl \email{Matthias.Kohl@stamats.de}
 }
@@ -216,16 +212,13 @@ and \pkg{distrEx} is included into the mere documentation package \pkg{distrDoc}
 and may be called by \code{require("distrDoc");vignette("distr")}
 
 a homepage to this package is available under\cr
-\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distrEx.html}
+\url{http://distr.r-forge.r-project.org/}
 
 M. Kohl (2005): \emph{Numerical Contributions to the Asymptotic 
 Theory of Robustness.} PhD Thesis. Bayreuth. Available as 
 \url{http://www.stamats.de/ThesisMKohl.pdf}
 }
 \keyword{package}
-\concept{LLN}
-\concept{CLT}
-\concept{Teaching demos}
 \concept{S4 condition class}
 \concept{S4 distribution class}
 \concept{functional}

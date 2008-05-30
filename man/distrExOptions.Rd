@@ -1,5 +1,6 @@
 \name{distrExOptions}
 \alias{distrExOptions}
+\alias{distrExoptions}
 \alias{getdistrExOption}
 \alias{MCIterations}
 \alias{GLIntegrateTruncQuantile}
@@ -11,12 +12,15 @@
 \alias{m1dfRelativeTolerance}
 \alias{m2dfLowerTruncQuantile}
 \alias{m2dfRelativeTolerance}
+\alias{nDiscretize}
+\alias{hSmooth}
 
 \title{Function to change the global variables of the package `distrEx' }
 \description{With \code{distrExOptions} you can inspect and change 
   the global variables of the package \pkg{distrEx}. }
 \usage{
 distrExOptions(...)
+distrExoptions(...)
 getdistrExOption(x)
 }
 \arguments{
@@ -29,6 +33,10 @@ getdistrExOption(x)
   \code{distrExOptions(x)} returns the global variable \var{x}.\newline
   \code{getdistrExOption(x)} returns the global variable \var{x}.\newline
   \code{distrExOptions(x=y)} sets the value of the global variable \var{x} to \var{y}.
+}
+\section{distrExoptions}{
+For compatibility with spelling in package \pkg{distr}, \code{distrExoptions} is 
+just a synonym to \code{distrExOptions}.
 }
 \section{Global Options}{
 \describe{
@@ -55,6 +63,11 @@ getdistrExOption(x)
     of \code{m2df} which corresponds to the \code{m2dfLowerTruncQuantile}-quantile. }
   \item{m2dfRelativeTolerance:}{ The relative tolerance used inside of \code{m2df}
     when calling \code{distrExIntegrate}. }
+  \item{nDiscretize:}{ number of support values used for the discretization
+    of objects of class \code{"AbscontDistribution"}. }
+  \item{hSmooth:}{ smoothing parameter to smooth objects of class 
+    \code{"DiscreteDistribution"}. This is done via convolution with the
+    normal distribution \code{Norm(mean = 0, sd = hSmooth)}.}
 }
 }
 %\references{}

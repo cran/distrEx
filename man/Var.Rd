@@ -26,9 +26,11 @@
 \alias{var,Unif-method}
 \alias{var,Weibull-method}
 \alias{var,Td-method}
+\alias{var,Arcsine-method}
 \alias{sd}
 \alias{sd-methods}
 \alias{sd,UnivariateDistribution-method}
+\alias{sd,Norm-method}
 \alias{median}
 \alias{median,ANY-method}
 \alias{median-methods}
@@ -46,6 +48,7 @@
 \alias{median,Lnorm-method}
 \alias{median,Norm-method}
 \alias{median,Unif-method}
+\alias{median,Arcsine-method}
 \alias{IQR}
 \alias{IQR-methods}
 \alias{IQR,ANY-method}
@@ -63,6 +66,7 @@
 \alias{IQR,Logis-method}
 \alias{IQR,Norm-method}
 \alias{IQR,Unif-method}
+\alias{IQR,Arcsine-method}
 \alias{mad}
 \alias{mad,ANY-method}
 \alias{mad-methods}
@@ -79,6 +83,7 @@
 \alias{mad,Logis-method}
 \alias{mad,Norm-method}
 \alias{mad,Unif-method}
+\alias{mad,Arcsine-method}
 \alias{skewness}
 \alias{skewness-methods}
 \alias{skewness,ANY-method}
@@ -106,6 +111,7 @@
 \alias{skewness,Unif-method}
 \alias{skewness,Weibull-method}
 \alias{skewness,Td-method}
+\alias{skewness,Arcsine-method}
 \alias{kurtosis}
 \alias{kurtosis-methods}
 \alias{kurtosis,ANY-method}
@@ -133,6 +139,7 @@
 \alias{kurtosis,Unif-method}
 \alias{kurtosis,Weibull-method}
 \alias{kurtosis,Td-method}
+\alias{kurtosis,Arcsine-method}
 
 \title{Generic Functions for the Computation of Functionals}
 \description{
@@ -152,6 +159,7 @@ IQR(x, ...)
 \S4method{IQR}{Logis}(x)
 \S4method{IQR}{Norm}(x)
 \S4method{IQR}{Unif}(x)
+\S4method{IQR}{Arcsine}(x)
 
 median(x, ...)
 
@@ -166,6 +174,7 @@ median(x, ...)
 \S4method{median}{Lnorm}(x)
 \S4method{median}{Norm}(x)
 \S4method{median}{Unif}(x)
+\S4method{median}{Arcsine}(x)
 
 mad(x, ...)
 
@@ -179,80 +188,85 @@ mad(x, ...)
 \S4method{mad}{Logis}(x)
 \S4method{mad}{Norm}(x)
 \S4method{mad}{Unif}(x)
+\S4method{mad}{Arcsine}(x)
 
 sd(x, ...)
 
 \S4method{sd}{UnivariateDistribution}(x, fun, cond, withCond, useApply, ...)
+\S4method{sd}{Norm}(x, fun, cond, withCond = FALSE, useApply = TRUE, ...)
 
 var(x, ...)
 
 \S4method{var}{UnivariateDistribution}(x, fun, cond, withCond, useApply, ...)
 \S4method{var}{AffLinDistribution}(x, fun, cond, withCond, useApply, ...)
-\S4method{var}{Binom}(x)
-\S4method{var}{Beta}(x)
-\S4method{var}{Cauchy}(x)
-\S4method{var}{Chisq}(x)
-\S4method{var}{Dirac}(x)
-\S4method{var}{DExp}(x)
-\S4method{var}{Exp}(x)
-\S4method{var}{Fd}(x)
-\S4method{var}{Gammad}(x)
-\S4method{var}{Geom}(x)
-\S4method{var}{Hyper}(x)
-\S4method{var}{Logis}(x)
-\S4method{var}{Lnorm}(x)
-\S4method{var}{Nbinom}(x)
-\S4method{var}{Norm}(x)
-\S4method{var}{Pois}(x)
-\S4method{var}{Td}(x)
-\S4method{var}{Unif}(x)
-\S4method{var}{Weibull}(x)
+\S4method{var}{Binom}(x, ...)
+\S4method{var}{Beta}(x, ...)
+\S4method{var}{Cauchy}(x, ...)
+\S4method{var}{Chisq}(x, ...)
+\S4method{var}{Dirac}(x, ...)
+\S4method{var}{DExp}(x, ...)
+\S4method{var}{Exp}(x, ...)
+\S4method{var}{Fd}(x, ...)
+\S4method{var}{Gammad}(x, ...)
+\S4method{var}{Geom}(x, ...)
+\S4method{var}{Hyper}(x, ...)
+\S4method{var}{Logis}(x, ...)
+\S4method{var}{Lnorm}(x, ...)
+\S4method{var}{Nbinom}(x, ...)
+\S4method{var}{Norm}(x, ...)
+\S4method{var}{Pois}(x, ...)
+\S4method{var}{Td}(x, ...)
+\S4method{var}{Unif}(x, ...)
+\S4method{var}{Weibull}(x, ...)
+\S4method{var}{Arcsine}(x, ...)
 
 skewness(x, ...)
 \S4method{skewness}{UnivariateDistribution}(x, fun, cond, withCond, useApply, ...)
 \S4method{skewness}{AffLinDistribution}(x, fun, cond, withCond, useApply, ...)
-\S4method{skewness}{Binom}(x)
-\S4method{skewness}{Beta}(x)
-\S4method{skewness}{Cauchy}(x)
-\S4method{skewness}{Chisq}(x)
-\S4method{skewness}{Dirac}(x)
-\S4method{skewness}{DExp}(x)
-\S4method{skewness}{Exp}(x)
-\S4method{skewness}{Fd}(x)
-\S4method{skewness}{Gammad}(x)
-\S4method{skewness}{Geom}(x)
-\S4method{skewness}{Hyper}(x)
-\S4method{skewness}{Logis}(x)
-\S4method{skewness}{Lnorm}(x)
-\S4method{skewness}{Nbinom}(x)
-\S4method{skewness}{Norm}(x)
-\S4method{skewness}{Pois}(x)
-\S4method{skewness}{Td}(x)
-\S4method{skewness}{Unif}(x)
-\S4method{skewness}{Weibull}(x)
+\S4method{skewness}{Binom}(x, ...)
+\S4method{skewness}{Beta}(x, ...)
+\S4method{skewness}{Cauchy}(x, ...)
+\S4method{skewness}{Chisq}(x, ...)
+\S4method{skewness}{Dirac}(x, ...)
+\S4method{skewness}{DExp}(x, ...)
+\S4method{skewness}{Exp}(x, ...)
+\S4method{skewness}{Fd}(x, ...)
+\S4method{skewness}{Gammad}(x, ...)
+\S4method{skewness}{Geom}(x, ...)
+\S4method{skewness}{Hyper}(x, ...)
+\S4method{skewness}{Logis}(x, ...)
+\S4method{skewness}{Lnorm}(x, ...)
+\S4method{skewness}{Nbinom}(x, ...)
+\S4method{skewness}{Norm}(x, ...)
+\S4method{skewness}{Pois}(x, ...)
+\S4method{skewness}{Td}(x, ...)
+\S4method{skewness}{Unif}(x, ...)
+\S4method{skewness}{Weibull}(x, ...)
+\S4method{skewness}{Arcsine}(x, ...)
 
 kurtosis(x, ...)
 \S4method{kurtosis}{UnivariateDistribution}(x, fun, cond, withCond, useApply, ...)
 \S4method{kurtosis}{AffLinDistribution}(x, fun, cond, withCond, useApply, ...)
-\S4method{kurtosis}{Binom}(x)
-\S4method{kurtosis}{Beta}(x)
-\S4method{kurtosis}{Cauchy}(x)
-\S4method{kurtosis}{Chisq}(x)
-\S4method{kurtosis}{Dirac}(x)
-\S4method{kurtosis}{DExp}(x)
-\S4method{kurtosis}{Exp}(x)
-\S4method{kurtosis}{Fd}(x)
-\S4method{kurtosis}{Gammad}(x)
-\S4method{kurtosis}{Geom}(x)
-\S4method{kurtosis}{Hyper}(x)
-\S4method{kurtosis}{Logis}(x)
-\S4method{kurtosis}{Lnorm}(x)
-\S4method{kurtosis}{Nbinom}(x)
-\S4method{kurtosis}{Norm}(x)
-\S4method{kurtosis}{Pois}(x)
-\S4method{kurtosis}{Td}(x)
-\S4method{kurtosis}{Unif}(x)
-\S4method{kurtosis}{Weibull}(x)
+\S4method{kurtosis}{Binom}(x, ...)
+\S4method{kurtosis}{Beta}(x, ...)
+\S4method{kurtosis}{Cauchy}(x, ...)
+\S4method{kurtosis}{Chisq}(x, ...)
+\S4method{kurtosis}{Dirac}(x, ...)
+\S4method{kurtosis}{DExp}(x, ...)
+\S4method{kurtosis}{Exp}(x, ...)
+\S4method{kurtosis}{Fd}(x, ...)
+\S4method{kurtosis}{Gammad}(x, ...)
+\S4method{kurtosis}{Geom}(x, ...)
+\S4method{kurtosis}{Hyper}(x, ...)
+\S4method{kurtosis}{Logis}(x, ...)
+\S4method{kurtosis}{Lnorm}(x, ...)
+\S4method{kurtosis}{Nbinom}(x, ...)
+\S4method{kurtosis}{Norm}(x, ...)
+\S4method{kurtosis}{Pois}(x, ...)
+\S4method{kurtosis}{Td}(x, ...)
+\S4method{kurtosis}{Unif}(x, ...)
+\S4method{kurtosis}{Weibull}(x, ...)
+\S4method{kurtosis}{Arcsine}(x, ...)
 }
 \arguments{
   \item{x}{ object of class \code{"UnivariateDistribution"}}
@@ -369,6 +383,9 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{var}, \code{signature(x = "Weibull")}:}{ 
     exact evaluation using explicit expressions.}
+  \item{\code{var}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
+
   \item{\code{IQR}, \code{signature(x = "Cauchy")}:}{ 
     exact evaluation using explicit expressions.}
   \item{\code{IQR}, \code{signature(x = "Dirac")}:}{ 
@@ -385,6 +402,9 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{IQR}, \code{signature(x = "Unif")}:}{ 
     exact evaluation using explicit expressions.}
+  \item{\code{IQR}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
+
   \item{\code{median}, \code{signature(x = "Cauchy")}:}{ 
     exact evaluation using explicit expressions.}
   \item{\code{median}, \code{signature(x = "Dirac")}:}{ 
@@ -403,6 +423,9 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{median}, \code{signature(x = "Unif")}:}{ 
     exact evaluation using explicit expressions.}
+  \item{\code{median}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
+
   \item{\code{mad}, \code{signature(x = "Cauchy")}:}{ 
     exact evaluation using explicit expressions.}
   \item{\code{mad}, \code{signature(x = "Dirac")}:}{ 
@@ -419,7 +442,10 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{mad}, \code{signature(x = "Unif")}:}{ 
     exact evaluation using explicit expressions.}
-\item{\code{skewness}, \code{signature(x = "Beta")}:}{ 
+  \item{\code{mad}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
+
+  \item{\code{skewness}, \code{signature(x = "Beta")}:}{ 
     for noncentrality 0 exact evaluation using explicit expressions.}  
   \item{\code{skewness}, \code{signature(x = "Binom")}:}{ 
     exact evaluation using explicit expressions.}
@@ -457,7 +483,10 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{skewness}, \code{signature(x = "Weibull")}:}{ 
     exact evaluation using explicit expressions.}
-\item{\code{kurtosis}, \code{signature(x = "Beta")}:}{ 
+  \item{\code{skewness}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
+  
+  \item{\code{kurtosis}, \code{signature(x = "Beta")}:}{ 
     for noncentrality 0 exact evaluation using explicit expressions.}  
   \item{\code{kurtosis}, \code{signature(x = "Binom")}:}{ 
     exact evaluation using explicit expressions.}
@@ -495,10 +524,12 @@ kurtosis(x, ...)
     exact evaluation using explicit expressions.}
   \item{\code{kurtosis}, \code{signature(x = "Weibull")}:}{ 
     exact evaluation using explicit expressions.}
+  \item{\code{kurtosis}, \code{signature(x = "Arcsine")}:}{ 
+    exact evaluation using explicit expressions.}
 
 }}
 %\references{ ~put references to the literature/web site here ~ }
-\author{Peter Ruckdeschel \email{peter.ruckdeschel@uni-bayreuth.de}}
+\author{Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de}}
 %\note{ ~~further notes~~ }
 
 \section{Caveat}{
