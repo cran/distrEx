@@ -1,12 +1,12 @@
 # plot
-setMethod("plot", "MultivariateDistribution", 
-    function(x,y=NULL,...){ 
+setMethod("plot", signature(x="MultivariateDistribution",y="missing"), 
+    function(x, y,...){ 
         warning("'plot' not yet implemented for objects",
                 " of class ", class(x))
     })
 
-setMethod("plot", "UnivariateCondDistribution", 
-    function(x,y=NULL,...){ 
+setMethod("plot", signature(x="UnivariateCondDistribution",y="missing"), 
+    function(x, y,...){ 
         warning("'plot' not yet implemented for objects",
                 " of class ", class(x))
     })
