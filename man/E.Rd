@@ -4,6 +4,7 @@
 \alias{E,UnivariateDistribution,missing,missing-method}
 \alias{E,AbscontDistribution,missing,missing-method}
 \alias{E,DiscreteDistribution,missing,missing-method}
+\alias{E,LatticeDistribution,missing,missing-method}
 \alias{E,AffLinDistribution,missing,missing-method}
 \alias{E,AffLinAbscontDistribution,missing,missing-method}
 \alias{E,AffLinDiscreteDistribution,missing,missing-method}
@@ -15,6 +16,7 @@
 \alias{E,UnivariateDistribution,function,missing-method}
 \alias{E,AbscontDistribution,function,missing-method}
 \alias{E,DiscreteDistribution,function,missing-method}
+\alias{E,LatticeDistribution,function,missing-method}
 \alias{E,MultivariateDistribution,function,missing-method}
 \alias{E,DiscreteMVDistribution,function,missing-method}
 \alias{E,UnivarLebDecDistribution,function,missing-method}
