@@ -1,6 +1,6 @@
 Package: distrEx
-Version: 2.0.4
-Date: 2009-01-12
+Version: 2.0.5
+Date: 2009-02-19
 Title: Extensions of package distr
 Description: Extensions of package distr and some additional
         functionality
@@ -11,5 +11,4 @@ Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 LazyLoad: yes
 License: LGPL-3
 URL: http://distr.r-forge.r-project.org/
-Revision: 375
-Packaged: Tue Jan 13 05:22:11 2009; rforge
+Packaged: Fri Feb 20 15:07:40 2009; ruckdesc
