@@ -137,15 +137,24 @@ if(!isGeneric("ConvexContamination")){
                function(e1, e2, size) standardGeneric("ConvexContamination"))
 }
 
+if(!isGeneric("AsymTotalVarDist")){
+   setGeneric("AsymTotalVarDist", 
+               function(e1, e2, ...) standardGeneric("AsymTotalVarDist"))
+}
+if(!isGeneric("OAsymTotalVarDist")){
+   setGeneric("OAsymTotalVarDist", 
+               function(e1, e2, ...) standardGeneric("OAsymTotalVarDist"))
+}
+
 if(!isGeneric("E")){ 
    setGeneric("E", function(object, fun, cond, ...) standardGeneric("E"))
 }
 
 if(!isGeneric("m1df")){
-   setGeneric("m1df", function(object, upper) standardGeneric("m1df"))
+   setGeneric("m1df", function(object, upper, ...) standardGeneric("m1df"))
 }
 if(!isGeneric("m2df")){
-   setGeneric("m2df", function(object, upper) standardGeneric("m2df"))
+   setGeneric("m2df", function(object, upper, ...) standardGeneric("m2df"))
 }
 
 #if(!isGeneric("illustrateCLT")){

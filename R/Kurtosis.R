@@ -60,8 +60,12 @@ setMethod("kurtosis", signature(x = "AffLinLatticeDistribution"),
 ###
 setMethod("kurtosis", signature(x = "Norm"),
     function(x,...){ 
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
        return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(0)
@@ -69,8 +73,12 @@ setMethod("kurtosis", signature(x = "Norm"),
 #
 setMethod("kurtosis", signature(x = "Binom"),
     function(x,  ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
        return(kurtosis(as(x,"DiscreteDistribution"),...))
     else
         p <- prob(x)
@@ -80,8 +88,12 @@ setMethod("kurtosis", signature(x = "Binom"),
 #
 setMethod("kurtosis", signature(x = "Cauchy"),
     function(x,...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
       return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(NA)
@@ -89,21 +101,29 @@ setMethod("kurtosis", signature(x = "Cauchy"),
 #
 setMethod("kurtosis", signature(x = "Chisq"),
     function(x,...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
        return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(12*(df(x)+4*ncp(x))/(df(x)+2*ncp(x))^2)
     })
 #
 setMethod("kurtosis", signature(x = "Dirac"),
-    function(x, ...){return(0)})
+    function(x, ...){return(NA)})
 
 #
 setMethod("kurtosis", signature(x = "DExp"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(3)
@@ -111,8 +131,12 @@ setMethod("kurtosis", signature(x = "DExp"),
 #
 setMethod("kurtosis", signature(x = "Exp"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(2)
@@ -121,23 +145,42 @@ setMethod("kurtosis", signature(x = "Exp"),
 #
 setMethod("kurtosis", signature(x = "Fd"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) {
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) {
          return(kurtosis(as(x,"AbscontDistribution"),...))
     }else {
         if (df2(x)>8){
           m <- df1(x)
           n <- df2(x)
           d <- ncp(x)
-          L <- d/m
-          m2 <- 2*n^2*(m+n-2)/m/(n-2)^2/(n-4)*(1+2*L+m*L^2/(m+n-2))
-          a <-  12*n^4*(m+n-2)/m^3/(n-2)^4/(n-4)/(n-6)/(n-8)
-          b <-  (1+4*L)*(2*(3*m+n-2)*(2*m+n-2)+(m+n-2)*(n-2)*(m+2))
-          c <-  2*m*(3*m+2*n-4)*(n+10)*L^2
-          d <-  4*m^2*(n+10)*L^3
-          e <-  m^3*(n+10)*L^4/(m+n-2)
-          m4 <- a*(b+c+d+e)
-          return(m4/m2^2-3)
+          m2 <- var(x)
+          m1 <- E(x)
+          m3 <- (n/m)^3/(n-2)/(n-4)/(n-6)*
+                  (m^3+6*m^2+8*m+3*d*(m^2+6*m+8)+3*d^2*(m+4)+d^3)
+          mm1 <- m-1
+          mm2 <- mm1 * (m+1)
+          mm3 <- mm2 * (m+3)
+          mm4 <- mm3 * (m+5)
+          mmd1 <- d+1
+          mmd2 <- 3 + 6*d + d^2
+          mmd3 <- 15 + 45*d + 15*d^2 + d^3
+          mmd4 <- 105 + 420*d + 210*d^2 + 28*d^3 + d^4
+          mm <- mm4 + 4*mm3*mmd1 + 6*mm2*mmd2 + 4*mm1*mmd3+ mmd4          
+          m4 <- (n/m)^4/(n-2)/(n-4)/(n-6)/(n-8)*mm
+          return((m4-4*m3*m1+6*m2*m1^2+3*m1^4)/m2^2-3)
+#          L <- d/m
+#          m2 <- 2*n^2*(m+n-2)/m/(n-2)^2/(n-4)*(1+2*L+m*L^2/(m+n-2))
+#          a <-  12*n^4*(m+n-2)/m^3/(n-2)^4/(n-4)/(n-6)/(n-8)
+#          b <-  (1+4*L)*(2*(3*m+n-2)*(2*m+n-2)+(m+n-2)*(n-2)*(m+2))
+#          c <-  2*m*(3*m+2*n-4)*(n+10)*L^2
+#          d <-  4*m^2*(n+10)*L^3
+#          e <-  m^3*(n+10)*L^4/(m+n-2)
+#          m4 <- a*(b+c+d+e)
+#          return(m4/m2^2-3)
         } else {
           return(NA)
         }
@@ -146,8 +189,12 @@ setMethod("kurtosis", signature(x = "Fd"),
 #
 setMethod("kurtosis", signature(x = "Gammad"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(6/shape(x))
@@ -155,8 +202,12 @@ setMethod("kurtosis", signature(x = "Gammad"),
 #
 setMethod("kurtosis", signature(x = "Geom"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"DiscreteDistribution"),...))
     else
         return(6+ prob(x)^2/(1-prob(x)))
@@ -164,8 +215,12 @@ setMethod("kurtosis", signature(x = "Geom"),
 #
 setMethod("kurtosis", signature(x = "Hyper"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"DiscreteDistribution"),...))
     else
        {k <- k(x);
@@ -174,15 +229,19 @@ setMethod("kurtosis", signature(x = "Hyper"),
         a <- (m+n)^2*(m+n-1)/(k*m*n*(m+n-k)*(m+n-2)*(m+n-3));
         return(
                 a*((m+n)*(m+n+1-6*k)+3*m*n*(k-2)+6*k^2+3*m*n*k*(6-k)/(m+n)
-                -18*m*n*k^2/(m+n)^2)
+                -18*m*n*k^2/(m+n)^2)-3
               )
         }
     })
 #
 setMethod("kurtosis", signature(x = "Logis"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(6/5)
@@ -190,19 +249,27 @@ setMethod("kurtosis", signature(x = "Logis"),
 #
 setMethod("kurtosis", signature(x = "Lnorm"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) {
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) {
         return(kurtosis(as(x,"AbscontDistribution"),...))
     } else {
         w <- exp(sdlog(x)^2)
-        return( w^4+2*w^3+3*w^2-3 )
+        return( w^4+2*w^3+3*w^2-6)
     }
     })
 #
 setMethod("kurtosis", signature(x = "Nbinom"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(kurtosis(as(x,"DiscreteDistribution"),...))
     else
         return(6/size(x)+prob(x)^2/(size(x)*(1-prob(x))))
@@ -210,8 +277,12 @@ setMethod("kurtosis", signature(x = "Nbinom"),
 #
 setMethod("kurtosis", signature(x = "Pois"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(kurtosis(as(x,"DiscreteDistribution"),...))
     else
         return(1/lambda(x))
@@ -219,17 +290,22 @@ setMethod("kurtosis", signature(x = "Pois"),
 #
 setMethod("kurtosis", signature(x = "Td"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))){ 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)){ 
         return(kurtosis(as(x,"AbscontDistribution"),...))
     } else {
         if (df(x)>4){
-          n <- df(x); d<- ncp(x)
-          m1 <- sqrt(0.5*n)*gamma(0.5*(n-1))*d/gamma(0.5*n)
-          m2 <- n*(1+d^2)/(n-2)-m1^2
-          m3 <- m1*(n*(2*n-3+d^2)/(n-2)/(n-3)-2*m2)
-          m4 <- n^2*(3+6*d^2+d^4)/(n-2)/(n-4)-m1^2*(n*((n+1)*d^2+3*(3*n-5))/(n-2)/(n-3)-3*m2)
-          return(m4/m2^2-3)
+          n <- df(x)
+          d <- ncp(x)
+          m2 <- var(x)
+          m1 <- E(x)
+          m3 <- (n/2)^1.5*(3*d+d^3)*exp(lgamma((n-3)/2)-lgamma(n/2))
+          m4 <- n^2*(3+6*d^2+d^4)/(n-2)/(n-4)
+          return((m4-4*m3*m1+6*m2*m1^2+3*m1^4)/m2^2-3)
         } else {
           return(NA)
         }
@@ -239,8 +315,12 @@ setMethod("kurtosis", signature(x = "Td"),
 #
 setMethod("kurtosis", signature(x = "Unif"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         return(-6/5)
@@ -248,8 +328,12 @@ setMethod("kurtosis", signature(x = "Unif"),
 #
 setMethod("kurtosis", signature(x = "Weibull"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(kurtosis(as(x,"AbscontDistribution"),...))
     else
         g1 <- gamma(1+1/shape(x))
@@ -262,7 +346,11 @@ setMethod("kurtosis", signature(x = "Weibull"),
 #    
 setMethod("kurtosis", signature(x = "Beta"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
     if((hasArg(fun))||(hasArg(cond))||(!isTRUE(all.equal(ncp(x),0)))) 
         return(kurtosis(as(x,"AbscontDistribution"),...))
     else
@@ -275,7 +363,46 @@ setMethod("kurtosis", signature(x = "Beta"),
 ###################################################################################
 
 setMethod("kurtosis", signature(x = "Arcsine"),
-    function(x, ...)return(-3/2))
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(kurtosis(as(x,"AbscontDistribution"),...))
+    else    return(-3/2)
+    })
 
+setMethod("kurtosis", signature(x = "Pareto"),
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(kurtosis(as(x,"AbscontDistribution"),...))
+    else{
+         a <- shape(x)
+         if(a<=4) return(NA)
+         else
+         return( 6*(a^3+a^2-6*a-2)/a/(a-3)/(a-4) ) 
+    }
+})
 
+setMethod("kurtosis", signature(x = "Gumbel"),
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(kurtosis(as(x,"AbscontDistribution"),...))
+    else{
+         return(12/5)
+# http://mathworld.wolfram.com/GumbelDistribution.html         
+    }
+})
 

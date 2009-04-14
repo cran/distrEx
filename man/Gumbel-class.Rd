@@ -32,6 +32,13 @@
     \item{\code{d}:}{\code{dgumbel}}
     \item{\code{p}:}{\code{pgumbel}}
     \item{\code{q}:}{\code{qgumbel}}
+    \item{\code{gaps}:}{(numeric) matrix or \code{NULL}}
+    \item{\code{.withArith}:}{logical: used internally to issue warnings as to interpretation of arithmetics}
+    \item{\code{.withSim}:}{logical: used internally to issue warnings as to accuracy}
+    \item{\code{.logExact}:}{logical: used internally to flag the case where there are explicit formulae for the
+                              log version of density, cdf, and quantile function}
+    \item{\code{.lowerExact}:}{logical: used internally to flag the case where there are explicit formulae for the
+                              lower tail version of cdf and quantile function}
   }
 }
 \section{Extends}{
@@ -60,6 +67,24 @@ Class \code{"Distribution"}, by class \code{"AbscontDistribution"}.
 
     \item{\code{*}}{\code{signature(e1 = "Gumbel", e2 = "numeric")}: result again of 
       class \code{"Gumbel"}; exact. }
+
+    \item{E}{\code{signature(object = "Gumbel", fun = "missing", cond = "missing")}: 
+      exact evaluation of expectation using explicit expressions.}
+
+     \item{var}{\code{signature(x = "Gumbel")}: 
+      exact evaluation of expectation using explicit expressions.}
+
+     \item{skewness}{\code{signature(x = "Gumbel")}: 
+      exact evaluation of expectation using explicit expressions.}
+
+     \item{kurtosis}{\code{signature(x = "Gumbel")}: 
+      exact evaluation of expectation using explicit expressions.}
+
+     \item{median}{\code{signature(x = "Gumbel")}: 
+      exact evaluation of expectation using explicit expressions.}
+
+     \item{IQR}{\code{signature(x = "Gumbel")}: 
+      exact evaluation of expectation using explicit expressions.}
   }
 }
 \references{Johnson et al. (1995) \emph{Continuous Univariate Distributions. Vol. 2. 2nd ed.}

@@ -20,6 +20,8 @@
 \alias{E,MultivariateDistribution,function,missing-method}
 \alias{E,DiscreteMVDistribution,function,missing-method}
 \alias{E,UnivarLebDecDistribution,function,missing-method}
+\alias{E,AcDcLcDistribution,ANY,ANY-method}
+\alias{E,CompoundDistribution,missing,missing-method}
 \alias{E,UnivariateCondDistribution,missing,numeric-method}
 \alias{E,AbscontCondDistribution,missing,numeric-method}
 \alias{E,DiscreteCondDistribution,missing,numeric-method}
@@ -28,6 +30,7 @@
 \alias{E,UnivariateCondDistribution,function,numeric-method}
 \alias{E,AbscontCondDistribution,function,numeric-method}
 \alias{E,DiscreteCondDistribution,function,numeric-method}
+\alias{E,Arcsine,missing,missing-method}
 \alias{E,Beta,missing,missing-method}
 \alias{E,Binom,missing,missing-method}
 \alias{E,Cauchy,missing,missing-method}
@@ -38,16 +41,17 @@
 \alias{E,Fd,missing,missing-method}
 \alias{E,Gammad,missing,missing-method}
 \alias{E,Geom,missing,missing-method}
+\alias{E,Gumbel,missing,missing-method}
 \alias{E,Hyper,missing,missing-method}
 \alias{E,Logis,missing,missing-method}
 \alias{E,Lnorm,missing,missing-method}
 \alias{E,Nbinom,missing,missing-method}
 \alias{E,Norm,missing,missing-method}
+\alias{E,Pareto,missing,missing-method}
 \alias{E,Pois,missing,missing-method}
 \alias{E,Td,missing,missing-method}
 \alias{E,Unif,missing,missing-method}
 \alias{E,Weibull,missing,missing-method}
-\alias{E,Arcsine,missing,missing-method}
 
 \title{Generic Function for the Computation of (Conditional) Expectations}
 \description{
@@ -56,52 +60,115 @@
 \usage{
 E(object, fun, cond, ...)
 
-\S4method{E}{UnivariateDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+\S4method{E}{UnivariateDistribution,missing,missing}(object, 
+             low = NULL, upp = NULL, Nsim = getdistrExOption("MCIterations"), ...)
 
-\S4method{E}{AbscontDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+\S4method{E}{UnivariateDistribution,function,missing}(object, fun, 
+        useApply = TRUE, low = NULL, upp = NULL,  Nsim = getdistrExOption("MCIterations"), ...)
 
-\S4method{E}{DiscreteDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+\S4method{E}{AbscontDistribution,function,missing}(object, fun,  useApply = TRUE,
+             low = NULL, upp = NULL, 
+             rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ...)
 
-\S4method{E}{AffLinDistribution,missing,missing}(object, fun, cond)
+\S4method{E}{DiscreteDistribution,function,missing}(object, fun, useApply = TRUE, 
+             low = NULL, upp = NULL, ...)
 
-\S4method{E}{AffLinUnivarLebDecDistribution,missing,missing}(object, fun, cond)
+\S4method{E}{AffLinDistribution,missing,missing}(object, low = NULL, upp = NULL, ...)
 
-\S4method{E}{MultivariateDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+\S4method{E}{AffLinUnivarLebDecDistribution,missing,missing}(object, low = NULL, upp = NULL, ...)
 
-\S4method{E}{DiscreteMVDistribution,function,missing}(object, fun, cond, useApply = TRUE, ...)
+\S4method{E}{MultivariateDistribution,missing,missing}(object, 
+             Nsim = getdistrExOption("MCIterations"), ...)
+\S4method{E}{MultivariateDistribution,function,missing}(object, fun, useApply = TRUE, 
+             Nsim = getdistrExOption("MCIterations"), ...)
 
-\S4method{E}{AbscontCondDistribution,missing,numeric}(object, fun, cond, useApply = TRUE)
+\S4method{E}{DiscreteMVDistribution,missing,missing}(object, low = NULL, upp = NULL, ...)
 
-\S4method{E}{DiscreteCondDistribution,missing,numeric}(object, fun, cond, useApply = TRUE)
+\S4method{E}{DiscreteMVDistribution,function,missing}(object, fun, 
+             useApply = TRUE, ...)
 
-\S4method{E}{UnivariateCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+\S4method{E}{AbscontCondDistribution,missing,numeric}(object, cond, useApply = TRUE,
+             low = NULL, upp = NULL, 
+             rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ...)
 
-\S4method{E}{AbscontCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+\S4method{E}{DiscreteCondDistribution,missing,numeric}(object, cond, useApply = TRUE,
+             low = NULL, upp = NULL, ...)
 
-\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+\S4method{E}{UnivariateCondDistribution,function,numeric}(object, fun, cond, 
+              withCond = FALSE, useApply = TRUE, low = NULL, upp = NULL,
+              Nsim = getdistrExOption("MCIterations"), ...)
 
-\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, withCond = FALSE, useApply = TRUE, ...)
+\S4method{E}{AbscontCondDistribution,function,numeric}(object, fun, cond, 
+               withCond = FALSE, useApply = TRUE, low = NULL, upp = NULL,
+             rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac")
+             , ...)
 
-\S4method{E}{Beta,missing,missing}(object, fun, cond)
-\S4method{E}{Binom,missing,missing}(object, fun, cond)
-\S4method{E}{Cauchy,missing,missing}(object, fun, cond)
-\S4method{E}{Chisq,missing,missing}(object, fun, cond)
-\S4method{E}{Dirac,missing,missing}(object, fun, cond)
-\S4method{E}{DExp,missing,missing}(object, fun, cond)
-\S4method{E}{Exp,missing,missing}(object, fun, cond)
-\S4method{E}{Fd,missing,missing}(object, fun, cond)
-\S4method{E}{Gammad,missing,missing}(object, fun, cond)
-\S4method{E}{Geom,missing,missing}(object, fun, cond)
-\S4method{E}{Hyper,missing,missing}(object, fun, cond)
-\S4method{E}{Logis,missing,missing}(object, fun, cond)
-\S4method{E}{Lnorm,missing,missing}(object, fun, cond)
-\S4method{E}{Nbinom,missing,missing}(object, fun, cond)
-\S4method{E}{Norm,missing,missing}(object, fun, cond)
-\S4method{E}{Pois,missing,missing}(object, fun, cond)
-\S4method{E}{Unif,missing,missing}(object, fun, cond)
-\S4method{E}{Td,missing,missing}(object, fun, cond)
-\S4method{E}{Weibull,missing,missing}(object, fun, cond)
-\S4method{E}{Arcsine,missing,missing}(object, fun, cond)
+\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, 
+             withCond = FALSE, useApply = TRUE, low = NULL, upp = NULL,...)
+
+\S4method{E}{DiscreteCondDistribution,function,numeric}(object, fun, cond, 
+             withCond = FALSE, useApply = TRUE, low = NULL, upp = NULL,...)
+             
+\S4method{E}{UnivarLebDecDistribution,missing,missing}(object, low = NULL, upp = NULL,  
+             rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ... )
+\S4method{E}{UnivarLebDecDistribution,function,missing}(object, fun, 
+             useApply = TRUE, low = NULL, upp = NULL, rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ... )
+\S4method{E}{UnivarLebDecDistribution,missing,ANY}(object, cond, 
+             low = NULL, upp = NULL, rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ... )
+\S4method{E}{UnivarLebDecDistribution,function,ANY}(object, fun, cond, 
+             useApply = TRUE, low = NULL, upp = NULL,
+             rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ... )
+
+\S4method{E}{AcDcLcDistribution,ANY,ANY}(object, fun, cond, 
+             low = NULL, upp = NULL, rel.tol= getdistrExOption("ErelativeTolerance"), 
+             lowerTruncQuantile = getdistrExOption("ElowerTruncQuantile"), 
+             upperTruncQuantile = getdistrExOption("EupperTruncQuantile"), 
+             IQR.fac = getdistrExOption("IQR.fac"), ... )
+\S4method{E}{CompoundDistribution,missing,missing}(object, low = NULL, upp = NULL, ...)
+
+\S4method{E}{Arcsine,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Beta,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Binom,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Cauchy,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Chisq,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Dirac,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{DExp,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Exp,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Fd,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Gammad,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Geom,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Gumbel,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Hyper,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Logis,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Lnorm,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Nbinom,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Norm,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Pareto,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Pois,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Unif,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Td,missing,missing}(object, low = NULL, upp = NULL, ...)
+\S4method{E}{Weibull,missing,missing}(object, low = NULL, upp = NULL, ...)
 
 }
 \arguments{
@@ -110,13 +177,28 @@ E(object, fun, cond, ...)
     else the (conditional) expection of \code{fun} is computed. }
   \item{cond}{ if not missing the conditional expectation 
     given \code{cond} is computed. }
+  \item{Nsim}{ number of MC simulations used to determine the expectation. }
+  \item{rel.tol}{relative tolerance for \code{distrExIntegrate}.} 
+  \item{low}{lower bound of integration range.}
+  \item{upp}{upper bound of integration range.}
+  \item{lowerTruncQuantile}{lower quantile for quantile based integration range.}
+  \item{upperTruncQuantile}{upper quantile for quantile based integration range.}
+  \item{IQR.fac}{factor for scale based integration range (i.e.; 
+  median of the distribution \eqn{\pm}{+-}\code{IQR.fac}\eqn{\times}{*}IQR).}
   \item{\dots}{ additional arguments to \code{fun} }
   \item{useApply}{ logical: should \code{sapply}, respectively \code{apply} 
     be used to evaluate \code{fun}. }
   \item{withCond}{ logical: is \code{cond} in the argument list of \code{fun}. }
 }
 \details{The precision of the computations can be controlled via 
-  certain global options; cf. \code{\link{distrExOptions}}. }
+  certain global options; cf. \code{\link{distrExOptions}}. 
+    Also note that arguments \code{low} and \code{upp} should be given as
+  named arguments in order to prevent them to be matched by arguments
+  \code{fun} or \code{cond}. Also the result, when arguments 
+  \code{low} or \code{upp} is given, is the \emph{unconditional value} of the
+  expectation; no conditioning with respect to \code{low <= object <= upp}
+  is done.}
+
 \value{
   The (conditional) expectation is computed.
 }
@@ -205,6 +287,36 @@ E(object, fun, cond, ...)
     conditional distributions given \code{cond}. The computation is
     based on \code{support} and \code{sum}. }
 
+  \item{object = "UnivarLebDecDistribution", fun = "missing", cond = "missing":}{
+        expectation by separate evaluation of expectation of discrete and
+        abs. continuous part and subsequent weighting.
+        }
+  \item{object = "UnivarLebDecDistribution", fun = "function", cond = "missing":}{
+        expectation by separate evaluation of expectation of discrete and
+        abs. continuous part and subsequent weighting.
+        }
+  \item{object = "UnivarLebDecDistribution", fun = "missing", cond = "ANY":}{
+        expectation by separate evaluation of expectation of discrete and
+        abs. continuous part and subsequent weighting.
+        }
+  \item{object = "UnivarLebDecDistribution", fun = "function", cond = "ANY":}{
+        expectation by separate evaluation of expectation of discrete and
+        abs. continuous part and subsequent weighting.
+        }
+  \item{object = "AcDcLcDistribution", fun = "ANY", cond = "ANY":}{
+        expectation by first coercing to class \code{"UnivarLebDecDistribution"}
+        and using the corresponding method.
+        }
+  \item{object = "CompoundDistribution", fun = "missing", cond = "missing":}{
+        if we are in i.i.d. situation (i.e., slot \code{SummandsDistr} is of
+        class \code{UnivariateDistribution}) the formula 
+        \eqn{E[N]E[S]} for \eqn{N} the frequency distribution and
+        \eqn{S} the summand distribution; else we coerce to 
+        \code{"UnivarLebDecDistribution"}.
+        }
+
+  \item{object = "Arcsine", fun = "missing", cond = "missing":}{ 
+    exact evaluation using explicit expressions.}
   \item{object = "Beta", fun = "missing", cond = "missing":}{ 
     for noncentrality 0 exact evaluation using explicit expressions.}
   \item{object = "Binom", fun = "missing", cond = "missing":}{ 
@@ -223,6 +335,8 @@ E(object, fun, cond, ...)
     exact evaluation using explicit expressions.}
   \item{object = "Gammad", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
+  \item{object = "Gumbel", fun = "missing", cond = "missing":}{ 
+    exact evaluation using explicit expressions.}
   \item{object = "Geom", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
   \item{object = "Hyper", fun = "missing", cond = "missing":}{ 
@@ -235,6 +349,8 @@ E(object, fun, cond, ...)
     exact evaluation using explicit expressions.}
   \item{object = "Norm", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
+  \item{object = "Pareto", fun = "missing", cond = "missing":}{ 
+    exact evaluation using explicit expressions.}
   \item{object = "Pois", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
   \item{object = "Unif", fun = "missing", cond = "missing":}{ 
@@ -242,8 +358,6 @@ E(object, fun, cond, ...)
   \item{object = "Td", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
   \item{object = "Weibull", fun = "missing", cond = "missing":}{ 
-    exact evaluation using explicit expressions.}
-  \item{object = "Arcsine", fun = "missing", cond = "missing":}{ 
     exact evaluation using explicit expressions.}
 }}
 %\references{ ~put references to the literature/web site here ~ }
@@ -282,6 +396,22 @@ E(Norm(mean=1), fun = function(x){x^2})
 E(D1, function(x, cond){cond*x^2}, cond = 2, withCond = TRUE, useApply = FALSE)
 E(Norm(mean=2), function(x){2*x^2})
 
+E(as(Norm(mean=2),"AbscontDistribution"))
+### somewhat less accurate:
+E(as(Norm(mean=2),"AbscontDistribution"), 
+     lowerTruncQuantil=1e-4,upperTruncQuantil=1e-4, IQR.fac= 4)
+### even less accurate:
+E(as(Norm(mean=2),"AbscontDistribution"), 
+     lowerTruncQuantil=1e-2,upperTruncQuantil=1e-2, IQR.fac= 4)
+### no good idea, but just as an example:
+E(as(Norm(mean=2),"AbscontDistribution"), 
+     lowerTruncQuantil=1e-2,upperTruncQuantil=1e-2, IQR.fac= .1)
+
+### truncation of integration range; see also m1df...
+E(Norm(mean=2), low=2,upp=4)
+
+E(Cauchy())
+E(Cauchy(),upp=3,low=-2)
 # some Lebesgue decomposed distribution 
 mymix <- UnivarLebDecDistribution(acPart = Norm(), discretePart = Binom(4,.4),
          acWeight = 0.4)

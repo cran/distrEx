@@ -43,6 +43,25 @@ setMethod("var", signature(x = "AffLinDiscreteDistribution"),
 setMethod("var", signature(x = "AffLinLatticeDistribution"),
            getMethod("var", signature(x = "AffLinDistribution")))    
 
+setMethod("var", signature(x = "CompoundDistribution"),
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
+         return(var(as(x,"UnivarLebDecDistribution"),...))
+    else{
+       S <- x@SummandsDistr
+       N <- x@NumbOfSummandsDistr
+       if(is(S,"UnivariateDistribution")){
+         return(E(N)*var(S, ...)+ (var(S, ...)+E(S, ...)^2)*var(N))
+       }
+       else  return(var(simplifyD(x),...))
+    }})
+
+
 ################################################################################
 #sd
 ################################################################################
@@ -90,6 +109,11 @@ setMethod("median", signature(x = "UnivariateDistribution"),
         return(q(x)(1/2))
     })
 
+setMethod("median", signature(x = "UnivariateCondDistribution"),
+    function(x, cond){
+        return(q(x)(1/2, cond = cond))
+    })
+
 setMethod("median", signature(x = "AffLinDistribution"),
     function(x) x@a * median(x@X0) + x@b) 
 
@@ -122,6 +146,11 @@ setMethod("IQR", signature(x = "UnivariateDistribution"),
         return(q(x)(3/4)-q(x)(1/4))
     })
 
+setMethod("IQR", signature(x = "UnivariateCondDistribution"),
+    function(x, cond){
+        return(q(x)(3/4, cond = cond)-q(x)(1/4, cond = cond))
+    })
+
 setMethod("IQR", signature(x = "DiscreteDistribution"),
     function(x) q.r(x)(3/4)-q(x)(1/4)
 )
@@ -149,8 +178,12 @@ make01 <- function(x){
 #################################################################
 setMethod("var", signature(x = "Norm"),
     function(x,...){ 
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
        return(var(as(x,"AbscontDistribution"),...))
     else
         return(sd(x)^2)
@@ -158,8 +191,12 @@ setMethod("var", signature(x = "Norm"),
 
 setMethod("var", signature(x = "Binom"),
     function(x,...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
         return(var(as(x,"DiscreteDistribution"),...))
     else
         return(size(x)*prob(x)*(1-prob(x)))
@@ -167,8 +204,12 @@ setMethod("var", signature(x = "Binom"),
 
 setMethod("var", signature(x = "Cauchy"),
     function(x,...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
       return(var(as(x,"AbscontDistribution"),...))
     else
         return(NA)
@@ -176,8 +217,12 @@ setMethod("var", signature(x = "Cauchy"),
 
 setMethod("var", signature(x = "Chisq"),
     function(x,...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond)))
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp))
        return(var(as(x,"AbscontDistribution"),...))
     else
         return(2*(df(x)+2*ncp(x)))
@@ -189,17 +234,25 @@ setMethod("var", signature(x = "Dirac"),
 
 setMethod("var", signature(x = "DExp"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"AbscontDistribution"),...))
     else
-        return(2/rate(x)^2)
+        return(2)
     })
 
 setMethod("var", signature(x = "Exp"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"AbscontDistribution"),...))
     else
         return(1/rate(x)^2)
@@ -208,8 +261,12 @@ setMethod("var", signature(x = "Exp"),
 
 setMethod("var", signature(x = "Fd"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"AbscontDistribution"),...))
     else
         {df1 <- df1(x)
@@ -222,8 +279,12 @@ setMethod("var", signature(x = "Fd"),
 
 setMethod("var", signature(x = "Gammad"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"AbscontDistribution"),...))
     else
         return(shape(x)*scale(x)^2)
@@ -231,16 +292,24 @@ setMethod("var", signature(x = "Gammad"),
 
 setMethod("var", signature(x = "Geom"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"DiscreteDistribution"),...))
     else {p <- prob(x); e <- 1/p-1; return(e+e^2)}
     })
 
 setMethod("var", signature(x = "Hyper"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"DiscreteDistribution"),...))
     else
        {k <- k(x);
@@ -251,8 +320,12 @@ setMethod("var", signature(x = "Hyper"),
 
 setMethod("var", signature(x = "Logis"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"AbscontDistribution"),...))
     else
         return(pi^2/3*scale(x)^2)
@@ -260,8 +333,12 @@ setMethod("var", signature(x = "Logis"),
 
 setMethod("var", signature(x = "Lnorm"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"AbscontDistribution"),...))
     else
         return(exp(2*meanlog(x)+sdlog(x)^2)*(exp(sdlog(x)^2)-1))
@@ -269,16 +346,24 @@ setMethod("var", signature(x = "Lnorm"),
 
 setMethod("var", signature(x = "Nbinom"),
     function(x, ...){    
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
          return(var(as(x,"DiscreteDistribution"),...))
     else {p <- prob(x); e <- 1/p-1; return(size(x)*(e+e^2))}
     })
 
 setMethod("var", signature(x = "Pois"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"DiscreteDistribution"),...))
     else
         return(lambda(x))
@@ -286,22 +371,30 @@ setMethod("var", signature(x = "Pois"),
 
 setMethod("var", signature(x = "Td"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"AbscontDistribution"),...))
     else
         {n <- df(x); d<- ncp(x)
-        ## correction thanks to G.Jay Kerns
-        return(ifelse( n>2, n/(n-2)+
-               d^2*(n/(n-2)-n/2*exp(lgamma((n-1)/2)-lgamma(n/2))^2), NA))
+        ## correction thanks to G.Jay Kerns ### corrected again P.R.
+        return(ifelse( n>2, n/(n-2)*(1+d^2)
+                           -d^2*n/2*exp(2*(lgamma((n-1)/2)-lgamma(n/2))), NA))
        }
     })
 
 
 setMethod("var", signature(x = "Unif"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"AbscontDistribution"),...))
     else
         return((Max(x)-Min(x))^2/12)
@@ -309,8 +402,12 @@ setMethod("var", signature(x = "Unif"),
 
 setMethod("var", signature(x = "Weibull"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
-    if((hasArg(fun))||(hasArg(cond))) 
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
         return(var(as(x,"AbscontDistribution"),...))
     else
         return(scale(x)^2*(gamma(1+2/shape(x))- (gamma(1 + 1/shape(x)))^2))
@@ -318,7 +415,11 @@ setMethod("var", signature(x = "Weibull"),
     
 setMethod("var", signature(x = "Beta"),
     function(x, ...){
-    fun <- NULL; cond <- NULL
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
     if((hasArg(fun))||(hasArg(cond))||(!isTRUE(all.equal(ncp(x),0)))) 
         return(var(as(x,"AbscontDistribution"),...))
     else
@@ -327,7 +428,44 @@ setMethod("var", signature(x = "Beta"),
     })
 
 setMethod("var", signature(x = "Arcsine"),
-    function(x, ...)return(1/2))
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(var(as(x,"AbscontDistribution"),...))
+    else
+        return(1/2)})
+
+setMethod("var", signature(x = "Pareto"),
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(var(as(x,"AbscontDistribution"),...))
+    else{ a <- shape(x); b <- Min(x)
+        if(a<=2) return(NA)
+        return(b^2 * a/(a-1)^2/(a-2))
+    }})
+
+setMethod("var", signature(x = "Gumbel"),
+    function(x, ...){
+    dots <- match.call(call = sys.call(sys.parent(1)), 
+                       expand.dots = FALSE)$"..."
+    fun <- NULL; cond <- NULL; low <- NULL; upp <- NULL
+    if(hasArg(low)) low <- dots$low
+    if(hasArg(upp)) upp <- dots$upp
+    if(hasArg(fun)||hasArg(cond)||!is.null(low)||!is.null(upp)) 
+        return(var(as(x,"AbscontDistribution"),...))
+    else{  b <- scale(x)
+            return(b^2 * pi^2/6)
+    }})
+## http://mathworld.wolfram.com/GumbelDistribution.html
 
 #################################################################
 # some exact medians
@@ -363,6 +501,15 @@ setMethod("median", signature(x = "Unif"),
 setMethod("median", signature(x = "Arcsine"),
     function(x) 0)
 
+setMethod("median", signature(x = "Pareto"),
+    function(x) {a <- shape(x); b<- Min(x)
+              return(b*2^(1/a))
+    })
+setMethod("median", signature(x = "Gumbel"),
+    function(x) {a <- loc(x); b <- scale(x)
+              return(a - b *log(log(2)))
+    })
+
 #################################################################
 # some exact IQRs
 #################################################################
@@ -371,13 +518,13 @@ setMethod("IQR", signature(x = "Norm"),
     function(x) 2*qnorm(3/4)*sd(x))
 
 setMethod("IQR", signature(x = "Cauchy"),
-    function(x) 2*scale(x))
+    function(x) 2*scale(x)*qcauchy(3/4))
 
 setMethod("IQR", signature(x = "Dirac"),
     function(x) 0)
 
 setMethod("IQR", signature(x = "DExp"),
-    function(x) 2*log(2)/rate(DExp))
+    function(x) 2*log(2))
 
 setMethod("IQR", signature(x = "Exp"),
     function(x) (log(4)-log(4/3))/rate(x))
@@ -395,6 +542,14 @@ setMethod("IQR", signature(x = "Unif"),
 setMethod("IQR", signature(x = "Arcsine"),
     function(x) sqrt(2))
 
+setMethod("IQR", signature(x = "Pareto"),
+    function(x) {a <- shape(x); b<- Min(x)
+              return(b*(4^(1/a)-(4/3)^(1/a)))
+    })
+setMethod("IQR", signature(x = "Gumbel"),
+    function(x) { b <- scale(x)
+              return(b * (log(log(4))-log(log(4/3))))
+    })
 #################################################################
 # some exact mads
 #################################################################
@@ -403,13 +558,13 @@ setMethod("mad", signature(x = "Norm"),
     function(x) qnorm(3/4)*sd(x))
 
 setMethod("mad", signature(x = "Cauchy"),
-    function(x)  scale(x))
+    function(x)  scale(x)*qcauchy(3/4))
 
 setMethod("mad", signature(x = "Dirac"),
     function(x) 0)
 
 setMethod("mad", signature(x = "DExp"),
-    function(x) log(2)/rate(DExp))
+    function(x) log(2))
 
 setMethod("mad", signature(x = "Exp"),
     function(x) log((1+sqrt(5))/2)/rate(x))
@@ -428,3 +583,4 @@ setMethod("mad", signature(x = "Unif"),
 
 setMethod("mad", signature(x = "Arcsine"),
     function(x) sqrt(1/2))
+
