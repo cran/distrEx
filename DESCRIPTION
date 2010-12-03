@@ -1,6 +1,6 @@
 Package: distrEx
-Version: 2.2
-Date: 2009-10-16
+Version: 2.3
+Date: 2010-12-03
 Title: Extensions of package distr
 Description: Extensions of package distr and some additional
         functionality
@@ -12,9 +12,12 @@ LazyLoad: yes
 License: LGPL-3
 Encoding: latin1
 URL: http://distr.r-forge.r-project.org/
-LastChangedDate: {$LastChangedDate: 2009-10-16 06:00:10 +0200 (Fr, 16.
-        Okt 2009) $}
-LastChangedRevision: {$LastChangedRevision: 613 $}
-Packaged: 2009-11-03 09:34:33 UTC; btms02
+LastChangedDate: {$LastChangedDate: 2010-12-03 12:12:36 +0100 (Fri, 03
+        Dec 2010) $}
+LastChangedRevision: {$LastChangedRevision: 700 $}
+SVNRevision: 699
 Repository: CRAN
-Date/Publication: 2009-11-03 13:49:28
+Repository/R-Forge/Project: distr
+Repository/R-Forge/Revision: 715
+Date/Publication: 2011-01-20 14:50:47
+Packaged: 2011-01-20 14:49:35 UTC; hornik
