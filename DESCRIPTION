@@ -1,6 +1,6 @@
 Package: distrEx
-Version: 2.3
-Date: 2010-12-03
+Version: 2.3.1
+Date: 2011-09-30
 Title: Extensions of package distr
 Description: Extensions of package distr and some additional
         functionality
@@ -9,15 +9,14 @@ Suggests: tcltk
 Author: Matthias Kohl, Peter Ruckdeschel
 Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 LazyLoad: yes
+ByteCompile: yes
 License: LGPL-3
 Encoding: latin1
 URL: http://distr.r-forge.r-project.org/
-LastChangedDate: {$LastChangedDate: 2010-12-03 12:12:36 +0100 (Fri, 03
-        Dec 2010) $}
-LastChangedRevision: {$LastChangedRevision: 700 $}
-SVNRevision: 699
+LastChangedDate: {$LastChangedDate: 2011-09-30 11:02:55 +0200 (Fr, 30
+        Sep 2011) $}
+LastChangedRevision: {$LastChangedRevision: 742 $}
+SVNRevision: 741
+Packaged: 2011-10-19 13:22:08 UTC; ruckdesc
 Repository: CRAN
-Repository/R-Forge/Project: distr
-Repository/R-Forge/Revision: 715
-Date/Publication: 2011-01-20 14:50:47
-Packaged: 2011-01-20 14:49:35 UTC; hornik
+Date/Publication: 2011-10-19 13:43:34
