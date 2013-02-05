@@ -1,6 +1,6 @@
 
-R version 2.12.1 Patched (2011-01-04 r53913)
-Copyright (C) 2011 The R Foundation for Statistical Computing
+R Under development (unstable) (2013-01-09 r61595) -- "Unsuffered Consequences"
+Copyright (C) 2013 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -24,7 +24,7 @@ Type 'q()' to quit R.
 > library('distrEx')
 Loading required package: distr
 Loading required package: startupmsg
-:startupmsg>  Utilities for start-up messages (version 0.7.1)
+:startupmsg>  Utilities for start-up messages (version 0.8)
 :startupmsg> 
 :startupmsg>  For more information see ?"startupmsg",
 :startupmsg>  NEWS("startupmsg")
@@ -32,7 +32,14 @@ Loading required package: startupmsg
 Loading required package: sfsmisc
 Loading required package: SweaveListingUtils
 :SweaveListingUtils>  Utilities for Sweave together with
-:SweaveListingUtils>  TeX listings package (version 0.5)
+:SweaveListingUtils>  TeX listings package (version 0.6)
+:SweaveListingUtils> 
+:SweaveListingUtils>  NOTE: Support for this package
+:SweaveListingUtils>  will stop soon.
+:SweaveListingUtils> 
+:SweaveListingUtils>  Package 'knitr' is providing the
+:SweaveListingUtils>  same functionality in a better
+:SweaveListingUtils>  way.
 :SweaveListingUtils> 
 :SweaveListingUtils>  Some functions from package 'base'
 :SweaveListingUtils>  are intentionally masked ---see
@@ -51,14 +58,14 @@ Loading required package: SweaveListingUtils
 :SweaveListingUtils>  vignette("ExampleSweaveListingUtils").
 
 
-Attaching package: 'SweaveListingUtils'
+Attaching package: ‘SweaveListingUtils’
 
-The following object(s) are masked from 'package:base':
+The following object is masked from ‘package:base’:
 
     library, require
 
 :distr>  Object oriented implementation of distributions (version
-:distr>  2.3)
+:distr>  2.4)
 :distr> 
 :distr>  Attention: Arithmetics on distribution objects are
 :distr>  understood as operations on corresponding random variables
@@ -77,25 +84,20 @@ The following object(s) are masked from 'package:base':
 :distr>  vignette("distr").
 
 
-Attaching package: 'distr'
+Attaching package: ‘distr’
 
-The following object(s) are masked from 'package:stats':
+The following object is masked from ‘package:stats’:
 
     df, qqplot, sd
 
-Loading required package: evd
-Loading required package: actuar
-
-Attaching package: 'actuar'
-
-The following object(s) are masked from 'package:grDevices':
-
-    cm
-
-:distrEx>  Extensions of package distr (version 2.3)
+:distrEx>  Extensions of package distr (version 2.4)
 :distrEx> 
 :distrEx>  Note: Packages "e1071", "moments", "fBasics" should be
-:distrEx>  attached /before/ package "distrEx". See distrExMASK().
+:distrEx>  attached /before/ package "distrEx". See
+:distrEx>  distrExMASK().Note: Extreme value distribution
+:distrEx>  functionality has been moved to
+:distrEx> 
+:distrEx>        package "RobExtremes". See distrExMOVED().
 :distrEx> 
 :distrEx>  For more information see ?"distrEx", NEWS("distrEx"), as
 :distrEx>  well as
@@ -105,20 +107,31 @@ The following object(s) are masked from 'package:grDevices':
 :distrEx>  vignette("distr").
 
 
-Attaching package: 'distrEx'
+Attaching package: ‘distrEx’
 
-The following object(s) are masked from 'package:stats':
+The following object is masked from ‘package:stats’:
 
     IQR, mad, median, var
 
 > 
 > assign(".oldSearch", search(), pos = 'CheckExEnv')
+> assign(".ExTimings", "distrEx-Ex.timings", pos = 'CheckExEnv')
+> cat("name\tuser\tsystem\telapsed\n", file=get(".ExTimings", pos = 'CheckExEnv'))
+> assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   format(x[1L:3L])
++ },
++ pos = 'CheckExEnv')
+> 
 > cleanEx()
 > nameEx("AbscontCondDistribution-class")
 > ### * AbscontCondDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: AbscontCondDistribution-class
 > ### Title: Absolutely continuous conditional distribution
 > ### Aliases: AbscontCondDistribution-class
@@ -134,12 +147,16 @@ Slot "name":
 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("AbscontCondDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("AsymTotalVarDist")
 > ### * AsymTotalVarDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: AsymTotalVarDist
 > ### Title: Generic function for the computation of asymmetric total
 > ###   variation distance of two distributions
@@ -160,9 +177,10 @@ Slot "name":
 > 
 > ### ** Examples
 > 
-> AsymTotalVarDist(Norm(), Gumbel(), rho=0.3)
+> AsymTotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)), rho=0.3)
 asym. total variation distance 
-                     0.2316870 
+                     0.5311789 
 > AsymTotalVarDist(Norm(), Td(10), rho=0.3)
 asym. total variation distance 
                     0.03412603 
@@ -191,16 +209,20 @@ asym. total variation distance
 > 
 > AsymTotalVarDist(rbinom(50, size = 20, prob = 0.5), Binom(size = 20, prob = 0.5), rho=0.3)
 asym. total variation distance 
-                     0.2925150 
+                      0.292515 
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("AsymTotalVarDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Condition-class")
 > ### * Condition-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Condition-class
 > ### Title: Conditions
 > ### Aliases: Condition-class name,Condition-method name<-,Condition-method
@@ -214,12 +236,16 @@ Slot "name":
 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("Condition-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ContaminationSize")
 > ### * ContaminationSize
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ContaminationSize
 > ### Title: Generic Function for the Computation of the Convex Contamination
 > ###   (Pseudo-)Distance of Two Distributions
@@ -263,12 +289,16 @@ $size.of.contamination
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("ContaminationSize", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ConvexContamination")
 > ### * ConvexContamination
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ConvexContamination
 > ### Title: Generic Function for Generating Convex Contaminations
 > ### Aliases: ConvexContamination ConvexContamination-methods
@@ -290,12 +320,16 @@ $size.of.contamination
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("ConvexContamination", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CvMDist")
 > ### * CvMDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CvMDist
 > ### Title: Generic function for the computation of the Cramer - von Mises
 > ###   distance of two distributions
@@ -306,12 +340,14 @@ $size.of.contamination
 > 
 > ### ** Examples
 > 
-> CvMDist(Norm(), Gumbel())
+> CvMDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)))
 CvM distance 
-   0.1227136 
-> CvMDist(Norm(), Gumbel(), mu = Norm())
+   0.1812994 
+> CvMDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)),mu=Norm())
 CvM distance 
-   0.1227136 
+   0.1812994 
 > CvMDist(Norm(), Td(10))
 CvM distance 
   0.00933072 
@@ -336,12 +372,16 @@ CvM distance
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("CvMDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DiscreteCondDistribution-class")
 > ### * DiscreteCondDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DiscreteCondDistribution-class
 > ### Title: Discrete conditional distribution
 > ### Aliases: DiscreteCondDistribution-class
@@ -357,12 +397,16 @@ Slot "name":
 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("DiscreteCondDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DiscreteMVDistribution-class")
 > ### * DiscreteMVDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DiscreteMVDistribution-class
 > ### Title: Discrete Multivariate Distributions
 > ### Aliases: DiscreteMVDistribution-class
@@ -422,12 +466,16 @@ Slot "name":
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("DiscreteMVDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DiscreteMVDistribution")
 > ### * DiscreteMVDistribution
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DiscreteMVDistribution
 > ### Title: Generating function for DiscreteMVDistribution-class
 > ### Aliases: DiscreteMVDistribution
@@ -465,12 +513,16 @@ Slot "name":
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("DiscreteMVDistribution", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("E")
 > ### * E
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: E
 > ### Title: Generic Function for the Computation of (Conditional)
 > ###   Expectations
@@ -602,12 +654,16 @@ Slot "name":
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("E", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("EuclCondition-class")
 > ### * EuclCondition-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: EuclCondition-class
 > ### Title: Conditioning by an Euclidean space.
 > ### Aliases: EuclCondition-class Range Range,EuclCondition-method
@@ -622,12 +678,16 @@ Range:	Euclidean Space with dimension 1
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("EuclCondition-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("EuclCondition")
 > ### * EuclCondition
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: EuclCondition
 > ### Title: Generating function for EuclCondition-class
 > ### Aliases: EuclCondition
@@ -650,106 +710,16 @@ function (dimension)
 > 
 > 
 > 
-> cleanEx()
-> nameEx("GEV-class")
-> ### * GEV-class
 > 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GEV-class
-> ### Title: Generalized EV distribution
-> ### Aliases: GEV-class initialize,GEV-method loc,GEV-method
-> ###   loc<-,GEV-method location,GEV-method location<-,GEV-method
-> ###   scale,GEV-method scale<-,GEV-method shape,GEV-method
-> ###   shape<-,GEV-method +,GEV,numeric-method *,GEV,numeric-method
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- new("GEV", loc = 0, scale = 1,shape = 0))
-Distribution Object of Class: GEV
- loc: 0
- scale: 1
- shape: 0
-> plot(P1)
-> shape(P1)
-[1] 0
-> loc(P1)
-[1] 0
-> scale(P1) <- 4
-> loc(P1) <- 2
-> plot(P1)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("GEV")
-> ### * GEV
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GEV
-> ### Title: Generating function for GEV-class
-> ### Aliases: GEV
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- GEV(loc = 0, scale = 1, shape = 0))
-Distribution Object of Class: GEV
- loc: 0
- scale: 1
- shape: 0
-> plot(P1)
-> 
-> E(GEV()) 
-[1] 0.5772157
-> E(P1, function(x){x^2})
-[1] 1.977920
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("GEVParameter-class")
-> ### * GEVParameter-class
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GEVParameter-class
-> ### Title: Parameter of generalized Pareto distributions
-> ### Aliases: GEVParameter-class loc,GEVParameter-method
-> ###   loc<-,GEVParameter-method location,GEVParameter-method
-> ###   location<-,GEVParameter-method scale,GEVParameter-method
-> ###   scale<-,GEVParameter-method shape,GEVParameter-method
-> ###   shape<-,GEVParameter-method
-> ### Keywords: distribution models
-> 
-> ### ** Examples
-> 
-> new("GEVParameter")
-An object of class "GEVParameter"
-Slot "loc":
-[1] 0
-
-Slot "scale":
-[1] 1
-
-Slot "shape":
-[1] 0.5
-
-Slot "name":
-[1] "Parameter of a generalized extreme value distribution"
-
-> 
-> 
-> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("EuclCondition", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("GLIntegrate")
 > ### * GLIntegrate
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: GLIntegrate
 > ### Title: Gauss-Legendre Quadrature
 > ### Aliases: GLIntegrate
@@ -758,212 +728,22 @@ Slot "name":
 > ### ** Examples
 > 
 > integrate(dnorm, -1.96, 1.96)
-0.9500042 with absolute error < 1.0e-11
+0.9500042 with absolute error < 1e-11
 > GLIntegrate(dnorm, -1.96, 1.96)
 [1] 0.9500042
 > 
 > 
 > 
-> cleanEx()
-> nameEx("GPareto-class")
-> ### * GPareto-class
 > 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GPareto-class
-> ### Title: Generalized Pareto distribution
-> ### Aliases: GPareto-class initialize,GPareto-method loc,GPareto-method
-> ###   loc<-,GPareto-method location,GPareto-method
-> ###   location<-,GPareto-method scale,GPareto-method scale<-,GPareto-method
-> ###   shape,GPareto-method shape<-,GPareto-method +,GPareto,numeric-method
-> ###   *,GPareto,numeric-method
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- new("GPareto", loc = 0, scale = 1,shape = 0))
-Distribution Object of Class: GPareto
- loc: 0
- scale: 1
- shape: 0
-> plot(P1)
-> shape(P1)
-[1] 0
-> loc(P1)
-[1] 0
-> scale(P1) <- 4
-> loc(P1) <- 2
-> plot(P1)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("GPareto")
-> ### * GPareto
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GPareto
-> ### Title: Generating function for GPareto-class
-> ### Aliases: GPareto
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- GPareto(loc = 0, scale = 1, shape = 0))
-Distribution Object of Class: Exp
- rate: 1
-> plot(P1)
-> 
-> E(GPareto()) 
-[1] 1
-> E(P1, function(x){x^2})
-[1] 1.999971
-> 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("GParetoParameter-class")
-> ### * GParetoParameter-class
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GParetoParameter-class
-> ### Title: Parameter of generalized Pareto distributions
-> ### Aliases: GParetoParameter-class loc,GParetoParameter-method
-> ###   loc<-,GParetoParameter-method location,GParetoParameter-method
-> ###   location<-,GParetoParameter-method scale,GParetoParameter-method
-> ###   scale<-,GParetoParameter-method shape,GParetoParameter-method
-> ###   shape<-,GParetoParameter-method
-> ### Keywords: distribution models
-> 
-> ### ** Examples
-> 
-> new("GParetoParameter")
-An object of class "GParetoParameter"
-Slot "loc":
-[1] 0
-
-Slot "scale":
-[1] 1
-
-Slot "shape":
-[1] 0
-
-Slot "name":
-[1] "Parameter of a generalized Pareto distribution"
-
-> 
-> 
-> 
-> cleanEx()
-> nameEx("Gumbel-class")
-> ### * Gumbel-class
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: Gumbel-class
-> ### Title: Gumbel distribution
-> ### Aliases: Gumbel-class initialize,Gumbel-method loc,Gumbel-method
-> ###   loc<-,Gumbel-method scale,Gumbel-method scale<-,Gumbel-method
-> ###   +,Gumbel,numeric-method *,Gumbel,numeric-method
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (G1 <- new("Gumbel", loc = 1, scale = 2))
-Distribution Object of Class: Gumbel
- loc: 1
- scale: 2
-> plot(G1)
-> loc(G1)
-[1] 1
-> scale(G1)
-[1] 2
-> loc(G1) <- -1
-> scale(G1) <- 2
-> plot(G1)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("Gumbel")
-> ### * Gumbel
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: Gumbel
-> ### Title: Generating function for Gumbel-class
-> ### Aliases: Gumbel
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (G1 <- Gumbel(loc = 1, scale = 2))
-Distribution Object of Class: Gumbel
- loc: 1
- scale: 2
-> plot(G1)
-> loc(G1)
-[1] 1
-> scale(G1)
-[1] 2
-> loc(G1) <- -1
-> scale(G1) <- 2
-> plot(G1)
-> 
-> E(Gumbel()) # Euler's constant
-[1] -0.5772157
-> E(G1, function(x){x^2})
-[1] 6.60347
-> 
-> ## The function is currently defined as
-> function(loc = 0, scale = 1){ 
-+   new("Gumbel", loc = loc, scale = scale)
-+ }
-function (loc = 0, scale = 1) 
-{
-    new("Gumbel", loc = loc, scale = scale)
-}
-> 
-> 
-> 
-> cleanEx()
-> nameEx("GumbelParameter-class")
-> ### * GumbelParameter-class
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: GumbelParameter-class
-> ### Title: Paramter of Gumbel distributions
-> ### Aliases: GumbelParameter-class loc loc,GumbelParameter-method loc<-
-> ###   loc<-,GumbelParameter-method scale,GumbelParameter-method
-> ###   scale<-,GumbelParameter-method
-> ### Keywords: distribution models
-> 
-> ### ** Examples
-> 
-> new("GumbelParameter")
-An object of class "GumbelParameter"
-Slot "loc":
-[1] 0
-
-Slot "scale":
-[1] 1
-
-Slot "name":
-[1] "parameter of a Gumbel distribution"
-
-> 
-> 
-> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("GLIntegrate", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("HellingerDist")
 > ### * HellingerDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: HellingerDist
 > ### Title: Generic function for the computation of the Hellinger distance
 > ###   of two distributions
@@ -984,9 +764,10 @@ Slot "name":
 > 
 > ### ** Examples
 > 
-> HellingerDist(Norm(), Gumbel())
+> HellingerDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)))
 Hellinger distance 
-         0.2204792 
+         0.4604849 
 > HellingerDist(Norm(), Td(10))
 Hellinger distance 
          0.0598968 
@@ -1019,12 +800,16 @@ Hellinger distance
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("HellingerDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("KolmogorovDist")
 > ### * KolmogorovDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: KolmogorovDist
 > ### Title: Generic function for the computation of the Kolmogorov distance
 > ###   of two distributions
@@ -1043,9 +828,10 @@ Hellinger distance
 > 
 > ### ** Examples
 > 
-> KolmogorovDist(Norm(), Gumbel())
+> KolmogorovDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)))
 Kolmogorov distance 
-          0.1501485 
+          0.3092684 
 > KolmogorovDist(Norm(), Td(10))
 Kolmogorov distance 
          0.01554215 
@@ -1057,22 +843,26 @@ Kolmogorov distance
          0.08863266 
 > KolmogorovDist(Norm(), rnorm(100))
 Kolmogorov distance 
-          0.0659914 
+          0.1149486 
 > KolmogorovDist((rbinom(50, size = 20, prob = 0.5)-10)/sqrt(5), Norm())
 Kolmogorov distance 
-               0.14 
+          0.1673604 
 > KolmogorovDist(rbinom(50, size = 20, prob = 0.5), Binom(size = 20, prob = 0.5))
 Kolmogorov distance 
-          0.1282777 
+         0.03172234 
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("KolmogorovDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("LMCondDistribution")
 > ### * LMCondDistribution
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: LMCondDistribution
 > ### Title: Generating function for the conditional distribution of a linear
 > ###   regression model.
@@ -1104,7 +894,7 @@ function (n, cond, ...)
     }
     0 + cond %*% 1 + 1 * r(n, ...)
 }
-<environment: 0x36087e8>
+<environment: 0x5df7d78>
 > d(D1)
 function (x, cond, log = FALSE, ...) 
 {
@@ -1126,7 +916,7 @@ function (x, cond, log = FALSE, ...)
     else d0 <- d0/1
     return(d0)
 }
-<environment: 0x36087e8>
+<environment: 0x5df7d78>
 > p(D1)
 function (q, cond, lower.tail = TRUE, log.p = FALSE, ...) 
 {
@@ -1153,7 +943,7 @@ function (q, cond, lower.tail = TRUE, log.p = FALSE, ...)
             p0 <- log(p0)
     return(p0)
 }
-<environment: 0x36087e8>
+<environment: 0x5df7d78>
 > q(D1)
 function (p, cond, lower.tail = TRUE, log.p = FALSE, ...) 
 {
@@ -1177,7 +967,7 @@ function (p, cond, lower.tail = TRUE, log.p = FALSE, ...)
         argList <- c(argList, dots)
     1 * do.call(q, argList) + 0 + as.vector(cond %*% 1)
 }
-<environment: 0x36087e8>
+<environment: 0x5df7d78>
 > param(D1)
 name:	parameter of a linear regression model
 theta:	1
@@ -1201,12 +991,16 @@ Range:	Euclidean Space with dimension 1
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("LMCondDistribution", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("LMParameter-class")
 > ### * LMParameter-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: LMParameter-class
 > ### Title: Parameter of a linear regression model
 > ### Aliases: LMParameter-class show,LMParameter-method
@@ -1222,12 +1016,16 @@ scale:	1
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("LMParameter-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("LMParameter")
 > ### * LMParameter
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: LMParameter
 > ### Title: Generating function for LMParameter-class
 > ### Aliases: LMParameter
@@ -1254,12 +1052,16 @@ function (theta = 0, intercept = 0, scale = 1)
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("LMParameter", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MultivariateDistribution-class")
 > ### * MultivariateDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MultivariateDistribution-class
 > ### Title: Multivariate Distributions
 > ### Aliases: MultivariateDistribution-class
@@ -1274,12 +1076,16 @@ function (theta = 0, intercept = 0, scale = 1)
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("MultivariateDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("OAsymTotalVarDist")
 > ### * OAsymTotalVarDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: OAsymTotalVarDist
 > ### Title: Generic function for the computation of (minimal) asymmetric
 > ###   total variation distance of two distributions
@@ -1300,9 +1106,10 @@ function (theta = 0, intercept = 0, scale = 1)
 > 
 > ### ** Examples
 > 
-> OAsymTotalVarDist(Norm(), Gumbel())
+> OAsymTotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)))
 minimal asym. total variation distance 
-                             0.2642218 
+                             0.6278316 
 > OAsymTotalVarDist(Norm(), Td(10))
 minimal asym. total variation distance 
                             0.04191508 
@@ -1327,7 +1134,7 @@ minimal asym. total variation distance
                              0.9201529 
 > OAsymTotalVarDist(y, Norm(), asis.smooth.discretize = "smooth")
 minimal asym. total variation distance 
-                              0.753965 
+                             0.7539651 
 > 
 > OAsymTotalVarDist(rbinom(50, size = 20, prob = 0.5), Binom(size = 20, prob = 0.5))
 minimal asym. total variation distance 
@@ -1335,102 +1142,16 @@ minimal asym. total variation distance
 > 
 > 
 > 
-> cleanEx()
-> nameEx("Pareto-class")
-> ### * Pareto-class
 > 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: Pareto-class
-> ### Title: Pareto distribution
-> ### Aliases: Pareto-class initialize,Pareto-method shape,Pareto-method
-> ###   shape<-,Pareto-method Min,Pareto-method Min<-,Pareto-method
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- new("Pareto", shape = 1, Min = 2))
-Distribution Object of Class: Pareto
- shape: 1
- Min: 2
-> plot(P1)
-> shape(P1)
-[1] 1
-> Min(P1)
-[1] 2
-> shape(P1) <- 4
-> Min(P1) <- 2
-> plot(P1)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("Pareto")
-> ### * Pareto
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: Pareto
-> ### Title: Generating function for Pareto-class
-> ### Aliases: Pareto
-> ### Keywords: distribution
-> 
-> ### ** Examples
-> 
-> (P1 <- Pareto(shape = 1, Min = 1))
-Distribution Object of Class: Pareto
- shape: 1
- Min: 1
-> plot(P1)
-> 
-> E(Pareto()) 
-[1] Inf
-> E(P1, function(x){x^2})
-[1] 41
-> 
-> ## The function is currently defined as
-> function(shape = 1, Min = 1) 
-+                new("Pareto", shape = shape, Min = Min)
-function (shape = 1, Min = 1) 
-new("Pareto", shape = shape, Min = Min)
-> 
-> 
-> 
-> cleanEx()
-> nameEx("ParetoParameter-class")
-> ### * ParetoParameter-class
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: ParetoParameter-class
-> ### Title: Paramter of Pareto distributions
-> ### Aliases: ParetoParameter-class shape shape,ParetoParameter-method
-> ###   shape<- shape<-,ParetoParameter-method Min,ParetoParameter-method
-> ###   Min<-,ParetoParameter-method
-> ### Keywords: distribution models
-> 
-> ### ** Examples
-> 
-> new("ParetoParameter")
-An object of class "ParetoParameter"
-Slot "shape":
-[1] 1
-
-Slot "Min":
-[1] 1
-
-Slot "name":
-[1] "Parameter of a Pareto distribution"
-
-> 
-> 
-> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("OAsymTotalVarDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("PrognCondDistribution-class")
 > ### * PrognCondDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: PrognCondDistribution-class
 > ### Title: Posterior distribution in convolution
 > ### Aliases: PrognCondDistribution-class
@@ -1444,12 +1165,16 @@ Name:	condition in case of a linear regression model
 Range:	Real Space with dimension 1
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("PrognCondDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("PrognCondDistribution")
 > ### * PrognCondDistribution
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: PrognCondDistribution
 > ### Title: Generating function for PrognCondDistribution-class
 > ### Aliases: PrognCondDistribution
@@ -1465,12 +1190,16 @@ Range:	Real Space with dimension 1
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("PrognCondDistribution", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("PrognCondition-class")
 > ### * PrognCondition-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: PrognCondition-class
 > ### Title: Conditions of class 'PrognCondition'
 > ### Aliases: PrognCondition-class show,PrognCondition-method PrognCondition
@@ -1482,12 +1211,16 @@ Name:	condition in case of a linear regression model
 Range:	Euclidean Space with dimension 1
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("PrognCondition-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("TotalVarDist")
 > ### * TotalVarDist
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: TotalVarDist
 > ### Title: Generic function for the computation of the total variation
 > ###   distance of two distributions
@@ -1508,9 +1241,10 @@ Range:	Euclidean Space with dimension 1
 > 
 > ### ** Examples
 > 
-> TotalVarDist(Norm(), Gumbel())
+> TotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
++                  mixCoeff=c(0.2,0.8)))
 total variation distance 
-               0.1501365 
+               0.4677806 
 > TotalVarDist(Norm(), Td(10))
 total variation distance 
               0.03107182 
@@ -1543,12 +1277,16 @@ total variation distance
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("TotalVarDist", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("UnivariateCondDistribution-class")
 > ### * UnivariateCondDistribution-class
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: UnivariateCondDistribution-class
 > ### Title: Univariate conditional distribution
 > ### Aliases: UnivariateCondDistribution-class cond
@@ -1567,12 +1305,16 @@ Slot "name":
 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("UnivariateCondDistribution-class", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Var")
 > ### * Var
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: var
 > ### Title: Generic Functions for the Computation of Functionals
 > ### Aliases: var var-methods var,ANY-method
@@ -1582,9 +1324,8 @@ Slot "name":
 > ###   var,AffLinLatticeDistribution-method var,CompoundDistribution-method
 > ###   var,Arcsine-method var,Beta-method var,Binom-method var,Cauchy-method
 > ###   var,Chisq-method var,Dirac-method var,DExp-method var,Exp-method
-> ###   var,Fd-method var,Gammad-method var,Geom-method var,Gumbel-method
-> ###   var,GPareto-method var,GEV-method var,Hyper-method var,Logis-method
-> ###   var,Lnorm-method var,Nbinom-method var,Norm-method var,Pareto-method
+> ###   var,Fd-method var,Gammad-method var,Geom-method var,Hyper-method
+> ###   var,Logis-method var,Lnorm-method var,Nbinom-method var,Norm-method
 > ###   var,Pois-method var,Unif-method var,Weibull-method var,Td-method sd
 > ###   sd-methods sd,UnivariateDistribution-method sd,Norm-method median
 > ###   median,ANY-method median-methods median,UnivariateDistribution-method
@@ -1594,18 +1335,15 @@ Slot "name":
 > ###   median,AffLinDiscreteDistribution-method
 > ###   median,AffLinLatticeDistribution-method median,Arcsine-method
 > ###   median,Cauchy-method median,Dirac-method median,DExp-method
-> ###   median,Exp-method median,Geom-method median,Gumbel-method
-> ###   median,GEV-method median,GPareto-method median,Logis-method
-> ###   median,Lnorm-method median,Norm-method median,Pareto-method
-> ###   median,Unif-method IQR IQR-methods IQR,ANY-method
-> ###   IQR,UnivariateDistribution-method
+> ###   median,Exp-method median,Geom-method median,Logis-method
+> ###   median,Lnorm-method median,Norm-method median,Unif-method IQR
+> ###   IQR-methods IQR,ANY-method IQR,UnivariateDistribution-method
 > ###   IQR,UnivariateCondDistribution-method IQR,AffLinDistribution-method
 > ###   IQR,AffLinAbscontDistribution-method
 > ###   IQR,AffLinDiscreteDistribution-method
 > ###   IQR,AffLinLatticeDistribution-method IQR,DiscreteDistribution-method
 > ###   IQR,Arcsine-method IQR,Cauchy-method IQR,Dirac-method IQR,DExp-method
-> ###   IQR,Exp-method IQR,Geom-method IQR,Gumbel-method IQR,GPareto-method
-> ###   IQR,GEV-method IQR,Logis-method IQR,Norm-method IQR,Pareto-method
+> ###   IQR,Exp-method IQR,Geom-method IQR,Logis-method IQR,Norm-method
 > ###   IQR,Unif-method mad mad,ANY-method mad-methods
 > ###   mad,UnivariateDistribution-method mad,AffLinDistribution-method
 > ###   mad,AffLinAbscontDistribution-method
@@ -1622,12 +1360,11 @@ Slot "name":
 > ###   skewness,Beta-method skewness,Binom-method skewness,Cauchy-method
 > ###   skewness,Chisq-method skewness,Dirac-method skewness,DExp-method
 > ###   skewness,Exp-method skewness,Fd-method skewness,Gammad-method
-> ###   skewness,Geom-method skewness,Gumbel-method skewness,GEV-method
-> ###   skewness,GPareto-method skewness,Hyper-method skewness,Logis-method
+> ###   skewness,Geom-method skewness,Hyper-method skewness,Logis-method
 > ###   skewness,Lnorm-method skewness,Nbinom-method skewness,Norm-method
-> ###   skewness,Pareto-method skewness,Pois-method skewness,Unif-method
-> ###   skewness,Weibull-method skewness,Td-method kurtosis kurtosis-methods
-> ###   kurtosis,ANY-method kurtosis,UnivariateDistribution-method
+> ###   skewness,Pois-method skewness,Unif-method skewness,Weibull-method
+> ###   skewness,Td-method kurtosis kurtosis-methods kurtosis,ANY-method
+> ###   kurtosis,UnivariateDistribution-method
 > ###   kurtosis,AffLinDistribution-method
 > ###   kurtosis,AffLinAbscontDistribution-method
 > ###   kurtosis,AffLinDiscreteDistribution-method
@@ -1635,11 +1372,10 @@ Slot "name":
 > ###   kurtosis,Beta-method kurtosis,Binom-method kurtosis,Cauchy-method
 > ###   kurtosis,Chisq-method kurtosis,Dirac-method kurtosis,DExp-method
 > ###   kurtosis,Exp-method kurtosis,Fd-method kurtosis,Gammad-method
-> ###   kurtosis,Geom-method kurtosis,Gumbel-method kurtosis,GEV-method
-> ###   kurtosis,GPareto-method kurtosis,Hyper-method kurtosis,Logis-method
+> ###   kurtosis,Geom-method kurtosis,Hyper-method kurtosis,Logis-method
 > ###   kurtosis,Lnorm-method kurtosis,Nbinom-method kurtosis,Norm-method
-> ###   kurtosis,Pareto-method kurtosis,Pois-method kurtosis,Unif-method
-> ###   kurtosis,Weibull-method kurtosis,Td-method
+> ###   kurtosis,Pois-method kurtosis,Unif-method kurtosis,Weibull-method
+> ###   kurtosis,Td-method
 > ### Keywords: methods distribution
 > 
 > ### ** Examples
@@ -1675,32 +1411,16 @@ Slot "name":
 > 
 > 
 > 
-> cleanEx()
-> nameEx("distrExConstants")
-> ### * distrExConstants
 > 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: distrExConstants
-> ### Title: Built-in Constants in package distrEx
-> ### Aliases: EULERMASCHERONICONSTANT APERYCONSTANT
-> ### Keywords: sysdata
-> 
-> ### ** Examples
-> 
-> EULERMASCHERONICONSTANT
-[1] 0.5772157
-> APERYCONSTANT
-[1] 1.202057
-> 
-> 
-> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("Var", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("distrExIntegrate")
 > ### * distrExIntegrate
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: distrExIntegrate
 > ### Title: Integration of One-Dimensional Functions
 > ### Aliases: distrExIntegrate
@@ -1721,12 +1441,16 @@ Error in integrate(fkt, lower = -1, upper = 5) :
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("distrExIntegrate", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("distrExMASK")
 > ### * distrExMASK
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: distrExMASK
 > ### Title: Masking of/by other functions in package "distrEx"
 > ### Aliases: distrExMASK MASKING
@@ -1780,12 +1504,52 @@ To re-mask, you may use
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("distrExMASK", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("distrExMOVED")
+> ### * distrExMOVED
+> 
+> flush(stderr()); flush(stdout())
+> 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: distrExMOVED
+> ### Title: Moved functionality from package "distrEx"
+> ### Aliases: distrExMOVED MOVEDING
+> ### Keywords: programming distribution documentation
+> 
+> ### ** Examples
+> 
+> distrExMOVED()
+#############################################################################
+#  On moving of functionality from package "distrEx" to package "RobExtremes"
+#############################################################################
+
+Attention:
+
+From package version 2.4 on, we have moved the functionality for extreme 
+value theory distributions to the new package "RobExtremes".
+
+This concerns:
+the GEV, GPareto, Gumbel, Pareto classes and functional kMAD.
+
+To keep using this functionality install and load/attach package
+"RobExtremes".
+
+> 
+> 
+> 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("distrExMOVED", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("distrExOptions")
 > ### * distrExOptions
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: distrExOptions
 > ### Title: Function to change the global variables of the package 'distrEx'
 > ### Aliases: distrExOptions distrExoptions getdistrExOption MCIterations
@@ -1849,35 +1613,16 @@ $ElowerTruncQuantile
 > 
 > 
 > 
-> cleanEx()
-> nameEx("kMAD")
-> ### * kMAD
 > 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: kMAD
-> ### Title: Asymmetric Median of Absolute Deviations for Skewed
-> ###   Distributions
-> ### Aliases: kMAD kMAD-methods kMAD,UnivariateDistribution,numeric-method
-> ###   kMAD,numeric,numeric-method
-> ### Keywords: scale estimator
-> 
-> ### ** Examples
-> 
-> x <- rnorm(100)
-> kMAD(x,k=10)
-[1] 0.1351646
-> kMAD(Norm(),k=10)
-[1] 0.1543645
-> 
-> 
-> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("distrExOptions", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("liesInSupport")
 > ### * liesInSupport
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: liesInSupport
 > ### Title: Generic Function for Testing the Support of a Distribution
 > ### Aliases: liesInSupport,DiscreteMVDistribution,numeric-method
@@ -1895,12 +1640,16 @@ $ElowerTruncQuantile
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("liesInSupport", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("m1df")
 > ### * m1df
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: m1df
 > ### Title: Generic Function for the Computation of Clipped First Moments
 > ### Aliases: m1df m1df-methods m1df,UnivariateDistribution-method
@@ -1934,12 +1683,16 @@ $ElowerTruncQuantile
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("m1df", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("m2df")
 > ### * m2df
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: m2df
 > ### Title: Generic function for the computation of clipped second moments
 > ### Aliases: m2df m2df-methods m2df,UnivariateDistribution-method
@@ -1973,12 +1726,16 @@ $ElowerTruncQuantile
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("m2df", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("make01")
 > ### * make01
 > 
 > flush(stderr()); flush(stdout())
 > 
+> assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: make01
 > ### Title: Centering and Standardization of Univariate Distributions
 > ### Aliases: make01
@@ -2000,10 +1757,13 @@ see 'distrARITH()'; for switching off this warning see '?distroptions'
 > 
 > 
 > 
+> 
+> assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> cat("make01", get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  14.23 0.12 14.519 0 0 
+Time elapsed:  11.196 0.132 11.389 0 0 
 > grDevices::dev.off()
 null device 
           1 

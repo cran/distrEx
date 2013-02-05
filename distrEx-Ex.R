@@ -46,7 +46,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-AsymTotalVarDist(Norm(), Gumbel(), rho=0.3)
+AsymTotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)), rho=0.3)
 AsymTotalVarDist(Norm(), Td(10), rho=0.3)
 AsymTotalVarDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100), rho=0.3) # mutually singular
 AsymTotalVarDist(Pois(10), Binom(size = 20), rho=0.3) 
@@ -146,8 +147,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-CvMDist(Norm(), Gumbel())
-CvMDist(Norm(), Gumbel(), mu = Norm())
+CvMDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)))
+CvMDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)),mu=Norm())
 CvMDist(Norm(), Td(10))
 CvMDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100))
 CvMDist(Pois(10), Binom(size = 20)) 
@@ -382,75 +385,6 @@ function(dimension){
 
 
 cleanEx()
-nameEx("GEV-class")
-### * GEV-class
-
-flush(stderr()); flush(stdout())
-
-### Name: GEV-class
-### Title: Generalized EV distribution
-### Aliases: GEV-class initialize,GEV-method loc,GEV-method
-###   loc<-,GEV-method location,GEV-method location<-,GEV-method
-###   scale,GEV-method scale<-,GEV-method shape,GEV-method
-###   shape<-,GEV-method +,GEV,numeric-method *,GEV,numeric-method
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- new("GEV", loc = 0, scale = 1,shape = 0))
-plot(P1)
-shape(P1)
-loc(P1)
-scale(P1) <- 4
-loc(P1) <- 2
-plot(P1)
-
-
-
-cleanEx()
-nameEx("GEV")
-### * GEV
-
-flush(stderr()); flush(stdout())
-
-### Name: GEV
-### Title: Generating function for GEV-class
-### Aliases: GEV
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- GEV(loc = 0, scale = 1, shape = 0))
-plot(P1)
-
-E(GEV()) 
-E(P1, function(x){x^2})
-
-
-
-
-cleanEx()
-nameEx("GEVParameter-class")
-### * GEVParameter-class
-
-flush(stderr()); flush(stdout())
-
-### Name: GEVParameter-class
-### Title: Parameter of generalized Pareto distributions
-### Aliases: GEVParameter-class loc,GEVParameter-method
-###   loc<-,GEVParameter-method location,GEVParameter-method
-###   location<-,GEVParameter-method scale,GEVParameter-method
-###   scale<-,GEVParameter-method shape,GEVParameter-method
-###   shape<-,GEVParameter-method
-### Keywords: distribution models
-
-### ** Examples
-
-new("GEVParameter")
-
-
-
-cleanEx()
 nameEx("GLIntegrate")
 ### * GLIntegrate
 
@@ -465,151 +399,6 @@ flush(stderr()); flush(stdout())
 
 integrate(dnorm, -1.96, 1.96)
 GLIntegrate(dnorm, -1.96, 1.96)
-
-
-
-cleanEx()
-nameEx("GPareto-class")
-### * GPareto-class
-
-flush(stderr()); flush(stdout())
-
-### Name: GPareto-class
-### Title: Generalized Pareto distribution
-### Aliases: GPareto-class initialize,GPareto-method loc,GPareto-method
-###   loc<-,GPareto-method location,GPareto-method
-###   location<-,GPareto-method scale,GPareto-method scale<-,GPareto-method
-###   shape,GPareto-method shape<-,GPareto-method +,GPareto,numeric-method
-###   *,GPareto,numeric-method
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- new("GPareto", loc = 0, scale = 1,shape = 0))
-plot(P1)
-shape(P1)
-loc(P1)
-scale(P1) <- 4
-loc(P1) <- 2
-plot(P1)
-
-
-
-cleanEx()
-nameEx("GPareto")
-### * GPareto
-
-flush(stderr()); flush(stdout())
-
-### Name: GPareto
-### Title: Generating function for GPareto-class
-### Aliases: GPareto
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- GPareto(loc = 0, scale = 1, shape = 0))
-plot(P1)
-
-E(GPareto()) 
-E(P1, function(x){x^2})
-
-
-
-
-cleanEx()
-nameEx("GParetoParameter-class")
-### * GParetoParameter-class
-
-flush(stderr()); flush(stdout())
-
-### Name: GParetoParameter-class
-### Title: Parameter of generalized Pareto distributions
-### Aliases: GParetoParameter-class loc,GParetoParameter-method
-###   loc<-,GParetoParameter-method location,GParetoParameter-method
-###   location<-,GParetoParameter-method scale,GParetoParameter-method
-###   scale<-,GParetoParameter-method shape,GParetoParameter-method
-###   shape<-,GParetoParameter-method
-### Keywords: distribution models
-
-### ** Examples
-
-new("GParetoParameter")
-
-
-
-cleanEx()
-nameEx("Gumbel-class")
-### * Gumbel-class
-
-flush(stderr()); flush(stdout())
-
-### Name: Gumbel-class
-### Title: Gumbel distribution
-### Aliases: Gumbel-class initialize,Gumbel-method loc,Gumbel-method
-###   loc<-,Gumbel-method scale,Gumbel-method scale<-,Gumbel-method
-###   +,Gumbel,numeric-method *,Gumbel,numeric-method
-### Keywords: distribution
-
-### ** Examples
-
-(G1 <- new("Gumbel", loc = 1, scale = 2))
-plot(G1)
-loc(G1)
-scale(G1)
-loc(G1) <- -1
-scale(G1) <- 2
-plot(G1)
-
-
-
-cleanEx()
-nameEx("Gumbel")
-### * Gumbel
-
-flush(stderr()); flush(stdout())
-
-### Name: Gumbel
-### Title: Generating function for Gumbel-class
-### Aliases: Gumbel
-### Keywords: distribution
-
-### ** Examples
-
-(G1 <- Gumbel(loc = 1, scale = 2))
-plot(G1)
-loc(G1)
-scale(G1)
-loc(G1) <- -1
-scale(G1) <- 2
-plot(G1)
-
-E(Gumbel()) # Euler's constant
-E(G1, function(x){x^2})
-
-## The function is currently defined as
-function(loc = 0, scale = 1){ 
-  new("Gumbel", loc = loc, scale = scale)
-}
-
-
-
-cleanEx()
-nameEx("GumbelParameter-class")
-### * GumbelParameter-class
-
-flush(stderr()); flush(stdout())
-
-### Name: GumbelParameter-class
-### Title: Paramter of Gumbel distributions
-### Aliases: GumbelParameter-class loc loc,GumbelParameter-method loc<-
-###   loc<-,GumbelParameter-method scale,GumbelParameter-method
-###   scale<-,GumbelParameter-method
-### Keywords: distribution models
-
-### ** Examples
-
-new("GumbelParameter")
 
 
 
@@ -639,7 +428,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-HellingerDist(Norm(), Gumbel())
+HellingerDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)))
 HellingerDist(Norm(), Td(10))
 HellingerDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100)) # mutually singular
 HellingerDist(Pois(10), Binom(size = 20)) 
@@ -680,7 +470,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-KolmogorovDist(Norm(), Gumbel())
+KolmogorovDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)))
 KolmogorovDist(Norm(), Td(10))
 KolmogorovDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100))
 KolmogorovDist(Pois(10), Binom(size = 20)) 
@@ -808,7 +599,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-OAsymTotalVarDist(Norm(), Gumbel())
+OAsymTotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)))
 OAsymTotalVarDist(Norm(), Td(10))
 OAsymTotalVarDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100)) # mutually singular
 OAsymTotalVarDist(Pois(10), Binom(size = 20)) 
@@ -822,74 +614,6 @@ OAsymTotalVarDist(y, Norm())
 OAsymTotalVarDist(y, Norm(), asis.smooth.discretize = "smooth")
 
 OAsymTotalVarDist(rbinom(50, size = 20, prob = 0.5), Binom(size = 20, prob = 0.5))
-
-
-
-cleanEx()
-nameEx("Pareto-class")
-### * Pareto-class
-
-flush(stderr()); flush(stdout())
-
-### Name: Pareto-class
-### Title: Pareto distribution
-### Aliases: Pareto-class initialize,Pareto-method shape,Pareto-method
-###   shape<-,Pareto-method Min,Pareto-method Min<-,Pareto-method
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- new("Pareto", shape = 1, Min = 2))
-plot(P1)
-shape(P1)
-Min(P1)
-shape(P1) <- 4
-Min(P1) <- 2
-plot(P1)
-
-
-
-cleanEx()
-nameEx("Pareto")
-### * Pareto
-
-flush(stderr()); flush(stdout())
-
-### Name: Pareto
-### Title: Generating function for Pareto-class
-### Aliases: Pareto
-### Keywords: distribution
-
-### ** Examples
-
-(P1 <- Pareto(shape = 1, Min = 1))
-plot(P1)
-
-E(Pareto()) 
-E(P1, function(x){x^2})
-
-## The function is currently defined as
-function(shape = 1, Min = 1) 
-               new("Pareto", shape = shape, Min = Min)
-
-
-
-cleanEx()
-nameEx("ParetoParameter-class")
-### * ParetoParameter-class
-
-flush(stderr()); flush(stdout())
-
-### Name: ParetoParameter-class
-### Title: Paramter of Pareto distributions
-### Aliases: ParetoParameter-class shape shape,ParetoParameter-method
-###   shape<- shape<-,ParetoParameter-method Min,ParetoParameter-method
-###   Min<-,ParetoParameter-method
-### Keywords: distribution models
-
-### ** Examples
-
-new("ParetoParameter")
 
 
 
@@ -966,7 +690,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-TotalVarDist(Norm(), Gumbel())
+TotalVarDist(Norm(), UnivarMixingDistribution(Norm(1,2),Norm(0.5,3),
+                 mixCoeff=c(0.2,0.8)))
 TotalVarDist(Norm(), Td(10))
 TotalVarDist(Norm(mean = 50, sd = sqrt(25)), Binom(size = 100)) # mutually singular
 TotalVarDist(Pois(10), Binom(size = 20)) 
@@ -1016,9 +741,8 @@ flush(stderr()); flush(stdout())
 ###   var,AffLinLatticeDistribution-method var,CompoundDistribution-method
 ###   var,Arcsine-method var,Beta-method var,Binom-method var,Cauchy-method
 ###   var,Chisq-method var,Dirac-method var,DExp-method var,Exp-method
-###   var,Fd-method var,Gammad-method var,Geom-method var,Gumbel-method
-###   var,GPareto-method var,GEV-method var,Hyper-method var,Logis-method
-###   var,Lnorm-method var,Nbinom-method var,Norm-method var,Pareto-method
+###   var,Fd-method var,Gammad-method var,Geom-method var,Hyper-method
+###   var,Logis-method var,Lnorm-method var,Nbinom-method var,Norm-method
 ###   var,Pois-method var,Unif-method var,Weibull-method var,Td-method sd
 ###   sd-methods sd,UnivariateDistribution-method sd,Norm-method median
 ###   median,ANY-method median-methods median,UnivariateDistribution-method
@@ -1028,18 +752,15 @@ flush(stderr()); flush(stdout())
 ###   median,AffLinDiscreteDistribution-method
 ###   median,AffLinLatticeDistribution-method median,Arcsine-method
 ###   median,Cauchy-method median,Dirac-method median,DExp-method
-###   median,Exp-method median,Geom-method median,Gumbel-method
-###   median,GEV-method median,GPareto-method median,Logis-method
-###   median,Lnorm-method median,Norm-method median,Pareto-method
-###   median,Unif-method IQR IQR-methods IQR,ANY-method
-###   IQR,UnivariateDistribution-method
+###   median,Exp-method median,Geom-method median,Logis-method
+###   median,Lnorm-method median,Norm-method median,Unif-method IQR
+###   IQR-methods IQR,ANY-method IQR,UnivariateDistribution-method
 ###   IQR,UnivariateCondDistribution-method IQR,AffLinDistribution-method
 ###   IQR,AffLinAbscontDistribution-method
 ###   IQR,AffLinDiscreteDistribution-method
 ###   IQR,AffLinLatticeDistribution-method IQR,DiscreteDistribution-method
 ###   IQR,Arcsine-method IQR,Cauchy-method IQR,Dirac-method IQR,DExp-method
-###   IQR,Exp-method IQR,Geom-method IQR,Gumbel-method IQR,GPareto-method
-###   IQR,GEV-method IQR,Logis-method IQR,Norm-method IQR,Pareto-method
+###   IQR,Exp-method IQR,Geom-method IQR,Logis-method IQR,Norm-method
 ###   IQR,Unif-method mad mad,ANY-method mad-methods
 ###   mad,UnivariateDistribution-method mad,AffLinDistribution-method
 ###   mad,AffLinAbscontDistribution-method
@@ -1056,12 +777,11 @@ flush(stderr()); flush(stdout())
 ###   skewness,Beta-method skewness,Binom-method skewness,Cauchy-method
 ###   skewness,Chisq-method skewness,Dirac-method skewness,DExp-method
 ###   skewness,Exp-method skewness,Fd-method skewness,Gammad-method
-###   skewness,Geom-method skewness,Gumbel-method skewness,GEV-method
-###   skewness,GPareto-method skewness,Hyper-method skewness,Logis-method
+###   skewness,Geom-method skewness,Hyper-method skewness,Logis-method
 ###   skewness,Lnorm-method skewness,Nbinom-method skewness,Norm-method
-###   skewness,Pareto-method skewness,Pois-method skewness,Unif-method
-###   skewness,Weibull-method skewness,Td-method kurtosis kurtosis-methods
-###   kurtosis,ANY-method kurtosis,UnivariateDistribution-method
+###   skewness,Pois-method skewness,Unif-method skewness,Weibull-method
+###   skewness,Td-method kurtosis kurtosis-methods kurtosis,ANY-method
+###   kurtosis,UnivariateDistribution-method
 ###   kurtosis,AffLinDistribution-method
 ###   kurtosis,AffLinAbscontDistribution-method
 ###   kurtosis,AffLinDiscreteDistribution-method
@@ -1069,11 +789,10 @@ flush(stderr()); flush(stdout())
 ###   kurtosis,Beta-method kurtosis,Binom-method kurtosis,Cauchy-method
 ###   kurtosis,Chisq-method kurtosis,Dirac-method kurtosis,DExp-method
 ###   kurtosis,Exp-method kurtosis,Fd-method kurtosis,Gammad-method
-###   kurtosis,Geom-method kurtosis,Gumbel-method kurtosis,GEV-method
-###   kurtosis,GPareto-method kurtosis,Hyper-method kurtosis,Logis-method
+###   kurtosis,Geom-method kurtosis,Hyper-method kurtosis,Logis-method
 ###   kurtosis,Lnorm-method kurtosis,Nbinom-method kurtosis,Norm-method
-###   kurtosis,Pareto-method kurtosis,Pois-method kurtosis,Unif-method
-###   kurtosis,Weibull-method kurtosis,Td-method
+###   kurtosis,Pois-method kurtosis,Unif-method kurtosis,Weibull-method
+###   kurtosis,Td-method
 ### Keywords: methods distribution
 
 ### ** Examples
@@ -1096,24 +815,6 @@ sd(as(Pois(),"UnivariateDistribution")) ## uses simulations
 sd(Norm(mean=2), fun = function(x){2*x^2}) ## uses simulations
 #
 mad(sin(exp(Norm()+2*Pois()))) ## weird
-
-
-
-cleanEx()
-nameEx("distrExConstants")
-### * distrExConstants
-
-flush(stderr()); flush(stdout())
-
-### Name: distrExConstants
-### Title: Built-in Constants in package distrEx
-### Aliases: EULERMASCHERONICONSTANT APERYCONSTANT
-### Keywords: sysdata
-
-### ** Examples
-
-EULERMASCHERONICONSTANT
-APERYCONSTANT
 
 
 
@@ -1156,6 +857,23 @@ distrExMASK()
 
 
 cleanEx()
+nameEx("distrExMOVED")
+### * distrExMOVED
+
+flush(stderr()); flush(stdout())
+
+### Name: distrExMOVED
+### Title: Moved functionality from package "distrEx"
+### Aliases: distrExMOVED MOVEDING
+### Keywords: programming distribution documentation
+
+### ** Examples
+
+distrExMOVED()
+
+
+
+cleanEx()
 nameEx("distrExOptions")
 ### * distrExOptions
 
@@ -1178,27 +896,6 @@ distrExOptions("ElowerTruncQuantile" = 1e-6)
 # or
 distrExOptions(ElowerTruncQuantile = 1e-6)
 getdistrExOption("ElowerTruncQuantile")
-
-
-
-cleanEx()
-nameEx("kMAD")
-### * kMAD
-
-flush(stderr()); flush(stdout())
-
-### Name: kMAD
-### Title: Asymmetric Median of Absolute Deviations for Skewed
-###   Distributions
-### Aliases: kMAD kMAD-methods kMAD,UnivariateDistribution,numeric-method
-###   kMAD,numeric,numeric-method
-### Keywords: scale estimator
-
-### ** Examples
-
-x <- rnorm(100)
-kMAD(x,k=10)
-kMAD(Norm(),k=10)
 
 
 

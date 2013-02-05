@@ -1,11 +1,11 @@
-\name{distrExMASK}
-\alias{distrExMASK}
-\alias{MASKING}
-\title{Masking of/by other functions in package "distrEx"}
-\description{Provides information on the (intended) masking of
-and (non-intended) masking by other other functions in package \pkg{distrEx}}
+\name{distrExMOVED}
+\alias{distrExMOVED}
+\alias{MOVEDING}
+\title{Moved functionality from package "distrEx"}
+\description{Provides information on moved  of
+functionality from package \pkg{distrEx}. }
 \usage{
-distrExMASK(library = NULL)
+distrExMOVED(library = NULL)
 }
 \arguments{
   \item{library}{a character vector with path names of R libraries, or \code{NULL}.
@@ -18,11 +18,10 @@ distrExMASK(library = NULL)
 
 \author{Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de}}
 \examples{
-distrExMASK()
+distrExMOVED()
 }
 \keyword{programming}
 \keyword{distribution}
 \keyword{documentation}
-\concept{masking}
+\concept{moved functionality}
 \concept{info file}
-
