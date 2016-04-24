@@ -1,21 +1,26 @@
 Package: distrEx
-Version: 2.5
-Date: 2013-09-12
-Title: Extensions of package distr
-Description: Extensions of package distr and some additional functionality
-Depends: R (>= 2.10), methods, distr (>= 2.2)
+Version: 2.6
+Date: 2016-04-23
+Title: Extensions of Package 'distr'
+Description: Extends package 'distr' by functionals, distances, and conditional distributions.
+Depends: R(>= 2.10.0), methods, distr(>= 2.2)
+Imports: startupmsg, utils, stats
 Suggests: tcltk
-Author: Matthias Kohl, Peter Ruckdeschel, Nataliya Horbenko
-Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
+Authors@R: c(person("Matthias", "Kohl", role=c("cre", "cph"),
+        email="Matthias.Kohl@stamats.de"), person("Peter", "Ruckdeschel", role=c("aut",
+        "cph")))
 ByteCompile: yes
 License: LGPL-3
 Encoding: latin1
 URL: http://distr.r-forge.r-project.org/
-LastChangedDate: {$LastChangedDate: 2013-09-12 23:37:25 +0200 (Do, 12.
-        Sep 2013) $}
-LastChangedRevision: {$LastChangedRevision: 914 $}
-SVNRevision: 913
-Packaged: 2013-09-13 13:52:25 UTC; kohlm
+LastChangedDate: {$LastChangedDate: 2015-11-07 22:47:41 +0100 (Sa, 07
+        Nov 2015) $}
+LastChangedRevision: {$LastChangedRevision: 1073 $}
+SVNRevision: 1089
 NeedsCompilation: yes
+Packaged: 2016-04-23 11:53:12 UTC; ruckdesc
+Author: Matthias Kohl [cre, cph],
+  Peter Ruckdeschel [aut, cph]
+Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 Repository: CRAN
-Date/Publication: 2013-09-13 16:22:36
+Date/Publication: 2016-04-24 23:19:04

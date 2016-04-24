@@ -17,8 +17,8 @@
 }
 \usage{
 CvMDist(e1, e2, ...)
-\S4method{CvMDist}{UnivariateDistribution,UnivariateDistribution}(e1, e2, mu = e2, useApply = FALSE, ...)
-\S4method{CvMDist}{numeric,UnivariateDistribution}(e1, e2, mu = e2, ...)
+\S4method{CvMDist}{UnivariateDistribution,UnivariateDistribution}(e1, e2, mu = e1, useApply = FALSE, ...)
+\S4method{CvMDist}{numeric,UnivariateDistribution}(e1, e2, mu = e1, ...)
 }
 \arguments{
   \item{e1}{ object of class \code{"Distribution"} or class \code{"numeric"} }
@@ -43,7 +43,7 @@ CvMDist(e1, e2, ...)
     Rieder, H. (1994) \emph{Robust Asymptotic Statistics}. New York: Springer.
 }
 \author{Matthias Kohl \email{Matthias.Kohl@stamats.de},\cr
-        Peter Ruckdeschel \email{Peter.Ruckdeschel@itwm.fraunhofer.de}}
+        Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de}}
 %\note{ ~~further notes~~ }
 \seealso{\code{\link{ContaminationSize}}, \code{\link{TotalVarDist}}, 
     \code{\link{HellingerDist}}, \code{\link{KolmogorovDist}},
