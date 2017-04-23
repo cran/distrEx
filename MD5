@@ -1,5 +1,5 @@
-3ab24ad716ad44832bff91aac69a7307 *DESCRIPTION
-9db6747f4f7e030e8612038f347a6579 *NAMESPACE
+2956a789b9eb845bbfca996049ff0eaa *DESCRIPTION
+8065a6ed6a2e182c608b986525ea5d47 *NAMESPACE
 37e1eeac420450d0f9fdd43b9eec4db2 *R/AllClass.R
 e2851b95ff7035737f75834ff5cb7551 *R/AllGeneric.R
 2f947720a1d4f7412b2844dff2e39c3e *R/AllMaskedMethods.R
@@ -9,7 +9,7 @@ e2851b95ff7035737f75834ff5cb7551 *R/AllGeneric.R
 a5ff311cb992af15385dadd1037a6039 *R/ClippedMoments.R
 c265d872bc3b5c2cf0ad74a59e1d378d *R/ContaminationSize.R
 81c8cc006774ec70ef7dfa907117f54e *R/ConvexContamination.R
-6dcebf347a808439a71cad5a7f453c60 *R/CvMDist.R
+2d0e473b3610a6ba819b5cb147fc835a *R/CvMDist.R
 968b7c456ca23246972565964e364103 *R/DiscreteMVDistribution.R
 9974b439b4b6b9c7274d591916d89907 *R/EmpiricalMVDistribution.R
 3435b644d4d7e11d655e7982976e8041 *R/Expectation.R
@@ -24,7 +24,7 @@ b53a53b04cee17c9a6a7d94bcb97b007 *R/PrognCondDistribution.R
 dc50429db83535aba4dd6afba28575a5 *R/Skewness.R
 6c74684035ab157bc7a1dd6a205732e1 *R/TotalVarDist.R
 ade8e50de917f92de10bed2cf9134a13 *R/UnivariateCondDistribution.R
-6e8ce5029efc7646f2fecb015af40266 *R/distrExIntegrate.R
+c92a9ddfd41f58db325f89e9d573a4ae *R/distrExIntegrate.R
 6a6bc1f26df96495105f0a4774c79b33 *R/distrExOptions.R
 a6e0dbdfdeb730ff89f6e26c851c3b59 *R/liesInSupport.R
 6aaf300e079907f8c1893fc70fb9f8f9 *R/moved2RobExtremes.R
@@ -35,10 +35,10 @@ f4433bd4de6327d90e952386486675bd *R/sysdata.rda
 13e8836b600884e50e00d6f5d167aa8a *inst/CITATION
 52460a350a38d696b15baca05f12b7ed *inst/MASKING
 c81c3ed086b2ed2da911f5cbcdc7b607 *inst/MOVED
-5a1bebbb469574a80afc0c46bae611f7 *inst/NEWS
+c4afea36bc51e3132216bafde367027c *inst/NEWS
 b32a69d23115fd2867f42aff6a9e989c *inst/TOBEDONE
 f9176b62cc96c725807f47f604862433 *inst/tests/Tests.r
-335262f6ecbfd1eddb6648152d0f676e *man/0distrEx-package.Rd
+5a282103373b40cd4d3e3603b602d97f *man/0distrEx-package.Rd
 ca0082890efffb07d8a33168556d2a08 *man/AbscontCondDistribution-class.Rd
 dbd3dde861fad149c7ccf33855751ba8 *man/AsymTotalVarDist.Rd
 30184cc13194f0ead78cfa4ae434283c *man/Condition-class.Rd
@@ -77,6 +77,6 @@ f8e173cf9192522a5b5815e1175cfd16 *man/distrExOptions.Rd
 de82cae1a31ba16f68b9aba5125f1a42 *man/m2df.Rd
 d74db38c9796040a16299f39aadb611e *man/make01.Rd
 83e0801adfc698bbef1e9052779864dc *man/plot-methods.Rd
-ee7ad848e873e7244184bae58acd1dd1 *src/GLaw.c
+d624068e45e663038cc7c4cc40931d66 *src/GLaw.c
 d6086df727505c042a6c26268818c9da *tests/Examples/distrEx-Ex_i386.Rout.save
 db93cf59c28049c9d9d05946fd8d1a62 *tests/Examples/distrEx-Ex_x64.Rout.save
