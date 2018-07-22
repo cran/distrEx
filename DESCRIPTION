@@ -1,25 +1,26 @@
 Package: distrEx
-Version: 2.6.1
-Date: 2017-04-23
+Version: 2.7.0
+Date: 2018-07-08
 Title: Extensions of Package 'distr'
 Description: Extends package 'distr' by functionals, distances, and conditional distributions.
 Depends: R(>= 2.10.0), methods, distr(>= 2.2)
 Imports: startupmsg, utils, stats
 Suggests: tcltk
-Authors@R: c(person("Matthias", "Kohl", role=c("cre", "cph", "aut"), email="Matthias.Kohl@stamats.de"), person("Peter", "Ruckdeschel",
-           role=c("aut", "cph")))
+Authors@R: c(person("Matthias", "Kohl", role=c("cre", "cph"),
+        email="Matthias.Kohl@stamats.de"), person("Peter", "Ruckdeschel", role=c("aut",
+        "cph")))
 ByteCompile: yes
 License: LGPL-3
 Encoding: latin1
 URL: http://distr.r-forge.r-project.org/
-LastChangedDate: {$LastChangedDate: 2017-04-22 12:23:44 +0200 (Sa, 22.
-        Apr 2017) $}
-LastChangedRevision: {$LastChangedRevision: 1133 $}
-SVNRevision: 1132
+LastChangedDate: {$LastChangedDate: 2018-07-08 16:31:26 +0200 (So, 08.
+        Jul 2018) $}
+LastChangedRevision: {$LastChangedRevision: 1187 $}
+SVNRevision: 1186
 NeedsCompilation: yes
-Packaged: 2017-04-23 07:00:40 UTC; kohlm
-Author: Matthias Kohl [cre, cph, aut],
+Packaged: 2018-07-22 18:17:10 UTC; kohlm
+Author: Matthias Kohl [cre, cph],
   Peter Ruckdeschel [aut, cph]
 Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 Repository: CRAN
-Date/Publication: 2017-04-23 13:11:30 UTC
+Date/Publication: 2018-07-22 20:40:07 UTC
