@@ -27,15 +27,15 @@ Support for  extreme value distributions has moved to package \pkg{RobExtremes}
 \details{
 \tabular{ll}{
 Package: \tab distrEx \cr
-Version: \tab 2.7.0 \cr
-Date: \tab 2018-07-08 \cr
-Depends: \tab R(>= 2.10.0), methods, distr(>= 2.2) \cr
+Version: \tab 2.8.0 \cr
+Date: \tab 2019-03-29 \cr
+Depends: \tab R(>= 3.4), methods, distr(>= 2.8.0) \cr
 Imports: \tab startupmsg, utils, stats \cr
 Suggests:  \tab tcltk \cr
 LazyLoad: \tab yes \cr
 License: \tab LGPL-3 \cr
 URL: \tab http://distr.r-forge.r-project.org/\cr
-SVNRevision: \tab 1186 \cr
+VCS/SVNRevision: \tab 1332 \cr
 }
 }
 \section{Classes}{
@@ -46,9 +46,9 @@ Distribution Classes
 "Distribution" (from distr)
 |>"UnivariateDistribution" (from distr)
 |>|>"AbscontDistribution" (from distr)
-|>|>|>"Gumbel"
-|>|>|>"Pareto"
-|>|>|>"GPareto"
+|>|>|>"Gumbel"  (moved to package 'RobExtremes')
+|>|>|>"Pareto"  (moved to package 'RobExtremes')
+|>|>|>"GPareto" (moved to package 'RobExtremes')
 |>"MultivariateDistribution"
 |>|>"DiscreteMVDistribution-class"
 |>"UnivariateCondDistribution"
@@ -167,8 +167,6 @@ Demos are available --- see \code{demo(package="distrEx")}.}
 \section{Acknowledgement}{
 G. Jay Kerns, \email{gkerns@ysu.edu}, has provided a major contribution,
 in particular the functionals \code{skewness} and \code{kurtosis} are due to him.
-Natalyia Horbenko, \email{natalyia.horbenko@itwm.fraunhofer.de} has ported
-the \pkg{actuar} code for the Pareto distribution to this setup. 
 }
 
 \note{
@@ -216,7 +214,6 @@ Note: The first two numbers of package versions do not necessarily reflect
 \author{
 Matthias Kohl \email{Matthias.Kohl@stamats.de} and \cr
 Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de},\cr 
-
 \emph{Maintainer:}  Matthias Kohl \email{Matthias.Kohl@stamats.de}
 }
 \references{
@@ -226,8 +223,9 @@ S4 Classes for Distributions, \emph{R News}, \emph{6}(2), 2-6.
 
 %a more detailed manual for \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} may be downloaded from  
 %\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf}\cr
-
-a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, 
+a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst},
+    
+    
 and \pkg{distrEx} is included into the mere documentation package \pkg{distrDoc} 
 and may be called by \code{require("distrDoc");vignette("distr")}
 
