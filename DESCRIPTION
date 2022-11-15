@@ -1,6 +1,6 @@
 Package: distrEx
-Version: 2.8.0
-Date: 2019-03-29
+Version: 2.9.0
+Date: 2022-11-12
 Title: Extensions of Package 'distr'
 Description: Extends package 'distr' by functionals, distances, and conditional distributions.
 Depends: R(>= 3.4), methods, distr(>= 2.8.0)
@@ -13,14 +13,14 @@ ByteCompile: yes
 License: LGPL-3
 Encoding: latin1
 URL: http://distr.r-forge.r-project.org/
-LastChangedDate: {$LastChangedDate: 2019-03-29 11:46:27 +0100 (Fr, 29
-        Mrz 2019) $}
-LastChangedRevision: {$LastChangedRevision: 1333 $}
-VCS/SVNRevision: 1332
+LastChangedDate: {$LastChangedDate: 2022-11-12 22:34:34 +0100 (Sa, 12.
+        Nov 2022) $}
+LastChangedRevision: {$LastChangedRevision: 1381 $}
+VCS/SVNRevision: 1380
 NeedsCompilation: yes
-Packaged: 2019-03-29 10:47:31 UTC; ruckdesc
+Packaged: 2022-11-13 19:36:46 UTC; kohlm
 Author: Matthias Kohl [cre, cph],
   Peter Ruckdeschel [aut, cph]
 Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 Repository: CRAN
-Date/Publication: 2019-03-29 17:50:08 UTC
+Date/Publication: 2022-11-15 21:20:11 UTC

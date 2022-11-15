@@ -23,26 +23,23 @@ distrEx -- Extensions of Package distr
 }
 Support for  extreme value distributions has moved to package \pkg{RobExtremes}
 }
-
 \details{
 \tabular{ll}{
 Package: \tab distrEx \cr
-Version: \tab 2.8.0 \cr
-Date: \tab 2019-03-29 \cr
+Version: \tab 2.9.0 \cr
+Date: \tab 2022-11-12 \cr
 Depends: \tab R(>= 3.4), methods, distr(>= 2.8.0) \cr
 Imports: \tab startupmsg, utils, stats \cr
 Suggests:  \tab tcltk \cr
 LazyLoad: \tab yes \cr
 License: \tab LGPL-3 \cr
-URL: \tab http://distr.r-forge.r-project.org/\cr
-VCS/SVNRevision: \tab 1332 \cr
+URL: \tab https://distr.r-forge.r-project.org/\cr
+VCS/SVNRevision: \tab 1380 \cr
 }
 }
 \section{Classes}{
 \preformatted{
-
 Distribution Classes
-
 "Distribution" (from distr)
 |>"UnivariateDistribution" (from distr)
 |>|>"AbscontDistribution" (from distr)
@@ -55,16 +52,11 @@ Distribution Classes
 |>|>"AbscontCondDistribution"
 |>|>|>"PrognCondDistribution"
 |>|>"DiscreteCondDistribution"
-
-
 Condition Classes
-
 "Condition"
 |>"EuclCondition"
 |>"PrognCondition"
-
 Parameter Classes
-
 "OptionalParameter" (from distr)
 |>"Parameter" (from distr)
 |>|>"LMParameter"
@@ -73,25 +65,19 @@ Parameter Classes
 }
 }
 \section{Functions}{
-
 \preformatted{
-
 Integration:
 GLIntegrate             Gauss-Legendre quadrature
 distrExIntegrate        Integration of one-dimensional functions
-
 Options:
 distrExOptions          Function to change the global variables of the
                         package 'distrEx'
 Standardization:
 make01                  Centering and standardization of univariate
                         distributions
-
 }}
-
 \section{Generating Functions}{
 \preformatted{
-
 Distribution Classes
 ConvexContamination     Generic function for generating convex
                         contaminations
@@ -101,13 +87,10 @@ DiscreteMVDistribution
 Gumbel                  Generating function for Gumbel-class
 LMCondDistribution      Generating function for the conditional
                         distribution of a linear regression model.
-
 Condition Classes
 EuclCondition           Generating function for EuclCondition-class
-
 Parameter Classes
 LMParameter             Generating function for LMParameter-class
-
 }}
 \section{Methods}{
 \preformatted{
@@ -128,11 +111,8 @@ OAsymTotalVarDist       Generic function for the computation of the minimal (in 
                         asymmetric total variation distance of two distributions
 vonMisesDist            Generic function for the computation of the
                         von Mises distance of two distributions
-
 liesInSupport           Generic function for testing the support of a
                         distribution
-
-
 Functionals:
 E                       Generic function for the computation of
                         (conditional) expectations
@@ -150,29 +130,22 @@ skewness                Generic functions for the computation of
                         functionals
 kurtosis                Generic functions for the computation of
                         Functionals
-
-
 truncated Moments:
 m1df                    Generic function for the computation of clipped
                         first moments
 m2df                    Generic function for the computation of clipped
                         second moments
-
 }
 }
-
 \section{Demos}{
 Demos are available --- see \code{demo(package="distrEx")}.}
-
 \section{Acknowledgement}{
 G. Jay Kerns, \email{gkerns@ysu.edu}, has provided a major contribution,
 in particular the functionals \code{skewness} and \code{kurtosis} are due to him.
 }
-
 \note{
 Some functions of package \pkg{stats} have intentionally been masked, but 
 completely retain their functionality --- see \code{distrExMASK()}.
-
 If any of the packages \pkg{e1071}, \pkg{moments}, \pkg{fBasics} is to be used 
 together with \pkg{distrEx} the latter must be attached \emph{after} any of the 
 first mentioned. Otherwise \code{kurtosis()} and \code{skewness()}
@@ -180,20 +153,16 @@ defined as \emph{methods} in \pkg{distrEx} may get masked.\cr  To re-mask, you
 may use  \code{kurtosis <- distrEx::kurtosis; skewness <- distrEx::skewness}. 
 See also \code{distrExMASK()}
 }
-
 \section{Start-up-Banner}{
 You may suppress the start-up banner/message completely by setting 
 \code{options("StartupBanner"="off")} somewhere before loading this package by 
 \code{library} or \code{require} in your R-code / R-session.
-
 If option \code{"StartupBanner"} is not defined (default) or setting    
 \code{options("StartupBanner"=NULL)} or 
 \code{options("StartupBanner"="complete")} the complete start-up banner is 
 displayed.
-
 For any other value of option \code{"StartupBanner"} (i.e., not in 
 \code{c(NULL,"off","complete")}) only the version information is displayed.
-
 The same can be achieved by wrapping the \code{library} or \code{require}  call 
 into either \code{suppressStartupMessages()} or 
 \code{onlytypeStartupMessages(.,atypes="version")}.  
@@ -203,14 +172,12 @@ As for general \code{packageStartupMessage}'s, you may also suppress all
  call into \code{suppressPackageStartupMessages()} from 
  \pkg{startupmsg}-version 0.5 on.
  }
-
 \section{Package versions}{
 Note: The first two numbers of package versions do not necessarily reflect
  package-individual development, but rather are chosen for the
  distrXXX family as a whole in order to ease updating "depends"
  information.
 }
-
 \author{
 Matthias Kohl \email{Matthias.Kohl@stamats.de} and \cr
 Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de},\cr 
@@ -220,7 +187,6 @@ Peter Ruckdeschel \email{peter.ruckdeschel@uni-oldenburg.de},\cr
 P. Ruckdeschel, M. Kohl, T. Stabla, F. Camphausen (2006):
 S4 Classes for Distributions, \emph{R News}, \emph{6}(2), 2-6. 
 \url{https://CRAN.R-project.org/doc/Rnews/Rnews_2006-2.pdf}
-
 %a more detailed manual for \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst}, and \pkg{distrEx} may be downloaded from  
 %\url{http://www.uni-bayreuth.de/departments/math/org/mathe7/DISTR/distr.pdf}\cr
 a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst},
@@ -228,13 +194,11 @@ a vignette for packages \pkg{distr}, \pkg{distrSim}, \pkg{distrTEst},
     
 and \pkg{distrEx} is included into the mere documentation package \pkg{distrDoc} 
 and may be called by \code{require("distrDoc");vignette("distr")}
-
 a homepage to this package is available under\cr
-\url{http://distr.r-forge.r-project.org/}
-
+\url{https://distr.r-forge.r-project.org/}
 M. Kohl (2005): \emph{Numerical Contributions to the Asymptotic 
 Theory of Robustness.} PhD Thesis. Bayreuth. Available as 
-\url{http://www.stamats.de/wp-content/uploads/2018/04/ThesisMKohl.pdf}
+\url{https://www.stamats.de/wp-content/uploads/2018/04/ThesisMKohl.pdf}
 }
 \keyword{package}
 \concept{S4 condition class}
