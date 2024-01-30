@@ -23,6 +23,8 @@ under the hood:
 +  KolmogorovDist methods gain argument "..." in order to enable them to
    digest argument validity.check in MCEstimator 
 + fixed some broken URLs and changed URLs from http to https where possible
++ changed latin1 to UTF-8 encoding as requested by CRAN since latin1 
+  encoding will be deprecated.
 
 ##############
 v 2.8

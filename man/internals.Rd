@@ -54,11 +54,11 @@ These functions are used internally by package distrEx.}
   \item{prenames}{ to determine the position in the original tree, the names
      of parent nodes are concatenated, separated by "$" and passed on
      to children nodes by argument \code{prenames}. }
-  \item{namestoGather}{ we have two kind of diagnostic list items, ones which
+  \item{nmstoGather}{ we have two kind of diagnostic list items, ones which
     are easily grouped (numeric, character, logical) and ones which are calls,
-    lists or functions. \code{namestoGather} takes the names of items
+    lists or functions. \code{nmstoGather} takes the names of items
     to be regrouped which are of the first kind. }
-  \item{namestoGatherNS}{ the names of items to be regrouped which are of the
+  \item{nmstoGatherNS}{ the names of items to be regrouped which are of the
     second kind (NS standing for "non-shown"). }
   \item{.GatherList}{ the list of new regrouped sublists (of first kind).
           This argument is not filled by the user but rather passed on within the

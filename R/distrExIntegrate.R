@@ -1,4 +1,4 @@
-# Gauﬂ-Legendre abscissas and weights
+# Gauss-Legendre abscissas and weights
 # cf. for example Numerical Recipies in C (1992), p. 152
 
 #implementation in S:
@@ -152,7 +152,7 @@ distrExIntegrate <- function(f, lower, upper, subdivisions = 100,
                   abs.tol = abs.tol, stop.on.error = stop.on.error), dotsInt)),
                   silent = TRUE)
 
-    # if integrate fails => Gauﬂ-Legendre integration
+    # if integrate fails => Gauss-Legendre integration
     if(!is(res,"try-error")){
        val <- res$value
        if(diagnostic){
