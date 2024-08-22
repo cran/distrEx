@@ -17,7 +17,7 @@ EmpiricalMVDistribution(data, Symmetry = NoSymmetry())
 }
 \details{
   The function is a simple utility function providing a wrapper to the 
-  generating function \code{\link{DiscreteDistribution}}.
+  generating function \code{\link{DiscreteMVDistribution}}.
   
   Typical usages are
   \preformatted{

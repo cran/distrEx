@@ -9,7 +9,8 @@
 void attribute_hidden gauleg(int *n, double *eps, double *A, double *W)
 { int i,j, m=((*n)+1)/2; double z1,z,pp,p1,p2,p3;
       for(i=1;i<=m;i++){
-        z=cos(PI*(i-0.25)/((*n)+0.5));
+/* P.R. 20240819 changed PI to M_PI  */
+        z=cos(M_PI*(i-0.25)/((*n)+0.5));
         do{ p1=1.0;
             p2=0.0;
             for(j=1;j<=(*n);j++){

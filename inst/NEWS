@@ -8,6 +8,14 @@
  information)
 
 ##############
+v 2.9.3
+##############
+
+under the hood:
++ to comply with _R_USE_STRICT_R_HEADERS_=true, we changed calls to PI to M_PI in GLaw.c
+
+
+##############
 v 2.9
 ##############
 
