@@ -1,4 +1,4 @@
-9fdf040f470bd07aed241408a250d8c7 *DESCRIPTION
+5ddd2dd7179fc385faaf7eac41aea658 *DESCRIPTION
 e2d0884342c8ca9c96541a5e4f85280b *NAMESPACE
 bd19136dddc4a822bc14610ad01709a5 *R/AllClass.R
 e2851b95ff7035737f75834ff5cb7551 *R/AllGeneric.R
@@ -30,17 +30,17 @@ ade8e50de917f92de10bed2cf9134a13 *R/UnivariateCondDistribution.R
 8a9d5a0ac7af7d10e73be0a049c2a1f1 *R/distrExOptions.R
 d73cba5b7198cd09f1ef850a53630d3f *R/liesInSupport.R
 6aaf300e079907f8c1893fc70fb9f8f9 *R/moved2RobExtremes.R
-936aa98f6b066f2d8ef83a2a0d96b033 *R/sysdata.rda
+eec1b1f1bde2d7b4450422f7ceef2e82 *R/sysdata.rda
 5bac22d0a7acd6a385ba93e3f046df74 *demo/00Index
 d8a467c7442a0bb19c547174ad6863e7 *demo/Prognose.R
 3c73b32c9459bbe384b57fb337f7f328 *demo/distrExUse.R
 69882ce2c211072e1709b0601336d1d2 *inst/CITATION
 52460a350a38d696b15baca05f12b7ed *inst/MASKING
 c81c3ed086b2ed2da911f5cbcdc7b607 *inst/MOVED
-60fc40ac36bc251a1133e35398a4e9b9 *inst/NEWS
+e8b2a6d360378403c8912a188b8082ca *inst/NEWS
 474536d778435110922a8b2f8e5bf9a0 *inst/TOBEDONE
 f9176b62cc96c725807f47f604862433 *inst/tests/Tests.r
-3dfc30143bfd5a56e7c6d2c2f44ff264 *man/0distrEx-package.Rd
+8a85a3fec60edac4439c6a7c495de951 *man/0distrEx-package.Rd
 ca0082890efffb07d8a33168556d2a08 *man/AbscontCondDistribution-class.Rd
 7436239e79af2d135e29b41102239663 *man/AsymTotalVarDist.Rd
 30184cc13194f0ead78cfa4ae434283c *man/Condition-class.Rd

@@ -8,6 +8,16 @@
  information)
 
 ##############
+v 2.9.6
+##############
+
++ taken up pkg "robustbase" into "Enhances" in DESCRIPTION to ensure all 
+  inter-pkg xrefs in Rd-files work
+
+under the hood:
++ adapted reference output for new startupmsg
+
+##############
 v 2.9.4
 ##############
 
